@@ -27,12 +27,7 @@ namespace MapEditor
 
             InitializeComponent();
             ReadConfig();
-            if (_defaultPartFolder != "")
-            {
-                LoadParts(System.IO.Directory.GetFiles(".\\parts", "*.pxml"), out Part[] parts);
-                editor = new Editor(parts.ToList());
-                InvalidateParts();
-            }
+            
 
             Debug.ADLEnabled = false;
             if (enableLogging)
@@ -41,16 +36,22 @@ namespace MapEditor
 
                 Debug.ADLEnabled = true;
 
-                CreateADLCustomCMDConfig();
+                //CreateADLCustomCMDConfig();
 
                 System.Windows.Forms.Form f =
                 ADL.CustomCMD.CMDUtils.CreateCustomConsole(ps);
                 Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Initialized Debug Logs.");
             }
-
+            if (_defaultPartFolder != "")
+            {
+                LoadParts(System.IO.Directory.GetFiles(".\\parts", "*.pxml"), out Part[] parts);
+                editor = new Editor(parts.ToList());
+                InvalidateParts();
+            }
 
 
         }
+
         #region DebugLogging
         private static void CreateADLCustomCMDConfig()
         {
@@ -66,7 +67,7 @@ namespace MapEditor
                     });
             ADLCustomConsoleConfig config = ADLCustomConsoleConfig.Standard;
             config.FontSize = 13;
-            config.FrameTime = 50;
+            config.FrameTime = 45;
             config.ColorCoding = colorCoding;
             ADL.CustomCMD.CMDUtils.SaveConfig(config);
         }
@@ -101,9 +102,10 @@ namespace MapEditor
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            editor.GetPartAt(lbParts.SelectedIndex, out Part part);
-            if (editor.GetMap(out Map map) && part.IsValid(map.LaneCount, map.PartSize) && editor.AddToMapByIndex(lbMapParts.SelectedIndex, lbParts.SelectedIndex))
+            
+            if (editor.GetMap(out Map map) && editor.GetPartAt(lbParts.SelectedIndex, out Part part) && part.IsValid(map.LaneCount, map.PartSize) && editor.AddToMapByIndex(lbMapParts.SelectedIndex, lbParts.SelectedIndex))
             {
+                
                 InvalidateMap(map);
             }
         }
@@ -128,14 +130,16 @@ namespace MapEditor
                     InvalidateMap(map);
                 }
             }
-
+            lbMapParts.Focus();
         }
 
         public void InvalidateMap(Map map)
         {
+            int index = lbMapParts.SelectedIndex;
             lbMapParts.Items.Clear();
 
             lbMapParts.Items.AddRange(map.PartSequence);
+            if (lbMapParts.Items.Count > index) lbMapParts.SelectedIndex = index;
         }
 
         private void BtnOpenPartFile_Click(object sender, EventArgs e)
@@ -155,13 +159,14 @@ namespace MapEditor
 
         void InvalidateParts()
         {
-
+            int index = lbParts.SelectedIndex;
             lbParts.Items.Clear();
             editor.GetParts(out List<Part> parts);
             foreach (Part part in parts)
             {
                 lbParts.Items.Add(part.ToString());
             }
+           if(lbParts.Items.Count > index) lbParts.SelectedIndex = index;
 
         }
 
@@ -174,7 +179,7 @@ namespace MapEditor
             Brush unavailable = Brushes.Red;
 
             if (editor.GetMap(out Map map))
-                if (editor.FindAndExportPart(lbParts.Items[e.Index].ToString(), map.LaneCount, map.PartSize, out List<string> export))
+                if (editor.FindAndExportPart(lbParts.Items[e.Index].ToString(), map.LaneCount, map.PartSize, out List<string> export, false))
                 {
 
                     e.Graphics.DrawString(lbParts.Items[e.Index].ToString(), e.Font, available, e.Bounds, StringFormat.GenericDefault);
@@ -194,7 +199,14 @@ namespace MapEditor
 
         private void BtnCreatePart_Click(object sender, EventArgs e)
         {
-            PartCreator pc = new PartCreator(new Part());
+            Part pFinal;
+            if (editor.GetPartAt(lbParts.SelectedIndex, out Part p))
+            {
+                pFinal = Part.Copy(p);
+            }
+            else pFinal = new Part();
+            
+            PartCreator pc = new PartCreator(pFinal);
             if (pc.ShowDialog() == DialogResult.OK)
             {
                 editor.LoadPart(pc.GetPart());
@@ -440,8 +452,12 @@ namespace MapEditor
         {
             if (editor.GetMap(out Map map))
             {
-                editor.SwapParts(lbMapParts.SelectedIndex, lbMapParts.SelectedIndex - 1);
-                InvalidateMap(map);
+                if (editor.SwapParts(lbMapParts.SelectedIndex, lbMapParts.SelectedIndex - 1))
+                {
+
+                    InvalidateMap(map);
+                    lbMapParts.SelectedIndex--;
+                }
             }
 
         }
@@ -450,8 +466,12 @@ namespace MapEditor
         {
             if (editor.GetMap(out Map map))
             {
-                editor.SwapParts(lbMapParts.SelectedIndex, lbMapParts.SelectedIndex + 1);
-                InvalidateMap(map);
+                if(editor.SwapParts(lbMapParts.SelectedIndex, lbMapParts.SelectedIndex + 1))
+                {
+
+                    InvalidateMap(map);
+                    lbMapParts.SelectedIndex++;
+                }
             }
         }
 
@@ -492,7 +512,9 @@ namespace MapEditor
             SaveExport(tempMap, _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1) + "mge\\maps\\temp.txt");
             _engine = new System.Diagnostics.Process();
 
-            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(_enginePath, "temp.txt");
+            string s = System.IO.Path.GetFullPath(_enginePath);
+            Debug.Log(-1, s);
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(s, "temp.txt");
             psi.WorkingDirectory = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1);
             _engine.StartInfo = psi;
             _engine.Start();
@@ -514,7 +536,7 @@ namespace MapEditor
         {
             if (editor.GetMap(out Map map))
             {
-                map.Randomize = cbRandomizeParts.Checked;
+                map.SetRandomize(cbRandomizeParts.Checked);
             }
         }
 
@@ -545,6 +567,8 @@ namespace MapEditor
 
             }
         }
+
+
     }
 }
 

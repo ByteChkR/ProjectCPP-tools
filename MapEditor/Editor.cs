@@ -14,7 +14,7 @@ namespace MapEditor
 
         public Editor(List<Part> initparts)
         {
-            
+
             foreach (Part part in initparts)
             {
                 LoadPart(part);
@@ -30,7 +30,7 @@ namespace MapEditor
             bool ok = file.SelfCheck();
             parts.Add(file);
             parts.OrderBy(x => x.name);
-            if(ok)Debug.LogGen<LoggingChannel>(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Loaded " + file);
+            if (ok) Debug.LogGen<LoggingChannel>(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Loaded " + file);
             else
             {
                 Debug.LogGen<LoggingChannel>(LoggingChannel.WARNING | LoggingChannel.MAIN_EDITOR, "Could not load " + file);
@@ -45,14 +45,14 @@ namespace MapEditor
             return true;
         }
 
-        public void SwapParts(int one, int two)
+        public bool SwapParts(int one, int two)
         {
-            _currentMap.SwapParts(one, two);
+            return _currentMap.SwapParts(one, two);
         }
 
         public bool GetPartAt(int index, out Part part)
         {
-            if (index != -1 && index < parts.Count && index >=0)
+            if (index != -1 && index < parts.Count && index >= 0)
             {
                 part = parts[index];
                 return true;
@@ -62,13 +62,27 @@ namespace MapEditor
             return false;
         }
 
-        public bool FindAndExportPart(string name, int laneCount, int partSize, out List<string> export)
+        public bool FindAndExportPart(string name, int laneCount, int partSize, out List<string> export, bool debug = true)
         {
             for (int i = 0; i < parts.Count; i++)
             {
-                if (parts[i].name == name && parts[i].laneCount == laneCount && parts[i].partLength == partSize)
+                if (parts[i].name == name && parts[i].laneCount == laneCount && parts[i].Divisible(partSize))
                 {
-                    export = parts[i].ToEditFormat();
+                    if (partSize == parts[i].partLength)
+                        export = parts[i].ToEditFormat();
+                    else
+                    {
+                        if(debug)Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Dividing part into" + parts[i].partLength / partSize + " Sub Parts");
+                        List<List<string>> part = parts[i].ExportDivided(partSize);
+                        export = new List<string>();
+
+                        for (int j = 0; j < part.Count; j++)
+                        {
+                            if(debug)Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Compiling sub-part " + j);
+                            if (j != 0) export.Add("");
+                            export.AddRange(part[j]);
+                        }
+                    }
                     return true;
                 }
             }
@@ -105,7 +119,7 @@ namespace MapEditor
 
             for (int i = 0; i < m.PartSequence.Length; i++)
             {
-                Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, i.ToString());
+                Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Compiling Part " + i);
                 exportString.Add("");
                 if (!FindAndExportPart(m.PartSequence[i], m.LaneCount, m.PartSize, out List<string> col))
                     Debug.LogGen(LoggingChannel.WARNING | LoggingChannel.MAIN_EDITOR, "Tried to load part with lane & part count that could not be found in the loaded parts" + _currentMap.PartSequence[i] + " LC: " + _currentMap.LaneCount + " PC: " + _currentMap.PartSize);
@@ -125,7 +139,7 @@ namespace MapEditor
 
         public bool GetMap(out Map map)
         {
-            if(_currentMap == null)
+            if (_currentMap == null)
             {
                 //Debug.LogGen(LoggingChannel.WARNING | LoggingChannel.MAIN_EDITOR, "Editor tried to access map that has not been crated yet");
                 map = null;
@@ -154,10 +168,10 @@ namespace MapEditor
                 {
                     if (!FindAndExportPart(map.PartSequence[i], map.LaneCount, map.PartSize, out List<string> export))
                     {
-                        Debug.LogGen(LoggingChannel.MAIN_EDITOR | LoggingChannel.WARNING,"Could not find correct part for item(part will be zero filled) : " + map.PartSequence[i] +
+                        Debug.LogGen(LoggingChannel.MAIN_EDITOR | LoggingChannel.WARNING, "Could not find correct part for item(part will be zero filled) : " + map.PartSequence[i] +
                             "\nCheck Lane Count and Part Size in the object.");
                     }
-                    
+
                 }
                 _currentMap = map;
                 Debug.LogGen(LoggingChannel.MAIN_EDITOR | LoggingChannel.LOG, "MapLoaded.");
@@ -177,7 +191,7 @@ namespace MapEditor
             if (_currentMap != null && indexOfPart >= 0 && indexOfPart < parts.Count)
             {
                 _currentMap.AddPartAt(indexInMap, parts[indexOfPart]);
-                
+
                 return true;
             }
             Debug.LogGen(LoggingChannel.MAIN_EDITOR | LoggingChannel.ERROR, "Could not add to map.");
@@ -186,12 +200,12 @@ namespace MapEditor
 
         public bool RemoveFromMapByIndex(int indexInMap)
         {
-            if(_currentMap != null && indexInMap < _currentMap.PartSequence.Length && indexInMap >=0)
+            if (_currentMap != null && indexInMap < _currentMap.PartSequence.Length && indexInMap >= 0)
             {
                 _currentMap.RemovePartAt(indexInMap);
                 return true;
             }
-            Debug.LogGen(LoggingChannel.MAIN_EDITOR | LoggingChannel.ERROR, "Invalid Action. Map was not created or selected index(" + indexInMap+") is out of bounds");
+            Debug.LogGen(LoggingChannel.MAIN_EDITOR | LoggingChannel.ERROR, "Invalid Action. Map was not created or selected index(" + indexInMap + ") is out of bounds");
             return false;
         }
 

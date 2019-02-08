@@ -23,7 +23,7 @@ namespace MapEditor
             Text = part.name;
             string text = "";
             if (part.part != null) part.ToEditFormat().ForEach(x => text += x + '\n');
-            richTextBox1.Text = text;
+            richTextBox1.Text = text.TrimEnd();
             DialogResult = DialogResult.Cancel;
         }
 
