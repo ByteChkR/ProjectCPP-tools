@@ -49,8 +49,12 @@
             this.btnNewMap = new System.Windows.Forms.Button();
             this.grpBoxParts = new System.Windows.Forms.GroupBox();
             this.grpBoxMap = new System.Windows.Forms.GroupBox();
-            this.btnUp = new System.Windows.Forms.Button();
+            this.cbRandomizeParts = new System.Windows.Forms.CheckBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.btnMoveDown = new System.Windows.Forms.Button();
+            this.btnUp = new System.Windows.Forms.Button();
+            this.ofdEngine = new System.Windows.Forms.OpenFileDialog();
             this.grpBoxParts.SuspendLayout();
             this.grpBoxMap.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +72,7 @@
             // 
             this.btnEditLaneStep.Location = new System.Drawing.Point(412, 21);
             this.btnEditLaneStep.Name = "btnEditLaneStep";
-            this.btnEditLaneStep.Size = new System.Drawing.Size(75, 20);
+            this.btnEditLaneStep.Size = new System.Drawing.Size(50, 20);
             this.btnEditLaneStep.TabIndex = 4;
             this.btnEditLaneStep.Text = "edit";
             this.btnEditLaneStep.UseVisualStyleBackColor = true;
@@ -88,7 +92,7 @@
             this.lbMapParts.FormattingEnabled = true;
             this.lbMapParts.Location = new System.Drawing.Point(12, 85);
             this.lbMapParts.Name = "lbMapParts";
-            this.lbMapParts.Size = new System.Drawing.Size(450, 420);
+            this.lbMapParts.Size = new System.Drawing.Size(450, 394);
             this.lbMapParts.TabIndex = 7;
             // 
             // lbParts
@@ -246,6 +250,9 @@
             // 
             // grpBoxMap
             // 
+            this.grpBoxMap.Controls.Add(this.cbRandomizeParts);
+            this.grpBoxMap.Controls.Add(this.button5);
+            this.grpBoxMap.Controls.Add(this.button4);
             this.grpBoxMap.Controls.Add(this.btnMoveDown);
             this.grpBoxMap.Controls.Add(this.btnUp);
             this.grpBoxMap.Controls.Add(this.btnRemoveFromMap);
@@ -264,15 +271,36 @@
             this.grpBoxMap.TabStop = false;
             this.grpBoxMap.Text = "Map:";
             // 
-            // btnUp
+            // cbRandomizeParts
             // 
-            this.btnUp.Location = new System.Drawing.Point(124, 56);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(31, 24);
-            this.btnUp.TabIndex = 19;
-            this.btnUp.Text = "🡅";
-            this.btnUp.UseVisualStyleBackColor = true;
-            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            this.cbRandomizeParts.AutoSize = true;
+            this.cbRandomizeParts.Location = new System.Drawing.Point(13, 485);
+            this.cbRandomizeParts.Name = "cbRandomizeParts";
+            this.cbRandomizeParts.Size = new System.Drawing.Size(172, 17);
+            this.cbRandomizeParts.TabIndex = 23;
+            this.cbRandomizeParts.Text = "Randomize Part Order on Load";
+            this.cbRandomizeParts.UseVisualStyleBackColor = true;
+            this.cbRandomizeParts.CheckedChanged += new System.EventHandler(this.cbRandomizeParts_CheckedChanged);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(361, 56);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(58, 24);
+            this.button5.TabIndex = 22;
+            this.button5.Text = "Set .exe";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(425, 55);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(37, 24);
+            this.button4.TabIndex = 21;
+            this.button4.Text = "Play";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // btnMoveDown
             // 
@@ -283,6 +311,24 @@
             this.btnMoveDown.Text = "🡇";
             this.btnMoveDown.UseVisualStyleBackColor = true;
             this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
+            // 
+            // btnUp
+            // 
+            this.btnUp.Location = new System.Drawing.Point(124, 56);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(31, 24);
+            this.btnUp.TabIndex = 19;
+            this.btnUp.Text = "🡅";
+            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            // 
+            // ofdEngine
+            // 
+            this.ofdEngine.DefaultExt = "exe";
+            this.ofdEngine.FileName = "mge";
+            this.ofdEngine.Filter = "Engine Executable|*.exe";
+            this.ofdEngine.Multiselect = true;
+            this.ofdEngine.Title = "Open XML Part File";
             // 
             // frmEditor
             // 
@@ -295,6 +341,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmEditor";
             this.Text = "Map Editor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmEditor_Closing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmEditor_Closed);
             this.grpBoxParts.ResumeLayout(false);
             this.grpBoxParts.PerformLayout();
             this.grpBoxMap.ResumeLayout(false);
@@ -327,6 +375,10 @@
         private System.Windows.Forms.GroupBox grpBoxMap;
         private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.OpenFileDialog ofdEngine;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.CheckBox cbRandomizeParts;
     }
 }
 

@@ -11,9 +11,21 @@ namespace MapEditor
     {
         public int PartSize;
         public int LaneCount;
+        public int RandomizePartOrder;
         public int[] LaneSteps;
         public string[] PartSequence;
-        
+        public bool Randomize
+        {
+            get
+            {
+                return RandomizePartOrder == 1;
+            }
+            set
+            {
+                if (value) RandomizePartOrder = 1;
+                else RandomizePartOrder = 0;
+            }
+        }
 
 
         public Map():this(0,0){}
@@ -22,6 +34,7 @@ namespace MapEditor
             PartSequence = new string[0];
             PartSize = partSize;
             LaneCount = laneCount;
+            RandomizePartOrder = 0;
             LaneSteps = new int[LaneCount];
         }
 

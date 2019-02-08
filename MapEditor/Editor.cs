@@ -85,6 +85,8 @@ namespace MapEditor
             Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Constructing Header..");
             List<string> exportString = new List<string>
             {
+                _currentMap.RandomizePartOrder.ToString(),
+                "",
                 _currentMap.PartSize.ToString(),
                 "",
                 _currentMap.LaneCount.ToString()

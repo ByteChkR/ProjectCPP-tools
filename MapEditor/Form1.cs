@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using ADL;
@@ -15,8 +16,8 @@ namespace MapEditor
 {
     public partial class frmEditor : Form
     {
-
-
+        System.Diagnostics.Process _engine;
+        string _enginePath = "";
 
         public Editor editor;
 
@@ -109,10 +110,11 @@ namespace MapEditor
 
         private void BtnRemoveFromMap_Click(object sender, EventArgs e)
         {
-            if (editor.RemoveFromMapByIndex(lbMapParts.SelectedIndex))
+            if (editor.GetMap(out Map map))
             {
-                if (editor.GetMap(out Map map))
+                if (editor.RemoveFromMapByIndex(lbMapParts.SelectedIndex))
                 {
+
                     InvalidateMap(map);
                 }
             }
@@ -260,7 +262,7 @@ namespace MapEditor
                 {
                     InvalidateParts();
                     InvalidateMap(map);
-                    
+
                 }
             }
         }
@@ -375,12 +377,12 @@ namespace MapEditor
 
         private void btnUp_Click(object sender, EventArgs e)
         {
-            if(editor.GetMap(out Map map))
+            if (editor.GetMap(out Map map))
             {
                 editor.SwapParts(lbMapParts.SelectedIndex, lbMapParts.SelectedIndex - 1);
                 InvalidateMap(map);
             }
-            
+
         }
 
         private void btnMoveDown_Click(object sender, EventArgs e)
@@ -395,6 +397,84 @@ namespace MapEditor
         private void grpBoxParts_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (_enginePath == "")
+            {
+                if (ofdEngine.ShowDialog() == DialogResult.OK)
+                {
+                    _enginePath = ofdEngine.FileName;
+
+                }
+            }
+            StartProcess();
+
+        }
+
+        string GetRelativePath(string filespec, string folder)
+        {
+            Uri pathUri = new Uri(filespec);
+            // Folders must end in a slash
+            if (!folder.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
+            {
+                folder += System.IO.Path.DirectorySeparatorChar;
+            }
+            Uri folderUri = new Uri(folder);
+            return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', System.IO.Path.DirectorySeparatorChar));
+        }
+
+        void StartProcess()
+        {
+            if (_engine != null)
+            {
+                _engine.Kill();
+
+                System.IO.File.Delete(_engine.StartInfo.WorkingDirectory + "mge\\maps\\temp.txt");
+            }
+            string relFilepath = GetRelativePath(System.IO.Path.GetFullPath(".\\temp.txt"), _enginePath.Substring(0, _enginePath.LastIndexOf('\\')));
+
+            List<string> tempMap = editor.ExportMap();
+            SaveExport(tempMap, _enginePath.Substring(0, _enginePath.LastIndexOf('\\')+1) + "mge\\maps\\temp.txt");
+            _engine = new System.Diagnostics.Process();
+
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(_enginePath, "temp.txt");
+            psi.WorkingDirectory = _enginePath.Substring(0, _enginePath.LastIndexOf('\\')+1);
+            _engine.StartInfo = psi;
+            _engine.Start();
+
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (ofdEngine.ShowDialog() == DialogResult.OK)
+            {
+                _enginePath = ofdEngine.FileName;
+
+            }
+        }
+
+        private void cbRandomizeParts_CheckedChanged(object sender, EventArgs e)
+        {
+            if(editor.GetMap(out Map map))
+            {
+                map.Randomize = cbRandomizeParts.Checked;
+            }
+        }
+
+        private void frmEditor_Closing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+            if (!editor.GetMap(out Map map)) return;
+            DialogResult res = MessageBox.Show("Unsaved work is about to be lost. Are u sure u want to exit?", "Exit?", MessageBoxButtons.YesNo);
+            if (res == DialogResult.No)
+                e.Cancel = false;
+        }
+
+        private void frmEditor_Closed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
