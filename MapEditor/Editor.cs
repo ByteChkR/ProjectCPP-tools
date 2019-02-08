@@ -79,35 +79,35 @@ namespace MapEditor
 
         #region MapIO
 
-        public List<string> ExportMap()
+        public List<string> ExportMap(Map m)
         {
             Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Compiling Map..");
             Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Constructing Header..");
             List<string> exportString = new List<string>
             {
-                _currentMap.RandomizePartOrder.ToString(),
+                m.RandomizePartOrder.ToString(),
                 "",
-                _currentMap.PartSize.ToString(),
+                m.PartSize.ToString(),
                 "",
-                _currentMap.LaneCount.ToString()
+                m.LaneCount.ToString()
             };
-            for (int i = 0; i < _currentMap.LaneSteps.Length; i++)
+            for (int i = 0; i < m.LaneSteps.Length; i++)
             {
-                exportString.Add(_currentMap.LaneSteps[i].ToString());
+                exportString.Add(m.LaneSteps[i].ToString());
             }
 
             Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Constructing Header.. DONE!");
             Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Constructing Parts..");
 
             exportString.Add("");
-            exportString.Add(_currentMap.PartSequence.Length.ToString());
+            exportString.Add(m.PartSequence.Length.ToString());
 
 
-            for (int i = 0; i < _currentMap.PartSequence.Length; i++)
+            for (int i = 0; i < m.PartSequence.Length; i++)
             {
                 Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, i.ToString());
                 exportString.Add("");
-                if(!FindAndExportPart(_currentMap.PartSequence[i], _currentMap.LaneCount, _currentMap.PartSize, out List<string> col))
+                if (!FindAndExportPart(m.PartSequence[i], m.LaneCount, m.PartSize, out List<string> col))
                     Debug.LogGen(LoggingChannel.WARNING | LoggingChannel.MAIN_EDITOR, "Tried to load part with lane & part count that could not be found in the loaded parts" + _currentMap.PartSequence[i] + " LC: " + _currentMap.LaneCount + " PC: " + _currentMap.PartSize);
 
                 exportString.AddRange(col);
@@ -116,6 +116,11 @@ namespace MapEditor
             Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Constructing Parts.. DONE!");
             Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Compiling Map.. DONE!");
             return exportString;
+        }
+
+        public List<string> ExportMap()
+        {
+            return ExportMap(_currentMap);
         }
 
         public bool GetMap(out Map map)

@@ -55,6 +55,7 @@
             this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
             this.ofdEngine = new System.Windows.Forms.OpenFileDialog();
+            this.btnStartFromSelection = new System.Windows.Forms.Button();
             this.grpBoxParts.SuspendLayout();
             this.grpBoxMap.SuspendLayout();
             this.SuspendLayout();
@@ -250,6 +251,7 @@
             // 
             // grpBoxMap
             // 
+            this.grpBoxMap.Controls.Add(this.btnStartFromSelection);
             this.grpBoxMap.Controls.Add(this.cbRandomizeParts);
             this.grpBoxMap.Controls.Add(this.button5);
             this.grpBoxMap.Controls.Add(this.button4);
@@ -284,7 +286,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(361, 56);
+            this.button5.Location = new System.Drawing.Point(246, 56);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(58, 24);
             this.button5.TabIndex = 22;
@@ -294,7 +296,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(425, 55);
+            this.button4.Location = new System.Drawing.Point(310, 55);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(37, 24);
             this.button4.TabIndex = 21;
@@ -329,6 +331,16 @@
             this.ofdEngine.Filter = "Engine Executable|*.exe";
             this.ofdEngine.Multiselect = true;
             this.ofdEngine.Title = "Open XML Part File";
+            // 
+            // btnStartFromSelection
+            // 
+            this.btnStartFromSelection.Location = new System.Drawing.Point(353, 55);
+            this.btnStartFromSelection.Name = "btnStartFromSelection";
+            this.btnStartFromSelection.Size = new System.Drawing.Size(109, 24);
+            this.btnStartFromSelection.TabIndex = 24;
+            this.btnStartFromSelection.Text = "Start from Selection";
+            this.btnStartFromSelection.UseVisualStyleBackColor = true;
+            this.btnStartFromSelection.Click += new System.EventHandler(this.btnStartFromSelection_Click);
             // 
             // frmEditor
             // 
@@ -379,6 +391,7 @@
         private System.Windows.Forms.OpenFileDialog ofdEngine;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.CheckBox cbRandomizeParts;
+        private System.Windows.Forms.Button btnStartFromSelection;
     }
 }
 

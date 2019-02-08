@@ -44,6 +44,19 @@ namespace MapEditor
             return true;
         }
 
+        public Map SubMap(int startIndex)
+        {
+            Map m = new Map(PartSize, LaneCount);
+            m.LaneSteps = LaneSteps;
+            m.RandomizePartOrder = RandomizePartOrder;
+            m.PartSequence = new string[PartSequence.Length - startIndex];
+            for (int i = 0; i < m.PartSequence.Length; i++)
+            {
+                m.PartSequence[i] = PartSequence[startIndex + i];
+            }
+            return m;
+        }
+
         public void SwapParts(int one, int two)
         {
             if(one >=0 &&one<PartSequence.Length && two >= 0 &&two<PartSequence.Length && one != two)
