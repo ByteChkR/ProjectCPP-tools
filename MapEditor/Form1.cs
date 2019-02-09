@@ -520,7 +520,8 @@ namespace MapEditor
 
                 }
             }
-            StartProcess();
+            if (editor.GetMap(out Map map)) StartProcess();
+            else Debug.LogGen(LoggingChannel.ERROR|LoggingChannel.MAIN_EDITOR, "No map loaded");
 
         }
 
@@ -593,8 +594,10 @@ namespace MapEditor
                 int index = lbMapParts.SelectedIndex;
                 if (lbMapParts.SelectedIndex == -1) index = 0;
                 StartProcess(index);
-
+                
             }
+            else Debug.LogGen(LoggingChannel.ERROR | LoggingChannel.MAIN_EDITOR, "No map loaded");
+
         }
 
 

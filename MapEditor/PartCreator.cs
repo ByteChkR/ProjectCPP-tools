@@ -14,6 +14,8 @@ namespace MapEditor
     public partial class PartCreator : Form
     {
         Part _part;
+        string lastText;
+        
         int _laneCount;
         int _partLength;
         bool _edit;
@@ -88,7 +90,8 @@ namespace MapEditor
                     System.Xml.Serialization.XmlSerializer xs = new System.Xml.Serialization.XmlSerializer(typeof(Part));
                     _part.partLength = _partLength;
                     _part.laneCount = _laneCount;
-                    if(!_edit)_part.name = sfd.FileName.Substring(sfd.FileName.LastIndexOf("\\") + 1);
+                    _part.biomeID = (int)nudBiomeID.Value;
+                    if (!_edit)_part.name = sfd.FileName.Substring(sfd.FileName.LastIndexOf("\\") + 1);
                     System.IO.Stream s = null;
                     try
                     {
@@ -132,7 +135,7 @@ namespace MapEditor
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            _part.biomeID = (int)nudBiomeID.Value;
+            
         }
     }
 }
