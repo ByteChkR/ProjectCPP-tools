@@ -513,7 +513,6 @@ namespace MapEditor
             _engine = new System.Diagnostics.Process();
 
             string s = System.IO.Path.GetFullPath(_enginePath);
-            Debug.Log(-1, s);
             System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(s, "temp.txt");
             psi.WorkingDirectory = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1);
             _engine.StartInfo = psi;
