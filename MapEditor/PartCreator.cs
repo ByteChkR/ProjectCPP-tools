@@ -16,14 +16,21 @@ namespace MapEditor
         Part _part;
         int _laneCount;
         int _partLength;
-        public PartCreator(Part part)
+        bool _edit;
+        string _saveLocation;
+        public PartCreator(Part part, bool edit, int biomeCount, string editSaveLocation)
         {
             _part = part;
+            _edit = edit;
+            _saveLocation = editSaveLocation;
             InitializeComponent();
+
+            nudBiomeID.Maximum = biomeCount - 1;
             Text = part.name;
             string text = "";
             if (part.part != null) part.ToEditFormat().ForEach(x => text += x + '\n');
             richTextBox1.Text = text.TrimEnd();
+            nudBiomeID.Value = part.biomeID;
             DialogResult = DialogResult.Cancel;
         }
 
@@ -76,16 +83,16 @@ namespace MapEditor
 
             if (CheckData(out _part.part, out string err))
             {
-                if (sfd.ShowDialog() == DialogResult.OK)
+                if (_edit || sfd.ShowDialog() == DialogResult.OK)
                 {
                     System.Xml.Serialization.XmlSerializer xs = new System.Xml.Serialization.XmlSerializer(typeof(Part));
                     _part.partLength = _partLength;
                     _part.laneCount = _laneCount;
-                    _part.name = sfd.FileName.Substring(sfd.FileName.LastIndexOf("\\") + 1);
+                    if(!_edit)_part.name = sfd.FileName.Substring(sfd.FileName.LastIndexOf("\\") + 1);
                     System.IO.Stream s = null;
                     try
                     {
-                        s = System.IO.File.OpenWrite(sfd.FileName);
+                        s = System.IO.File.OpenWrite(_edit ? _saveLocation + _part.name : sfd.FileName);
                         xs.Serialize(s, _part);
                         s.Close();
                     }
@@ -121,6 +128,11 @@ namespace MapEditor
         private void sfd_FileOk(object sender, CancelEventArgs e)
         {
 
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            _part.biomeID = (int)nudBiomeID.Value;
         }
     }
 }

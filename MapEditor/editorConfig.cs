@@ -11,13 +11,15 @@ namespace MapEditor
     {
         public string EnginePath;
         public string DefaultPartsFolder;
+        public int biomeCount;
 
 
         public static editorConfig GetStandard()
         {
             editorConfig ec = new editorConfig();
             ec.EnginePath = "";
-            ec.DefaultPartsFolder = ".\\parts";
+            ec.DefaultPartsFolder = ".\\parts\\";
+            ec.biomeCount = 1;
             return ec;
         }
     }

@@ -22,7 +22,7 @@ namespace MapEditor
 
         private void tbMapName_TextChanged(object sender, EventArgs e)
         {
-            if (!editor.FindAndExportPart(tbMapName.Text, (int)nudLaneCount.Value, (int)nudPartSize.Value, out List<string> a, false))
+            if (!editor.FindPart(tbMapName.Text, (int)nudLaneCount.Value, (int)nudPartSize.Value, out Part part))
             {
                 tbMapName.BackColor = Color.Green;
             }

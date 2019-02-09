@@ -13,6 +13,7 @@ namespace MapEditor
         public string name;
         public int partLength;
         public int laneCount;
+        public int biomeID;
         public int[][] part;
 
 
@@ -24,6 +25,11 @@ namespace MapEditor
         public bool Divisible(int targetSize)
         {
             return partLength % targetSize == 0 && partLength != 0;
+        }
+
+        public int DivisionCount(int targetSize)
+        {
+            return partLength / targetSize;
         }
 
         public List<List<string>> ExportDivided(int targetSize)

@@ -62,33 +62,63 @@ namespace MapEditor
             return false;
         }
 
-        public bool FindAndExportPart(string name, int laneCount, int partSize, out List<string> export, bool debug = true)
+        public bool FindPart(string name, int laneCount, int partSize, out Part part)
         {
             for (int i = 0; i < parts.Count; i++)
             {
                 if (parts[i].name == name && parts[i].laneCount == laneCount && parts[i].Divisible(partSize))
                 {
-                    if (partSize == parts[i].partLength)
-                        export = parts[i].ToEditFormat();
-                    else
-                    {
-                        if(debug)Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Dividing part into" + parts[i].partLength / partSize + " Sub Parts");
-                        List<List<string>> part = parts[i].ExportDivided(partSize);
-                        export = new List<string>();
-
-                        for (int j = 0; j < part.Count; j++)
-                        {
-                            if(debug)Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Compiling sub-part " + j);
-                            if (j != 0) export.Add("");
-                            export.AddRange(part[j]);
-                        }
-                    }
+                    part = parts[i];
                     return true;
                 }
             }
-            export = Part.Dummy(laneCount, partSize);
+            part = new Part();
             return false;
         }
+
+        public bool FindAndExportPart(string name, int laneCount, int partSize, out List<string> export, out List<string> biomeIDs, bool debug = true)
+        {
+            if (FindPart(name, laneCount, partSize, out Part partz) && ExportPart(partz, partSize, out export, out biomeIDs))
+            {
+                return true;
+
+            }
+            else
+            {
+                export = Part.Dummy(laneCount, partSize);
+                biomeIDs = new List<string>() { "0" };
+                return false;
+            }
+
+
+
+        }
+
+        public bool ExportPart(Part p, int targetSize, out List<string> export, out List<string> biomeIDs, bool debug = true)
+        {
+            biomeIDs = new List<string>();
+            if (p.DivisionCount(targetSize) != 1)
+            {
+                if (debug) Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Dividing part into" + p.partLength / targetSize + " Sub Parts");
+                List<List<string>> part = p.ExportDivided(targetSize);
+                export = new List<string>();
+
+                for (int j = 0; j < part.Count; j++)
+                {
+                    if (j != 0) export.Add("");
+                    export.AddRange(part[j]);
+                    biomeIDs.Add(p.biomeID.ToString());
+                }
+            }
+            else
+            {
+
+                biomeIDs.Add(p.biomeID.ToString());
+                export = p.ToEditFormat();
+            }
+            return true;
+        }
+
         #endregion
 
         #region MapIO
@@ -113,23 +143,59 @@ namespace MapEditor
             Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Constructing Header.. DONE!");
             Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Constructing Parts..");
 
-            exportString.Add("");
-            exportString.Add(m.PartSequence.Length.ToString());
+            int totalPartCount = GetTotalParts(m);
 
+            exportString.Add("");
+            exportString.Add(totalPartCount.ToString());
+            exportString.Add("");
+
+            int biomeIndex = exportString.Count;
+            Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Biome Index ->" + biomeIndex);
+
+            Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Compiling " + totalPartCount + " Parts");
+            List<string> biomes = new List<string>();
 
             for (int i = 0; i < m.PartSequence.Length; i++)
             {
-                Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Compiling Part " + i);
-                exportString.Add("");
-                if (!FindAndExportPart(m.PartSequence[i], m.LaneCount, m.PartSize, out List<string> col))
-                    Debug.LogGen(LoggingChannel.WARNING | LoggingChannel.MAIN_EDITOR, "Tried to load part with lane & part count that could not be found in the loaded parts" + _currentMap.PartSequence[i] + " LC: " + _currentMap.LaneCount + " PC: " + _currentMap.PartSize);
 
+                exportString.Add("");
+
+                if (!FindAndExportPart(m.PartSequence[i], m.LaneCount, m.PartSize, out List<string> col, out List<string> bids))
+                    Debug.LogGen(LoggingChannel.WARNING | LoggingChannel.MAIN_EDITOR, "Tried to load part with lane & part count that could not be found in the loaded parts" + _currentMap.PartSequence[i] + " LC: " + _currentMap.LaneCount + " PC: " + _currentMap.PartSize);
+                biomes.AddRange(bids);
                 exportString.AddRange(col);
             }
             exportString.Add("");
             Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Constructing Parts.. DONE!");
+            Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Constructing Biomes..");
+
+
+
+            for (int i = biomes.Count - 1; i >= 0; i--)
+            {
+                exportString.Insert(biomeIndex, biomes[i]);
+            }
+
+            Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Constructing Biomes.. DONE!");
+
             Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Compiling Map.. DONE!");
+
+
+
             return exportString;
+        }
+
+        public int GetTotalParts(Map m)
+        {
+            int part = 0;
+            for (int i = 0; i < m.PartSequence.Length; i++)
+            {
+                if (FindPart(m.PartSequence[i], m.LaneCount, m.PartSize, out Part prt))
+                {
+                    part += prt.DivisionCount(m.PartSize);
+                }
+            }
+            return part;
         }
 
         public List<string> ExportMap()
@@ -153,7 +219,7 @@ namespace MapEditor
         {
 
             Debug.LogGen(LoggingChannel.MAIN_EDITOR | LoggingChannel.LOG,
-                        "Adding Map..");
+                        "Loading Map..");
 
             if (map != null)
             {
@@ -166,7 +232,7 @@ namespace MapEditor
                 }
                 for (int i = 0; i < map.PartSequence.Length; i++)
                 {
-                    if (!FindAndExportPart(map.PartSequence[i], map.LaneCount, map.PartSize, out List<string> export))
+                    if (!FindPart(map.PartSequence[i], map.LaneCount, map.PartSize, out Part part))
                     {
                         Debug.LogGen(LoggingChannel.MAIN_EDITOR | LoggingChannel.WARNING, "Could not find correct part for item(part will be zero filled) : " + map.PartSequence[i] +
                             "\nCheck Lane Count and Part Size in the object.");

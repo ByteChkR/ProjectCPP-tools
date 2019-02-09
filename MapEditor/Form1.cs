@@ -19,7 +19,7 @@ namespace MapEditor
         System.Diagnostics.Process _engine;
         string _enginePath = "";
         string _defaultPartFolder = "";
-
+        int _biomeCount = 1;
         public Editor editor;
 
         public frmEditor(bool enableLogging)
@@ -152,6 +152,7 @@ namespace MapEditor
                     editor.LoadPart(part);
                 }
                 InvalidateParts();
+                if(editor.GetMap(out Map map))InvalidateMap(map);
             }
         }
 
@@ -170,6 +171,33 @@ namespace MapEditor
 
         }
 
+        void MapDrawItems(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index == -1) return;
+            e.DrawBackground();
+            Graphics g = e.Graphics;
+            Brush available = Brushes.Black;
+            Brush unavailable = Brushes.Red;
+
+            if (editor.GetMap(out Map map))
+                if (editor.FindPart(lbMapParts.Items[e.Index].ToString(), map.LaneCount, map.PartSize, out Part part))
+                {
+
+                    e.Graphics.DrawString(lbMapParts.Items[e.Index].ToString(), e.Font, available, e.Bounds, StringFormat.GenericDefault);
+                }
+                else
+                {
+                    e.Graphics.DrawString(lbMapParts.Items[e.Index].ToString(), e.Font, unavailable, e.Bounds, StringFormat.GenericDefault);
+
+                }
+            else
+            {
+                e.Graphics.DrawString(lbMapParts.Items[e.Index].ToString(), e.Font, unavailable, e.Bounds, StringFormat.GenericDefault);
+
+            }
+            e.DrawFocusRectangle();
+        }
+
         void PartsDrawItems(object sender, DrawItemEventArgs e)
         {
             if (e.Index == -1) return;
@@ -179,7 +207,7 @@ namespace MapEditor
             Brush unavailable = Brushes.Red;
 
             if (editor.GetMap(out Map map))
-                if (editor.FindAndExportPart(lbParts.Items[e.Index].ToString(), map.LaneCount, map.PartSize, out List<string> export, false))
+                if (editor.FindPart(lbParts.Items[e.Index].ToString(), map.LaneCount, map.PartSize, out Part part))
                 {
 
                     e.Graphics.DrawString(lbParts.Items[e.Index].ToString(), e.Font, available, e.Bounds, StringFormat.GenericDefault);
@@ -206,11 +234,12 @@ namespace MapEditor
             }
             else pFinal = new Part();
             
-            PartCreator pc = new PartCreator(pFinal);
+            PartCreator pc = new PartCreator(pFinal, false, _biomeCount, "");
             if (pc.ShowDialog() == DialogResult.OK)
             {
                 editor.LoadPart(pc.GetPart());
                 InvalidateParts();
+                if (editor.GetMap(out Map map)) InvalidateMap(map);
             }
 
         }
@@ -220,7 +249,7 @@ namespace MapEditor
             if (lbParts.SelectedIndex == -1) return;
             if (editor.GetPartAt(lbParts.SelectedIndex, out Part part))
             {
-                PartCreator pc = new PartCreator(part);
+                PartCreator pc = new PartCreator(part, true, _biomeCount, _defaultPartFolder);
                 if (pc.ShowDialog() == DialogResult.OK)
                 {
                     InvalidateParts();
@@ -417,7 +446,7 @@ namespace MapEditor
 
 
             }
-
+            if(ec.biomeCount > 0)_biomeCount = ec.biomeCount;
             _enginePath = ec.EnginePath;
             _defaultPartFolder = ec.DefaultPartsFolder;
         }
@@ -429,6 +458,7 @@ namespace MapEditor
             {
                 EnginePath = _enginePath,
                 DefaultPartsFolder = _defaultPartFolder,
+                biomeCount = _biomeCount,
             };
             System.IO.TextWriter tw = null;
             try

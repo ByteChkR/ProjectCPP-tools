@@ -35,7 +35,10 @@
             this.lblCompileStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnSave = new System.Windows.Forms.Button();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
+            this.nudBiomeID = new System.Windows.Forms.NumericUpDown();
+            this.lblBiomeID = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBiomeID)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -95,11 +98,30 @@
             this.sfd.Filter = "XML Part File|*.pxml";
             this.sfd.Title = "Save Part XML File";
             // 
+            // nudBiomeID
+            // 
+            this.nudBiomeID.Location = new System.Drawing.Point(500, 168);
+            this.nudBiomeID.Name = "nudBiomeID";
+            this.nudBiomeID.Size = new System.Drawing.Size(47, 20);
+            this.nudBiomeID.TabIndex = 3;
+            this.nudBiomeID.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // lblBiomeID
+            // 
+            this.lblBiomeID.AutoSize = true;
+            this.lblBiomeID.Location = new System.Drawing.Point(441, 171);
+            this.lblBiomeID.Name = "lblBiomeID";
+            this.lblBiomeID.Size = new System.Drawing.Size(53, 13);
+            this.lblBiomeID.TabIndex = 4;
+            this.lblBiomeID.Text = "Biome ID:";
+            // 
             // PartCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(652, 189);
+            this.Controls.Add(this.lblBiomeID);
+            this.Controls.Add(this.nudBiomeID);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.richTextBox1);
@@ -108,6 +130,7 @@
             this.Text = "PartCreator";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBiomeID)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,5 +145,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.SaveFileDialog sfd;
         private System.Windows.Forms.ToolStripStatusLabel lblCompileStatus;
+        private System.Windows.Forms.NumericUpDown nudBiomeID;
+        private System.Windows.Forms.Label lblBiomeID;
     }
 }

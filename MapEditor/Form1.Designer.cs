@@ -90,12 +90,14 @@
             // 
             // lbMapParts
             // 
+            this.lbMapParts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lbMapParts.FormattingEnabled = true;
             this.lbMapParts.Location = new System.Drawing.Point(12, 85);
             this.lbMapParts.Name = "lbMapParts";
             this.lbMapParts.Size = new System.Drawing.Size(450, 394);
             this.lbMapParts.TabIndex = 7;
-           // 
+            this.lbMapParts.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.MapDrawItems);
+            // 
             // lbParts
             // 
             this.lbParts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
