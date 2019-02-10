@@ -11,6 +11,7 @@ namespace MapEditor
     {
         public string EnginePath;
         public string DefaultPartsFolder;
+        public string HeightMap;
         public int biomeCount;
 
 
@@ -19,6 +20,7 @@ namespace MapEditor
             editorConfig ec = new editorConfig();
             ec.EnginePath = "";
             ec.DefaultPartsFolder = ".\\parts\\";
+            ec.HeightMap = "";
             ec.biomeCount = 1;
             return ec;
         }

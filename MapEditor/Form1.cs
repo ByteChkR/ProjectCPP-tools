@@ -19,6 +19,7 @@ namespace MapEditor
         System.Diagnostics.Process _engine;
         string _enginePath = "";
         string _defaultPartFolder = "";
+        string _heightMapPath;
         int _biomeCount = 1;
         public Editor editor;
 
@@ -449,6 +450,8 @@ namespace MapEditor
             if(ec.biomeCount > 0)_biomeCount = ec.biomeCount;
             _enginePath = ec.EnginePath;
             _defaultPartFolder = ec.DefaultPartsFolder;
+            _heightMapPath = ec.HeightMap;
+            if (_heightMapPath != "") lblHmpath.Text = _heightMapPath;
         }
 
         void SaveConfig()
@@ -459,6 +462,7 @@ namespace MapEditor
                 EnginePath = _enginePath,
                 DefaultPartsFolder = _defaultPartFolder,
                 biomeCount = _biomeCount,
+                HeightMap = _heightMapPath
             };
             System.IO.TextWriter tw = null;
             try
@@ -540,16 +544,49 @@ namespace MapEditor
             editor.GetMap(out Map map);
             Map m = map.SubMap(startIndex);
             List<string> tempMap = editor.ExportMap(m);
-            SaveExport(tempMap, _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1) + "mge\\maps\\temp.txt");
+            string filename = "temp.txt";
+            string datapath = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1) + "mge\\maps\\";
+
+            SaveExport(tempMap, datapath+filename);
+            
             _engine = new System.Diagnostics.Process();
 
             string s = System.IO.Path.GetFullPath(_enginePath);
-            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo(s, "temp.txt");
+            System.Diagnostics.ProcessStartInfo psi;
+            if (cboxMapMode.SelectedItem.ToString() != "Raw")
+            {
+                WriteLuaWrapper(datapath, filename, "temp.lua", _heightMapPath);
+                psi = new System.Diagnostics.ProcessStartInfo(s, "temp.lua");
+            }
+            else
+                psi = new System.Diagnostics.ProcessStartInfo(s, "temp.txt r");
+
             psi.WorkingDirectory = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1);
             _engine.StartInfo = psi;
             _engine.Start();
 
 
+        }
+
+        void WriteLuaWrapper(string datapath, string mapName, string wrapperName, string heightMap)
+        {
+            List<string> wrapper = new List<string>();
+            if (heightMap != "") wrapper.Add("heightTexture = \"" + heightMap + "\"");
+            wrapper.Add("map = \"" + mapName + "\"");
+            try
+            {
+
+                System.IO.TextWriter tr = new System.IO.StreamWriter(datapath + wrapperName);
+                for (int i = 0; i < wrapper.Count; i++)
+                {
+                    tr.WriteLine(wrapper[i]);
+                }
+                tr.Close();
+            }
+            catch (Exception)
+            {
+                Debug.LogGen(LoggingChannel.ERROR | LoggingChannel.MAIN_EDITOR, "Creating lua wrapper failed.");
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -600,7 +637,14 @@ namespace MapEditor
 
         }
 
-
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if(ofdHeightMap.ShowDialog() == DialogResult.OK)
+            {
+                _heightMapPath = ofdHeightMap.FileName.Substring(ofdHeightMap.FileName.LastIndexOf('\\')+1);
+                lblHmpath.Text = _heightMapPath;
+            }
+        }
     }
 }
 

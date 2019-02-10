@@ -56,8 +56,14 @@
             this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
             this.ofdEngine = new System.Windows.Forms.OpenFileDialog();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboxMapMode = new System.Windows.Forms.ComboBox();
+            this.lblHmpath = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.ofdHeightMap = new System.Windows.Forms.OpenFileDialog();
             this.grpBoxParts.SuspendLayout();
             this.grpBoxMap.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblLaneCount
@@ -104,7 +110,7 @@
             this.lbParts.FormattingEnabled = true;
             this.lbParts.Location = new System.Drawing.Point(21, 72);
             this.lbParts.Name = "lbParts";
-            this.lbParts.Size = new System.Drawing.Size(333, 433);
+            this.lbParts.Size = new System.Drawing.Size(333, 342);
             this.lbParts.TabIndex = 8;
             this.lbParts.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.PartsDrawItems);
             // 
@@ -243,9 +249,9 @@
             this.grpBoxParts.Controls.Add(this.btneditPart);
             this.grpBoxParts.Controls.Add(this.lblPartsAvaliable);
             this.grpBoxParts.Controls.Add(this.lbParts);
-            this.grpBoxParts.Location = new System.Drawing.Point(532, 12);
+            this.grpBoxParts.Location = new System.Drawing.Point(532, 97);
             this.grpBoxParts.Name = "grpBoxParts";
-            this.grpBoxParts.Size = new System.Drawing.Size(361, 513);
+            this.grpBoxParts.Size = new System.Drawing.Size(361, 428);
             this.grpBoxParts.TabIndex = 19;
             this.grpBoxParts.TabStop = false;
             this.grpBoxParts.Text = "Parts:";
@@ -253,10 +259,7 @@
             // 
             // grpBoxMap
             // 
-            this.grpBoxMap.Controls.Add(this.btnStartFromSelection);
             this.grpBoxMap.Controls.Add(this.cbRandomizeParts);
-            this.grpBoxMap.Controls.Add(this.button5);
-            this.grpBoxMap.Controls.Add(this.button4);
             this.grpBoxMap.Controls.Add(this.btnMoveDown);
             this.grpBoxMap.Controls.Add(this.btnUp);
             this.grpBoxMap.Controls.Add(this.btnRemoveFromMap);
@@ -277,7 +280,7 @@
             // 
             // btnStartFromSelection
             // 
-            this.btnStartFromSelection.Location = new System.Drawing.Point(353, 55);
+            this.btnStartFromSelection.Location = new System.Drawing.Point(113, 47);
             this.btnStartFromSelection.Name = "btnStartFromSelection";
             this.btnStartFromSelection.Size = new System.Drawing.Size(109, 24);
             this.btnStartFromSelection.TabIndex = 24;
@@ -298,7 +301,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(246, 56);
+            this.button5.Location = new System.Drawing.Point(6, 47);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(58, 24);
             this.button5.TabIndex = 22;
@@ -308,7 +311,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(310, 55);
+            this.button4.Location = new System.Drawing.Point(70, 47);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(37, 24);
             this.button4.TabIndex = 21;
@@ -344,11 +347,62 @@
             this.ofdEngine.Multiselect = true;
             this.ofdEngine.Title = "Open XML Part File";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnStartFromSelection);
+            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.Controls.Add(this.lblHmpath);
+            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.cboxMapMode);
+            this.groupBox1.Location = new System.Drawing.Point(532, 10);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(361, 82);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Engine Controls";
+            // 
+            // cboxMapMode
+            // 
+            this.cboxMapMode.FormattingEnabled = true;
+            this.cboxMapMode.Items.AddRange(new object[] {
+            "Raw",
+            "Lua"});
+            this.cboxMapMode.Location = new System.Drawing.Point(305, 19);
+            this.cboxMapMode.Name = "cboxMapMode";
+            this.cboxMapMode.Size = new System.Drawing.Size(50, 21);
+            this.cboxMapMode.TabIndex = 0;
+            this.cboxMapMode.Text = "Raw";
+            // 
+            // lblHmpath
+            // 
+            this.lblHmpath.AutoSize = true;
+            this.lblHmpath.Location = new System.Drawing.Point(130, 21);
+            this.lblHmpath.Name = "lblHmpath";
+            this.lblHmpath.Size = new System.Drawing.Size(79, 13);
+            this.lblHmpath.TabIndex = 1;
+            this.lblHmpath.Text = "No Height Map";
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(6, 16);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(121, 23);
+            this.button6.TabIndex = 2;
+            this.button6.Text = "Add Heightmap";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // ofdHeightMap
+            // 
+            this.ofdHeightMap.FileName = "openFileDialog1";
+            // 
             // frmEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 537);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpBoxMap);
             this.Controls.Add(this.grpBoxParts);
             this.Controls.Add(this.button1);
@@ -361,6 +415,8 @@
             this.grpBoxParts.PerformLayout();
             this.grpBoxMap.ResumeLayout(false);
             this.grpBoxMap.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -394,6 +450,11 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.CheckBox cbRandomizeParts;
         private System.Windows.Forms.Button btnStartFromSelection;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label lblHmpath;
+        private System.Windows.Forms.ComboBox cboxMapMode;
+        private System.Windows.Forms.OpenFileDialog ofdHeightMap;
     }
 }
 
