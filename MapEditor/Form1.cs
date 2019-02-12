@@ -18,17 +18,21 @@ namespace MapEditor
     {
         System.Diagnostics.Process _engine;
         string _enginePath = "";
+        string _engineWorkingDir = "";
         string _defaultPartFolder = "";
-        string _heightMapPath;
         int _biomeCount = 1;
         public Editor editor;
+        Form adl;
 
         public frmEditor(bool enableLogging)
         {
 
             InitializeComponent();
-            ReadConfig();
+
             
+
+            ReadConfig();
+
 
             Debug.ADLEnabled = false;
             if (enableLogging)
@@ -39,13 +43,13 @@ namespace MapEditor
 
                 //CreateADLCustomCMDConfig();
 
-                System.Windows.Forms.Form f =
-                ADL.CustomCMD.CMDUtils.CreateCustomConsole(ps);
+                adl = ADL.CustomCMD.CMDUtils.CreateCustomConsole(ps);
+                
                 Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Initialized Debug Logs.");
             }
-            if (_defaultPartFolder != "")
+            if (System.IO.Directory.Exists(_defaultPartFolder))
             {
-                LoadParts(System.IO.Directory.GetFiles(".\\parts", "*.pxml"), out Part[] parts);
+                LoadParts(System.IO.Directory.GetFiles(_defaultPartFolder, "*.pxml"), out Part[] parts);
                 editor = new Editor(parts.ToList());
                 InvalidateParts();
             }
@@ -103,10 +107,10 @@ namespace MapEditor
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            
+
             if (editor.GetMap(out Map map) && editor.GetPartAt(lbParts.SelectedIndex, out Part part) && part.IsValid(map.LaneCount, map.PartSize) && editor.AddToMapByIndex(lbMapParts.SelectedIndex, lbParts.SelectedIndex))
             {
-                
+
                 InvalidateMap(map);
             }
         }
@@ -153,7 +157,7 @@ namespace MapEditor
                     editor.LoadPart(part);
                 }
                 InvalidateParts();
-                if(editor.GetMap(out Map map))InvalidateMap(map);
+                if (editor.GetMap(out Map map)) InvalidateMap(map);
             }
         }
 
@@ -168,7 +172,7 @@ namespace MapEditor
             {
                 lbParts.Items.Add(part.ToString());
             }
-           if(lbParts.Items.Count > index) lbParts.SelectedIndex = index;
+            if (lbParts.Items.Count > index) lbParts.SelectedIndex = index;
 
         }
 
@@ -234,7 +238,7 @@ namespace MapEditor
                 pFinal = Part.Copy(p);
             }
             else pFinal = new Part();
-            
+
             PartCreator pc = new PartCreator(pFinal, false, _biomeCount, "");
             if (pc.ShowDialog() == DialogResult.OK)
             {
@@ -447,11 +451,12 @@ namespace MapEditor
 
 
             }
-            if(ec.biomeCount > 0)_biomeCount = ec.biomeCount;
+            if (ec.biomeCount > 0) _biomeCount = ec.biomeCount;
             _enginePath = ec.EnginePath;
+            if(_enginePath != "")_engineWorkingDir = _enginePath.Substring(0,_enginePath.LastIndexOf('\\')+1);
             _defaultPartFolder = ec.DefaultPartsFolder;
-            _heightMapPath = ec.HeightMap;
-            if (_heightMapPath != "") lblHmpath.Text = _heightMapPath;
+            InvalidateEnginePath();
+            if (cbHms.Items.Count > ec.HeightMap) cbHms.SelectedIndex = ec.HeightMap;
         }
 
         void SaveConfig()
@@ -462,7 +467,7 @@ namespace MapEditor
                 EnginePath = _enginePath,
                 DefaultPartsFolder = _defaultPartFolder,
                 biomeCount = _biomeCount,
-                HeightMap = _heightMapPath
+                HeightMap = cbHms.SelectedIndex
             };
             System.IO.TextWriter tw = null;
             try
@@ -500,7 +505,7 @@ namespace MapEditor
         {
             if (editor.GetMap(out Map map))
             {
-                if(editor.SwapParts(lbMapParts.SelectedIndex, lbMapParts.SelectedIndex + 1))
+                if (editor.SwapParts(lbMapParts.SelectedIndex, lbMapParts.SelectedIndex + 1))
                 {
 
                     InvalidateMap(map);
@@ -521,15 +526,15 @@ namespace MapEditor
                 if (ofdEngine.ShowDialog() == DialogResult.OK)
                 {
                     _enginePath = ofdEngine.FileName;
-
+                    _engineWorkingDir = _enginePath.Substring(0, _enginePath.LastIndexOf('\\')+1);
                 }
             }
             if (editor.GetMap(out Map map)) StartProcess();
-            else Debug.LogGen(LoggingChannel.ERROR|LoggingChannel.MAIN_EDITOR, "No map loaded");
+            else Debug.LogGen(LoggingChannel.ERROR | LoggingChannel.MAIN_EDITOR, "No map loaded");
 
         }
 
-        
+
         void StartProcess(int startIndex = 0)
         {
 
@@ -545,23 +550,23 @@ namespace MapEditor
             Map m = map.SubMap(startIndex);
             List<string> tempMap = editor.ExportMap(m);
             string filename = "temp.txt";
-            string datapath = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1) + "mge\\maps\\";
+            string datapath = _engineWorkingDir + "mge\\maps\\";
 
-            SaveExport(tempMap, datapath+filename);
-            
+            SaveExport(tempMap, datapath + filename);
+
             _engine = new System.Diagnostics.Process();
 
             string s = System.IO.Path.GetFullPath(_enginePath);
             System.Diagnostics.ProcessStartInfo psi;
             if (cboxMapMode.SelectedItem.ToString() != "Raw")
             {
-                WriteLuaWrapper(datapath, filename, "temp.lua", _heightMapPath);
+                WriteLuaWrapper(datapath, filename, "temp.lua", cbHms.Items[cbHms.SelectedIndex].ToString());
                 psi = new System.Diagnostics.ProcessStartInfo(s, "temp.lua");
             }
             else
                 psi = new System.Diagnostics.ProcessStartInfo(s, "temp.txt r");
 
-            psi.WorkingDirectory = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1);
+            psi.WorkingDirectory = _engineWorkingDir;
             _engine.StartInfo = psi;
             _engine.Start();
 
@@ -593,9 +598,9 @@ namespace MapEditor
         {
             if (ofdEngine.ShowDialog() == DialogResult.OK)
             {
-                string folder = Application.StartupPath;
                 _enginePath = ofdEngine.FileName;
-
+                _engineWorkingDir = _enginePath.Substring(0, _enginePath.LastIndexOf('\\')+1);
+                InvalidateEnginePath();
             }
         }
 
@@ -631,7 +636,7 @@ namespace MapEditor
                 int index = lbMapParts.SelectedIndex;
                 if (lbMapParts.SelectedIndex == -1) index = 0;
                 StartProcess(index);
-                
+
             }
             else Debug.LogGen(LoggingChannel.ERROR | LoggingChannel.MAIN_EDITOR, "No map loaded");
 
@@ -639,11 +644,60 @@ namespace MapEditor
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if(ofdHeightMap.ShowDialog() == DialogResult.OK)
+            if (ofdHeightMap.ShowDialog() == DialogResult.OK)
             {
-                _heightMapPath = ofdHeightMap.FileName.Substring(ofdHeightMap.FileName.LastIndexOf('\\')+1);
-                lblHmpath.Text = _heightMapPath;
+                System.IO.File.Copy(ofdHeightMap.FileName, _enginePath + ofdHeightMap.FileName.Substring(ofdHeightMap.FileName.LastIndexOf('\\') + 1), true);
+
+
+                InvalidateHeightmaps();
             }
+        }
+
+        void InvalidateEnginePath()
+        {
+            if (_enginePath.EndsWith("mge.exe") && System.IO.File.Exists(_enginePath))
+            {
+                btnAddHeightmap.Enabled = true;
+                btnPlay.Enabled = true;
+                btnStartFromSelection.Enabled = true;
+            }
+            else
+            {
+                btnAddHeightmap.Enabled = false;
+                btnPlay.Enabled = false;
+                btnStartFromSelection.Enabled = false;
+            }
+            InvalidateHeightmaps();
+        }
+
+        private void InvalidateHeightmaps()
+        {
+            if (System.IO.Directory.Exists(_engineWorkingDir + "\\mge\\textures\\"))
+            {
+                cbHms.Items.Clear();
+                cbHms.Items.Add("NONE");
+                foreach (string file in System.IO.Directory.GetFiles(_engineWorkingDir + "\\mge\\textures\\"))
+                {
+                    cbHms.Items.Add(file.Substring(file.LastIndexOf('\\') + 1));
+                }
+            }
+            else
+            {
+                Debug.LogGen(LoggingChannel.ERROR | LoggingChannel.MAIN_EDITOR, "Could not load heightmaps. Folder mge/textures does not exist");
+            }
+            
+        }
+
+        private void grpBoxMap_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmEditor_Load(object sender, EventArgs e)
+        {
+            CheckForIllegalCrossThreadCalls = false;
+            adl.SendToBack(); //Quick hack to make the console appear behind this form.
+            CheckForIllegalCrossThreadCalls = true;
         }
     }
 }

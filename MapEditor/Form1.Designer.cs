@@ -49,17 +49,18 @@
             this.btnNewMap = new System.Windows.Forms.Button();
             this.grpBoxParts = new System.Windows.Forms.GroupBox();
             this.grpBoxMap = new System.Windows.Forms.GroupBox();
-            this.btnStartFromSelection = new System.Windows.Forms.Button();
             this.cbRandomizeParts = new System.Windows.Forms.CheckBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
+            this.btnStartFromSelection = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.btnPlay = new System.Windows.Forms.Button();
             this.ofdEngine = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblHm = new System.Windows.Forms.Label();
+            this.cbHms = new System.Windows.Forms.ComboBox();
+            this.btnAddHeightmap = new System.Windows.Forms.Button();
             this.cboxMapMode = new System.Windows.Forms.ComboBox();
-            this.lblHmpath = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
             this.ofdHeightMap = new System.Windows.Forms.OpenFileDialog();
             this.grpBoxParts.SuspendLayout();
             this.grpBoxMap.SuspendLayout();
@@ -277,16 +278,7 @@
             this.grpBoxMap.TabIndex = 20;
             this.grpBoxMap.TabStop = false;
             this.grpBoxMap.Text = "Map:";
-            // 
-            // btnStartFromSelection
-            // 
-            this.btnStartFromSelection.Location = new System.Drawing.Point(113, 47);
-            this.btnStartFromSelection.Name = "btnStartFromSelection";
-            this.btnStartFromSelection.Size = new System.Drawing.Size(109, 24);
-            this.btnStartFromSelection.TabIndex = 24;
-            this.btnStartFromSelection.Text = "Start from Selection";
-            this.btnStartFromSelection.UseVisualStyleBackColor = true;
-            this.btnStartFromSelection.Click += new System.EventHandler(this.btnStartFromSelection_Click);
+            this.grpBoxMap.Enter += new System.EventHandler(this.grpBoxMap_Enter);
             // 
             // cbRandomizeParts
             // 
@@ -298,26 +290,6 @@
             this.cbRandomizeParts.Text = "Randomize Part Order on Load";
             this.cbRandomizeParts.UseVisualStyleBackColor = true;
             this.cbRandomizeParts.CheckedChanged += new System.EventHandler(this.cbRandomizeParts_CheckedChanged);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(6, 47);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(58, 24);
-            this.button5.TabIndex = 22;
-            this.button5.Text = "Set .exe";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(70, 47);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(37, 24);
-            this.button4.TabIndex = 21;
-            this.button4.Text = "Play";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // btnMoveDown
             // 
@@ -339,6 +311,36 @@
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
+            // btnStartFromSelection
+            // 
+            this.btnStartFromSelection.Location = new System.Drawing.Point(113, 47);
+            this.btnStartFromSelection.Name = "btnStartFromSelection";
+            this.btnStartFromSelection.Size = new System.Drawing.Size(109, 24);
+            this.btnStartFromSelection.TabIndex = 24;
+            this.btnStartFromSelection.Text = "Start from Selection";
+            this.btnStartFromSelection.UseVisualStyleBackColor = true;
+            this.btnStartFromSelection.Click += new System.EventHandler(this.btnStartFromSelection_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(6, 47);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(58, 24);
+            this.button5.TabIndex = 22;
+            this.button5.Text = "Set .exe";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // btnPlay
+            // 
+            this.btnPlay.Location = new System.Drawing.Point(70, 47);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(37, 24);
+            this.btnPlay.TabIndex = 21;
+            this.btnPlay.Text = "Play";
+            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.button4_Click);
+            // 
             // ofdEngine
             // 
             this.ofdEngine.DefaultExt = "exe";
@@ -349,11 +351,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblHm);
+            this.groupBox1.Controls.Add(this.cbHms);
             this.groupBox1.Controls.Add(this.btnStartFromSelection);
-            this.groupBox1.Controls.Add(this.button6);
-            this.groupBox1.Controls.Add(this.lblHmpath);
+            this.groupBox1.Controls.Add(this.btnAddHeightmap);
             this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.btnPlay);
             this.groupBox1.Controls.Add(this.cboxMapMode);
             this.groupBox1.Location = new System.Drawing.Point(532, 10);
             this.groupBox1.Name = "groupBox1";
@@ -361,6 +364,34 @@
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Engine Controls";
+            // 
+            // lblHm
+            // 
+            this.lblHm.AutoSize = true;
+            this.lblHm.Location = new System.Drawing.Point(113, 21);
+            this.lblHm.Name = "lblHm";
+            this.lblHm.Size = new System.Drawing.Size(65, 13);
+            this.lblHm.TabIndex = 26;
+            this.lblHm.Text = "Height Map:";
+            // 
+            // cbHms
+            // 
+            this.cbHms.FormattingEnabled = true;
+            this.cbHms.Location = new System.Drawing.Point(184, 18);
+            this.cbHms.Name = "cbHms";
+            this.cbHms.Size = new System.Drawing.Size(115, 21);
+            this.cbHms.TabIndex = 25;
+            this.cbHms.Text = "NONE";
+            // 
+            // btnAddHeightmap
+            // 
+            this.btnAddHeightmap.Location = new System.Drawing.Point(6, 16);
+            this.btnAddHeightmap.Name = "btnAddHeightmap";
+            this.btnAddHeightmap.Size = new System.Drawing.Size(101, 23);
+            this.btnAddHeightmap.TabIndex = 2;
+            this.btnAddHeightmap.Text = "Add Heightmap";
+            this.btnAddHeightmap.UseVisualStyleBackColor = true;
+            this.btnAddHeightmap.Click += new System.EventHandler(this.button6_Click);
             // 
             // cboxMapMode
             // 
@@ -374,28 +405,9 @@
             this.cboxMapMode.TabIndex = 0;
             this.cboxMapMode.Text = "Raw";
             // 
-            // lblHmpath
-            // 
-            this.lblHmpath.AutoSize = true;
-            this.lblHmpath.Location = new System.Drawing.Point(130, 21);
-            this.lblHmpath.Name = "lblHmpath";
-            this.lblHmpath.Size = new System.Drawing.Size(79, 13);
-            this.lblHmpath.TabIndex = 1;
-            this.lblHmpath.Text = "No Height Map";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(6, 16);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(121, 23);
-            this.button6.TabIndex = 2;
-            this.button6.Text = "Add Heightmap";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
             // ofdHeightMap
             // 
-            this.ofdHeightMap.FileName = "openFileDialog1";
+            this.ofdHeightMap.FileName = "Open Heightmap";
             // 
             // frmEditor
             // 
@@ -406,11 +418,14 @@
             this.Controls.Add(this.grpBoxMap);
             this.Controls.Add(this.grpBoxParts);
             this.Controls.Add(this.button1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmEditor";
             this.Text = "Map Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmEditor_Closing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmEditor_Closed);
+            this.Load += new System.EventHandler(this.frmEditor_Load);
             this.grpBoxParts.ResumeLayout(false);
             this.grpBoxParts.PerformLayout();
             this.grpBoxMap.ResumeLayout(false);
@@ -445,16 +460,17 @@
         private System.Windows.Forms.GroupBox grpBoxMap;
         private System.Windows.Forms.Button btnMoveDown;
         private System.Windows.Forms.Button btnUp;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.OpenFileDialog ofdEngine;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.CheckBox cbRandomizeParts;
         private System.Windows.Forms.Button btnStartFromSelection;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Label lblHmpath;
+        private System.Windows.Forms.Button btnAddHeightmap;
         private System.Windows.Forms.ComboBox cboxMapMode;
         private System.Windows.Forms.OpenFileDialog ofdHeightMap;
+        private System.Windows.Forms.Label lblHm;
+        private System.Windows.Forms.ComboBox cbHms;
     }
 }
 
