@@ -289,10 +289,11 @@ namespace MapEditor
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            List<string> exportString = editor.ExportMap();
-
-            if (sfdExport.ShowDialog() == DialogResult.OK)
+            if (editor.GetMap(out Map map) && sfdExport.ShowDialog() == DialogResult.OK)
             {
+                List<string> exportString = editor.ExportMap();
+
+            
                 SaveExport(exportString, sfdExport.FileName);
             }
         }
@@ -646,7 +647,8 @@ namespace MapEditor
         {
             if (ofdHeightMap.ShowDialog() == DialogResult.OK)
             {
-                System.IO.File.Copy(ofdHeightMap.FileName, _enginePath + ofdHeightMap.FileName.Substring(ofdHeightMap.FileName.LastIndexOf('\\') + 1), true);
+                System.IO.File.Copy(ofdHeightMap.FileName, _engineWorkingDir+ "mge\\textures\\" + ofdHeightMap.FileName.Substring(ofdHeightMap.FileName.LastIndexOf('\\') + 1), true);
+
 
 
                 InvalidateHeightmaps();
