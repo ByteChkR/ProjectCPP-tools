@@ -20,6 +20,9 @@ namespace MapEditor
             this.folderPath = folderPath;
             ec = config;
             InitializeComponent();
+            InvalidateCombos();
+
+            cboxMapMode.SelectedIndex = ec.isRaw ? 0 : 1;
         }
 
         public void InvalidateCombos()

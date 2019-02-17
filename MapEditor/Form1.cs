@@ -464,6 +464,10 @@ namespace MapEditor
             _defaultPartFolder = ec.DefaultPartsFolder;
             isRaw = ec.isRaw;
             es = new EngineSettings(_engineWorkingDir + "mge\\textures\\", ec);
+            heightmap = es.GetHeight();
+            horizonMap = es.GetHorizon();
+            groundMap = es.GetGround();
+            
             InvalidateEnginePath();
 
         }
