@@ -57,11 +57,8 @@
             this.btnPlay = new System.Windows.Forms.Button();
             this.ofdEngine = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblHm = new System.Windows.Forms.Label();
-            this.cbHms = new System.Windows.Forms.ComboBox();
-            this.btnAddHeightmap = new System.Windows.Forms.Button();
-            this.cboxMapMode = new System.Windows.Forms.ComboBox();
             this.ofdHeightMap = new System.Windows.Forms.OpenFileDialog();
+            this.button4 = new System.Windows.Forms.Button();
             this.grpBoxParts.SuspendLayout();
             this.grpBoxMap.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -111,7 +108,7 @@
             this.lbParts.FormattingEnabled = true;
             this.lbParts.Location = new System.Drawing.Point(21, 72);
             this.lbParts.Name = "lbParts";
-            this.lbParts.Size = new System.Drawing.Size(333, 342);
+            this.lbParts.Size = new System.Drawing.Size(333, 368);
             this.lbParts.TabIndex = 8;
             this.lbParts.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.PartsDrawItems);
             // 
@@ -250,9 +247,9 @@
             this.grpBoxParts.Controls.Add(this.btneditPart);
             this.grpBoxParts.Controls.Add(this.lblPartsAvaliable);
             this.grpBoxParts.Controls.Add(this.lbParts);
-            this.grpBoxParts.Location = new System.Drawing.Point(532, 97);
+            this.grpBoxParts.Location = new System.Drawing.Point(532, 68);
             this.grpBoxParts.Name = "grpBoxParts";
-            this.grpBoxParts.Size = new System.Drawing.Size(361, 428);
+            this.grpBoxParts.Size = new System.Drawing.Size(361, 457);
             this.grpBoxParts.TabIndex = 19;
             this.grpBoxParts.TabStop = false;
             this.grpBoxParts.Text = "Parts:";
@@ -313,7 +310,7 @@
             // 
             // btnStartFromSelection
             // 
-            this.btnStartFromSelection.Location = new System.Drawing.Point(113, 47);
+            this.btnStartFromSelection.Location = new System.Drawing.Point(113, 19);
             this.btnStartFromSelection.Name = "btnStartFromSelection";
             this.btnStartFromSelection.Size = new System.Drawing.Size(109, 24);
             this.btnStartFromSelection.TabIndex = 24;
@@ -323,7 +320,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(6, 47);
+            this.button5.Location = new System.Drawing.Point(6, 19);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(58, 24);
             this.button5.TabIndex = 22;
@@ -333,7 +330,7 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(70, 47);
+            this.btnPlay.Location = new System.Drawing.Point(70, 19);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(37, 24);
             this.btnPlay.TabIndex = 21;
@@ -351,63 +348,30 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lblHm);
-            this.groupBox1.Controls.Add(this.cbHms);
+            this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.btnStartFromSelection);
-            this.groupBox1.Controls.Add(this.btnAddHeightmap);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.btnPlay);
-            this.groupBox1.Controls.Add(this.cboxMapMode);
             this.groupBox1.Location = new System.Drawing.Point(532, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(361, 82);
+            this.groupBox1.Size = new System.Drawing.Size(361, 53);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Engine Controls";
             // 
-            // lblHm
-            // 
-            this.lblHm.AutoSize = true;
-            this.lblHm.Location = new System.Drawing.Point(113, 21);
-            this.lblHm.Name = "lblHm";
-            this.lblHm.Size = new System.Drawing.Size(65, 13);
-            this.lblHm.TabIndex = 26;
-            this.lblHm.Text = "Height Map:";
-            // 
-            // cbHms
-            // 
-            this.cbHms.FormattingEnabled = true;
-            this.cbHms.Location = new System.Drawing.Point(184, 18);
-            this.cbHms.Name = "cbHms";
-            this.cbHms.Size = new System.Drawing.Size(115, 21);
-            this.cbHms.TabIndex = 25;
-            this.cbHms.Text = "NONE";
-            // 
-            // btnAddHeightmap
-            // 
-            this.btnAddHeightmap.Location = new System.Drawing.Point(6, 16);
-            this.btnAddHeightmap.Name = "btnAddHeightmap";
-            this.btnAddHeightmap.Size = new System.Drawing.Size(101, 23);
-            this.btnAddHeightmap.TabIndex = 2;
-            this.btnAddHeightmap.Text = "Add Heightmap";
-            this.btnAddHeightmap.UseVisualStyleBackColor = true;
-            this.btnAddHeightmap.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // cboxMapMode
-            // 
-            this.cboxMapMode.FormattingEnabled = true;
-            this.cboxMapMode.Items.AddRange(new object[] {
-            "Raw",
-            "Lua"});
-            this.cboxMapMode.Location = new System.Drawing.Point(305, 19);
-            this.cboxMapMode.Name = "cboxMapMode";
-            this.cboxMapMode.Size = new System.Drawing.Size(50, 21);
-            this.cboxMapMode.TabIndex = 0;
-            this.cboxMapMode.Text = "Raw";
-            // 
             // ofdHeightMap
             // 
             this.ofdHeightMap.FileName = "Open Heightmap";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(224, 20);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(130, 23);
+            this.button4.TabIndex = 27;
+            this.button4.Text = "Set Engine Settings";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // frmEditor
             // 
@@ -431,7 +395,6 @@
             this.grpBoxMap.ResumeLayout(false);
             this.grpBoxMap.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -466,11 +429,8 @@
         private System.Windows.Forms.CheckBox cbRandomizeParts;
         private System.Windows.Forms.Button btnStartFromSelection;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnAddHeightmap;
-        private System.Windows.Forms.ComboBox cboxMapMode;
         private System.Windows.Forms.OpenFileDialog ofdHeightMap;
-        private System.Windows.Forms.Label lblHm;
-        private System.Windows.Forms.ComboBox cbHms;
+        private System.Windows.Forms.Button button4;
     }
 }
 

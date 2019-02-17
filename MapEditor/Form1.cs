@@ -22,6 +22,11 @@ namespace MapEditor
         string _defaultPartFolder = "";
         int _biomeCount = 1;
         public Editor editor;
+        string heightmap = "";
+        string horizonMap = "";
+        string groundMap = "";
+        bool isRaw = true;
+        EngineSettings es;
         Form adl;
 
         public frmEditor(bool enableLogging)
@@ -32,6 +37,7 @@ namespace MapEditor
             
 
             ReadConfig();
+
 
 
             Debug.ADLEnabled = false;
@@ -456,20 +462,22 @@ namespace MapEditor
             _enginePath = ec.EnginePath;
             if(_enginePath != "")_engineWorkingDir = _enginePath.Substring(0,_enginePath.LastIndexOf('\\')+1);
             _defaultPartFolder = ec.DefaultPartsFolder;
+            isRaw = ec.isRaw;
+            es = new EngineSettings(_engineWorkingDir + "mge\\textures\\", ec);
             InvalidateEnginePath();
-            if (cbHms.Items.Count > ec.HeightMap) cbHms.SelectedIndex = ec.HeightMap;
+
         }
 
         void SaveConfig()
         {
             XmlSerializer xs = new XmlSerializer(typeof(editorConfig));
-            editorConfig ec = new editorConfig()
-            {
-                EnginePath = _enginePath,
-                DefaultPartsFolder = _defaultPartFolder,
-                biomeCount = _biomeCount,
-                HeightMap = cbHms.SelectedIndex
-            };
+
+            editorConfig ec = es.GetConfig();
+            ec.EnginePath = _enginePath;
+            ec.DefaultPartsFolder = _defaultPartFolder;
+            ec.biomeCount = _biomeCount;
+            ec.isRaw = isRaw;
+
             System.IO.TextWriter tw = null;
             try
             {
@@ -559,9 +567,9 @@ namespace MapEditor
 
             string s = System.IO.Path.GetFullPath(_enginePath);
             System.Diagnostics.ProcessStartInfo psi;
-            if (cboxMapMode.SelectedItem.ToString() != "Raw")
+            if (!isRaw)
             {
-                WriteLuaWrapper(datapath, filename, "temp.lua", cbHms.Items[cbHms.SelectedIndex].ToString());
+                WriteLuaWrapper(datapath, filename, "temp.lua", heightmap, groundMap, horizonMap);
                 psi = new System.Diagnostics.ProcessStartInfo(s, "temp.lua");
             }
             else
@@ -574,11 +582,13 @@ namespace MapEditor
 
         }
 
-        void WriteLuaWrapper(string datapath, string mapName, string wrapperName, string heightMap)
+        void WriteLuaWrapper(string datapath, string mapName, string wrapperName, string heightMap, string groundTex, string horizonTex)
         {
             List<string> wrapper = new List<string>();
             if (heightMap != "") wrapper.Add("heightTexture = \"" + heightMap + "\"");
             wrapper.Add("map = \"" + mapName + "\"");
+            if (groundTex != "") wrapper.Add("ground = \"" + horizonTex + "\"");
+            if (groundTex != "") wrapper.Add("mapGround = \"" + groundTex + "\"");
             try
             {
 
@@ -659,13 +669,11 @@ namespace MapEditor
         {
             if (_enginePath.EndsWith("mge.exe") && System.IO.File.Exists(_enginePath))
             {
-                btnAddHeightmap.Enabled = true;
                 btnPlay.Enabled = true;
                 btnStartFromSelection.Enabled = true;
             }
             else
             {
-                btnAddHeightmap.Enabled = false;
                 btnPlay.Enabled = false;
                 btnStartFromSelection.Enabled = false;
             }
@@ -676,12 +684,8 @@ namespace MapEditor
         {
             if (System.IO.Directory.Exists(_engineWorkingDir + "\\mge\\textures\\"))
             {
-                cbHms.Items.Clear();
-                cbHms.Items.Add("NONE");
-                foreach (string file in System.IO.Directory.GetFiles(_engineWorkingDir + "\\mge\\textures\\"))
-                {
-                    cbHms.Items.Add(file.Substring(file.LastIndexOf('\\') + 1));
-                }
+                es.InvalidateCombos();
+
             }
             else
             {
@@ -700,6 +704,16 @@ namespace MapEditor
             CheckForIllegalCrossThreadCalls = false;
             adl.SendToBack(); //Quick hack to make the console appear behind this form.
             CheckForIllegalCrossThreadCalls = true;
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            if(es.ShowDialog() == DialogResult.OK)
+            {
+                heightmap = es.GetHeight();
+                groundMap = es.GetGround();
+                horizonMap = es.GetHorizon();
+            }
         }
     }
 }
