@@ -18,6 +18,9 @@ namespace MapEditor
         public bool isRaw;
 
 
+        
+
+
 
         public static editorConfig GetStandard()
         {

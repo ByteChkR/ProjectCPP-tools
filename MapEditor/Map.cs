@@ -14,7 +14,16 @@ namespace MapEditor
         public int RandomizePartOrder;
         public int[] LaneSteps;
         public string[] PartSequence;
-        
+
+        public float genOffset;
+        public float xCurvature;
+        public float xCurvatureSmoothness;
+        public float heightMapTiling;
+        public float heightMapSpeed;
+        public float heightMapMaxHeight;
+        public float heightMapSamplingWidth;
+        public float xMoveTiling;
+
         public bool GetRandomize()
         {
 
@@ -39,6 +48,14 @@ namespace MapEditor
             LaneCount = laneCount;
             RandomizePartOrder = 0;
             LaneSteps = new int[LaneCount];
+            genOffset = 75;
+            xCurvature = 50;
+            xCurvatureSmoothness = 2;
+            heightMapTiling = 1;
+            heightMapSamplingWidth = 8;
+            heightMapSpeed = 0;
+            heightMapMaxHeight = 10;
+            xMoveTiling = 100;
         }
 
         public bool SelfCheck()

@@ -14,7 +14,6 @@ namespace MapEditor
     public partial class PartCreator : Form
     {
         Part _part;
-        string lastText;
         
         int _laneCount;
         int _partLength;

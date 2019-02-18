@@ -34,7 +34,7 @@ namespace MapEditor
 
             InitializeComponent();
 
-            
+
 
             ReadConfig();
 
@@ -50,7 +50,7 @@ namespace MapEditor
                 //CreateADLCustomCMDConfig();
 
                 adl = ADL.CustomCMD.CMDUtils.CreateCustomConsole(ps);
-                
+
                 Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Initialized Debug Logs.");
             }
             if (System.IO.Directory.Exists(_defaultPartFolder))
@@ -299,7 +299,7 @@ namespace MapEditor
             {
                 List<string> exportString = editor.ExportMap();
 
-            
+
                 SaveExport(exportString, sfdExport.FileName);
             }
         }
@@ -460,14 +460,14 @@ namespace MapEditor
             }
             if (ec.biomeCount > 0) _biomeCount = ec.biomeCount;
             _enginePath = ec.EnginePath;
-            if(_enginePath != "")_engineWorkingDir = _enginePath.Substring(0,_enginePath.LastIndexOf('\\')+1);
+            if (_enginePath != "") _engineWorkingDir = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1);
             _defaultPartFolder = ec.DefaultPartsFolder;
             isRaw = ec.isRaw;
             es = new EngineSettings(_engineWorkingDir + "mge\\textures\\", ec);
             heightmap = es.GetHeight();
             horizonMap = es.GetHorizon();
             groundMap = es.GetGround();
-            
+
             InvalidateEnginePath();
 
         }
@@ -539,7 +539,7 @@ namespace MapEditor
                 if (ofdEngine.ShowDialog() == DialogResult.OK)
                 {
                     _enginePath = ofdEngine.FileName;
-                    _engineWorkingDir = _enginePath.Substring(0, _enginePath.LastIndexOf('\\')+1);
+                    _engineWorkingDir = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1);
                 }
             }
             if (editor.GetMap(out Map map)) StartProcess();
@@ -573,7 +573,11 @@ namespace MapEditor
             System.Diagnostics.ProcessStartInfo psi;
             if (!isRaw)
             {
-                WriteLuaWrapper(datapath, filename, "temp.lua", heightmap, groundMap, horizonMap);
+                WriteLuaWrapper(datapath, filename, "temp.lua", heightmap, groundMap, horizonMap,
+                    map.genOffset, map.xCurvature, map.xCurvatureSmoothness,
+                    map.heightMapTiling, map.heightMapSpeed,
+                    map.heightMapMaxHeight, map.heightMapSamplingWidth,
+                    map.xMoveTiling);
                 psi = new System.Diagnostics.ProcessStartInfo(s, "temp.lua");
             }
             else
@@ -586,13 +590,21 @@ namespace MapEditor
 
         }
 
-        void WriteLuaWrapper(string datapath, string mapName, string wrapperName, string heightMap, string groundTex, string horizonTex)
+        void WriteLuaWrapper(string datapath, string mapName, string wrapperName, string heightMap, string groundTex, string horizonTex, float genOffset, float xCurvature, float xCurvatureSmoothness, float heightMapTiling, float heightMapSpeed, float heightMapMaxHeight, float heightMapSamplingWidth, float xMoveTiling)
         {
             List<string> wrapper = new List<string>();
             if (heightMap != "") wrapper.Add("heightTexture = \"" + heightMap + "\"");
             wrapper.Add("map = \"" + mapName + "\"");
             if (groundTex != "") wrapper.Add("ground = \"" + horizonTex + "\"");
             if (groundTex != "") wrapper.Add("mapGround = \"" + groundTex + "\"");
+            wrapper.Add("genOffset = \"" + genOffset + "\"");
+            wrapper.Add("xCurvature = \"" + xCurvature + "\"");
+            wrapper.Add("xCurvatureSmoothness = \"" + xCurvatureSmoothness + "\"");
+            wrapper.Add("heightMapTiling = \"" + heightMapTiling + "\"");
+            wrapper.Add("heightMapSpeed = \"" + heightMapSpeed + "\"");
+            wrapper.Add("heightMapMaxHeight = \"" + heightMapMaxHeight + "\"");
+            wrapper.Add("heightMapSamplingWidth = \"" + heightMapSamplingWidth + "\"");
+            wrapper.Add("xMoveTiling = \"" + xMoveTiling + "\"");
             try
             {
 
@@ -614,7 +626,7 @@ namespace MapEditor
             if (ofdEngine.ShowDialog() == DialogResult.OK)
             {
                 _enginePath = ofdEngine.FileName;
-                _engineWorkingDir = _enginePath.Substring(0, _enginePath.LastIndexOf('\\')+1);
+                _engineWorkingDir = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1);
                 InvalidateEnginePath();
             }
         }
@@ -661,7 +673,7 @@ namespace MapEditor
         {
             if (ofdHeightMap.ShowDialog() == DialogResult.OK)
             {
-                System.IO.File.Copy(ofdHeightMap.FileName, _engineWorkingDir+ "mge\\textures\\" + ofdHeightMap.FileName.Substring(ofdHeightMap.FileName.LastIndexOf('\\') + 1), true);
+                System.IO.File.Copy(ofdHeightMap.FileName, _engineWorkingDir + "mge\\textures\\" + ofdHeightMap.FileName.Substring(ofdHeightMap.FileName.LastIndexOf('\\') + 1), true);
 
 
 
@@ -695,7 +707,7 @@ namespace MapEditor
             {
                 Debug.LogGen(LoggingChannel.ERROR | LoggingChannel.MAIN_EDITOR, "Could not load heightmaps. Folder mge/textures does not exist");
             }
-            
+
         }
 
         private void grpBoxMap_Enter(object sender, EventArgs e)
@@ -712,7 +724,10 @@ namespace MapEditor
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            if(es.ShowDialog() == DialogResult.OK)
+            Map m;
+            if (editor.GetMap(out m))
+                es.SetMap(m);
+            if (es.ShowDialog() == DialogResult.OK)
             {
                 heightmap = es.GetHeight();
                 groundMap = es.GetGround();
