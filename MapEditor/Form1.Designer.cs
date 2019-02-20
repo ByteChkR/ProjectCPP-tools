@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.lblLaneCount = new System.Windows.Forms.Label();
-            this.btnEditLaneStep = new System.Windows.Forms.Button();
             this.lblMapParts = new System.Windows.Forms.Label();
             this.lbMapParts = new System.Windows.Forms.ListBox();
             this.lbParts = new System.Windows.Forms.ListBox();
@@ -57,11 +56,13 @@
             this.btnPlay = new System.Windows.Forms.Button();
             this.ofdEngine = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ofdHeightMap = new System.Windows.Forms.OpenFileDialog();
             this.button4 = new System.Windows.Forms.Button();
+            this.ofdHeightMap = new System.Windows.Forms.OpenFileDialog();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.grpBoxParts.SuspendLayout();
             this.grpBoxMap.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblLaneCount
@@ -72,16 +73,6 @@
             this.lblLaneCount.Size = new System.Drawing.Size(76, 13);
             this.lblLaneCount.TabIndex = 2;
             this.lblLaneCount.Text = "Lane Spacing:";
-            // 
-            // btnEditLaneStep
-            // 
-            this.btnEditLaneStep.Location = new System.Drawing.Point(412, 21);
-            this.btnEditLaneStep.Name = "btnEditLaneStep";
-            this.btnEditLaneStep.Size = new System.Drawing.Size(50, 20);
-            this.btnEditLaneStep.TabIndex = 4;
-            this.btnEditLaneStep.Text = "edit";
-            this.btnEditLaneStep.UseVisualStyleBackColor = true;
-            this.btnEditLaneStep.Click += new System.EventHandler(this.BtnEditLaneStep_Click);
             // 
             // lblMapParts
             // 
@@ -257,6 +248,7 @@
             // 
             // grpBoxMap
             // 
+            this.grpBoxMap.Controls.Add(this.numericUpDown1);
             this.grpBoxMap.Controls.Add(this.cbRandomizeParts);
             this.grpBoxMap.Controls.Add(this.btnMoveDown);
             this.grpBoxMap.Controls.Add(this.btnUp);
@@ -268,7 +260,6 @@
             this.grpBoxMap.Controls.Add(this.button3);
             this.grpBoxMap.Controls.Add(this.button2);
             this.grpBoxMap.Controls.Add(this.lblLaneCount);
-            this.grpBoxMap.Controls.Add(this.btnEditLaneStep);
             this.grpBoxMap.Location = new System.Drawing.Point(12, 12);
             this.grpBoxMap.Name = "grpBoxMap";
             this.grpBoxMap.Size = new System.Drawing.Size(468, 513);
@@ -359,10 +350,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Engine Controls";
             // 
-            // ofdHeightMap
-            // 
-            this.ofdHeightMap.FileName = "Open Heightmap";
-            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(224, 20);
@@ -372,6 +359,23 @@
             this.button4.Text = "Set Engine Settings";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
+            // ofdHeightMap
+            // 
+            this.ofdHeightMap.FileName = "Open Heightmap";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(413, 22);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(49, 20);
+            this.numericUpDown1.TabIndex = 24;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // frmEditor
             // 
@@ -395,13 +399,13 @@
             this.grpBoxMap.ResumeLayout(false);
             this.grpBoxMap.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Label lblLaneCount;
-        private System.Windows.Forms.Button btnEditLaneStep;
         private System.Windows.Forms.Label lblMapParts;
         private System.Windows.Forms.ListBox lbMapParts;
         private System.Windows.Forms.ListBox lbParts;
@@ -431,6 +435,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.OpenFileDialog ofdHeightMap;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 

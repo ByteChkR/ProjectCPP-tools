@@ -14,7 +14,7 @@ namespace MapEditor
     public partial class PartCreator : Form
     {
         Part _part;
-        
+
         int _laneCount;
         int _partLength;
         bool _edit;
@@ -33,6 +33,18 @@ namespace MapEditor
             richTextBox1.Text = text.TrimEnd();
             nudBiomeID.Value = part.biomeID;
             DialogResult = DialogResult.Cancel;
+
+            if (_edit)
+            {
+                tbPartName.Enabled = false;
+                tbPartName.Text = part.name;
+            }
+            else
+            {
+
+                tbPartName.Enabled = true;
+                tbPartName.Text = part.name;
+            }
         }
 
         private void RichTextBox1_TextChanged(object sender, EventArgs e)
@@ -82,42 +94,40 @@ namespace MapEditor
         private void BtnSave_Click(object sender, EventArgs e)
         {
 
-            if (CheckData(out _part.part, out string err))
+            if (CheckData(out _part.part, out string err) && (_edit || ValidateName(out _part.name)))
             {
-                if (_edit || sfd.ShowDialog() == DialogResult.OK)
+
+                System.Xml.Serialization.XmlSerializer xs = new System.Xml.Serialization.XmlSerializer(typeof(Part));
+                _part.partLength = _partLength;
+                _part.laneCount = _laneCount;
+                _part.biomeID = (int)nudBiomeID.Value;
+                //_part.name = tbPartName.Text;
+                System.IO.Stream s = null;
+                try
                 {
-                    System.Xml.Serialization.XmlSerializer xs = new System.Xml.Serialization.XmlSerializer(typeof(Part));
-                    _part.partLength = _partLength;
-                    _part.laneCount = _laneCount;
-                    _part.biomeID = (int)nudBiomeID.Value;
-                    if (!_edit)_part.name = sfd.FileName.Substring(sfd.FileName.LastIndexOf("\\") + 1);
-                    System.IO.Stream s = null;
-                    try
-                    {
-                        s = System.IO.File.OpenWrite(_edit ? _saveLocation + _part.name : sfd.FileName);
-                        xs.Serialize(s, _part);
-                        s.Close();
-                    }
-                    catch (Exception)
-                    {
-                        if (s != null) s.Close();
-                        Debug.LogGen(LoggingChannel.PARTCREATOR_EDITOR | LoggingChannel.ERROR, err);
-                    }
-
-
-
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                    Debug.LogGen(LoggingChannel.PARTCREATOR_EDITOR | LoggingChannel.LOG, "Created Part:" + _part.name);
-                    return;
+                    s = System.IO.File.Open(_saveLocation + _part.name, System.IO.FileMode.Create);
+                    xs.Serialize(s, _part);
+                    s.Close();
                 }
-                Debug.LogGen(LoggingChannel.PARTCREATOR_EDITOR | LoggingChannel.ERROR, "Invalid File.");
-                MessageBox.Show("Invalid File");
+                catch (Exception)
+                {
+                    if (s != null) s.Close();
+                    Debug.LogGen(LoggingChannel.PARTCREATOR_EDITOR | LoggingChannel.ERROR, err);
+                }
+
+
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+                Debug.LogGen(LoggingChannel.PARTCREATOR_EDITOR | LoggingChannel.LOG, "Created Part:" + _part.name);
+                return;
+
+
 
             }
             else
             {
-                Debug.LogGen(LoggingChannel.PARTCREATOR_EDITOR | LoggingChannel.ERROR, "Error in the Part Data");
+                Debug.LogGen(LoggingChannel.PARTCREATOR_EDITOR | LoggingChannel.ERROR, "Error in the Part Data:" + err);
                 MessageBox.Show("Error in the Part Data");
             }
         }
@@ -134,7 +144,22 @@ namespace MapEditor
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void tbPartName_TextChanged(object sender, EventArgs e)
+        {
+            tbPartName.BackColor = ValidateName(out string s) ? Color.Green : Color.Red;
+        }
+
+        bool ValidateName(out string fileName)
+        {
+            string name = tbPartName.Text;
+            name += ".###";
+            name = name.Replace(".pxml", "");
+            name = name.Replace(".###", ".pxml");
+            fileName = name;
+            return !System.IO.File.Exists(_saveLocation + name);
         }
     }
 }

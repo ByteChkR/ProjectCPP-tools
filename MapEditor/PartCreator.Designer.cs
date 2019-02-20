@@ -37,16 +37,18 @@
             this.sfd = new System.Windows.Forms.SaveFileDialog();
             this.nudBiomeID = new System.Windows.Forms.NumericUpDown();
             this.lblBiomeID = new System.Windows.Forms.Label();
+            this.tbPartName = new System.Windows.Forms.TextBox();
+            this.lblPartName = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBiomeID)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(652, 189);
+            this.richTextBox1.Size = new System.Drawing.Size(652, 168);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.RichTextBox1_TextChanged);
@@ -115,11 +117,30 @@
             this.lblBiomeID.TabIndex = 4;
             this.lblBiomeID.Text = "Biome ID:";
             // 
+            // tbPartName
+            // 
+            this.tbPartName.Location = new System.Drawing.Point(278, 169);
+            this.tbPartName.Name = "tbPartName";
+            this.tbPartName.Size = new System.Drawing.Size(157, 20);
+            this.tbPartName.TabIndex = 5;
+            this.tbPartName.TextChanged += new System.EventHandler(this.tbPartName_TextChanged);
+            // 
+            // lblPartName
+            // 
+            this.lblPartName.AutoSize = true;
+            this.lblPartName.Location = new System.Drawing.Point(234, 172);
+            this.lblPartName.Name = "lblPartName";
+            this.lblPartName.Size = new System.Drawing.Size(38, 13);
+            this.lblPartName.TabIndex = 6;
+            this.lblPartName.Text = "Name:";
+            // 
             // PartCreator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(652, 189);
+            this.Controls.Add(this.lblPartName);
+            this.Controls.Add(this.tbPartName);
             this.Controls.Add(this.lblBiomeID);
             this.Controls.Add(this.nudBiomeID);
             this.Controls.Add(this.btnSave);
@@ -147,5 +168,7 @@
         private System.Windows.Forms.ToolStripStatusLabel lblCompileStatus;
         private System.Windows.Forms.NumericUpDown nudBiomeID;
         private System.Windows.Forms.Label lblBiomeID;
+        private System.Windows.Forms.TextBox tbPartName;
+        private System.Windows.Forms.Label lblPartName;
     }
 }

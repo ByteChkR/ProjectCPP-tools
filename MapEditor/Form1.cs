@@ -146,6 +146,7 @@ namespace MapEditor
 
         public void InvalidateMap(Map map)
         {
+            numericUpDown1.Value = (map.LaneSteps != null && map.LaneSteps.Length < 0) ? map.LaneSteps[0] : 3;
             int index = lbMapParts.SelectedIndex;
             lbMapParts.Items.Clear();
 
@@ -157,7 +158,8 @@ namespace MapEditor
         {
             if (ofdPart.ShowDialog() == DialogResult.OK)
             {
-                LoadParts(ofdPart.FileNames, out Part[] newParts);
+                string[] s = ofdPart.FileNames.Where(x => !x.StartsWith(System.IO.Path.GetFullPath(_defaultPartFolder))).ToArray();
+                LoadParts(s, out Part[] newParts);
                 foreach (Part part in newParts)
                 {
                     editor.LoadPart(part);
@@ -245,7 +247,7 @@ namespace MapEditor
             }
             else pFinal = new Part();
 
-            PartCreator pc = new PartCreator(pFinal, false, _biomeCount, "");
+            PartCreator pc = new PartCreator(pFinal, false, _biomeCount, _defaultPartFolder);
             if (pc.ShowDialog() == DialogResult.OK)
             {
                 editor.LoadPart(pc.GetPart());
@@ -264,6 +266,7 @@ namespace MapEditor
                 if (pc.ShowDialog() == DialogResult.OK)
                 {
                     InvalidateParts();
+                    if (editor.GetMap(out Map map)) InvalidateMap(map);
                 }
             }
         }
@@ -732,6 +735,19 @@ namespace MapEditor
                 heightmap = es.GetHeight();
                 groundMap = es.GetGround();
                 horizonMap = es.GetHorizon();
+            }
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            if (editor.GetMap(out Map map))
+            {
+                map.LaneSteps = new int[map.LaneCount];
+                for (int i = 0; i < map.LaneCount; i++)
+                {
+                    map.LaneSteps[i] = (int)numericUpDown1.Value;
+                }
+
             }
         }
     }
