@@ -51,16 +51,24 @@ namespace MapEditor
 
                 adl = ADL.CustomCMD.CMDUtils.CreateCustomConsole(ps);
 
+                adl.FormClosing += new FormClosingEventHandler(ConsoleClosing);
+
                 Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Initialized Debug Logs.");
             }
             if (System.IO.Directory.Exists(_defaultPartFolder))
             {
-                LoadParts(System.IO.Directory.GetFiles(_defaultPartFolder, "*.pxml"), out Part[] parts);
-                editor = new Editor(parts.ToList());
+                LoadParts(System.IO.Directory.GetFiles(_defaultPartFolder, "*.pxml"), out List<Part> parts);
+                editor = new Editor(parts);
                 InvalidateParts();
             }
 
 
+        }
+
+        private void ConsoleClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = !closeConsole;
+            if(!closeConsole) adl.Hide();
         }
 
         #region DebugLogging
@@ -113,12 +121,15 @@ namespace MapEditor
 
         private void Button1_Click(object sender, EventArgs e)
         {
-
-            if (editor.GetMap(out Map map) && editor.GetPartAt(lbParts.SelectedIndex, out Part part) && part.IsValid(map.LaneCount, map.PartSize) && editor.AddToMapByIndex(lbMapParts.SelectedIndex, lbParts.SelectedIndex))
+            for (int i = 0; i < lbParts.SelectedIndices.Count; i++)
             {
+                if (editor.GetMap(out Map map) && editor.GetPartAt(lbParts.SelectedIndices[i], out Part part) && part.IsValid(map.LaneCount, map.PartSize) && editor.AddToMapByIndex(lbMapParts.SelectedIndex, lbParts.SelectedIndices[i]))
+                {
 
-                InvalidateMap(map);
+                    InvalidateMap(map);
+                }
             }
+
         }
 
         private void AddToMapByIndex(int indexInMap, int indexOfPart)
@@ -135,23 +146,34 @@ namespace MapEditor
         {
             if (editor.GetMap(out Map map))
             {
-                if (editor.RemoveFromMapByIndex(lbMapParts.SelectedIndex))
+                for (int i = lbMapParts.SelectedIndices.Count - 1; i >= 0; i--)
                 {
+                    int idx = lbMapParts.SelectedIndices[i];
+                    if (editor.RemoveFromMapByIndex(idx))
+                    {
 
-                    InvalidateMap(map);
+                    }
+
                 }
             }
+
+            InvalidateMap(map, new int[0]);
             lbMapParts.Focus();
         }
 
-        public void InvalidateMap(Map map)
+        public void InvalidateMap(Map map, int[] selectedIndices = null)
         {
+            int max = lbMapParts.Items.Count;
             numericUpDown1.Value = (map.LaneSteps != null && map.LaneSteps.Length < 0) ? map.LaneSteps[0] : 3;
-            int index = lbMapParts.SelectedIndex;
+            int[] index = selectedIndices != null ? selectedIndices : lbMapParts.SelectedIndices.Cast<int>().ToArray();
             lbMapParts.Items.Clear();
 
             lbMapParts.Items.AddRange(map.PartSequence);
-            if (lbMapParts.Items.Count > index) lbMapParts.SelectedIndex = index;
+            if (lbMapParts.Items.Count >= max)
+                foreach (int idx in index)
+                {
+                    lbMapParts.SetSelected(idx, true);
+                }
         }
 
         private void BtnOpenPartFile_Click(object sender, EventArgs e)
@@ -159,7 +181,7 @@ namespace MapEditor
             if (ofdPart.ShowDialog() == DialogResult.OK)
             {
                 string[] s = ofdPart.FileNames.Where(x => !x.StartsWith(System.IO.Path.GetFullPath(_defaultPartFolder))).ToArray();
-                LoadParts(s, out Part[] newParts);
+                LoadParts(s, out List<Part> newParts);
                 foreach (Part part in newParts)
                 {
                     editor.LoadPart(part);
@@ -287,7 +309,6 @@ namespace MapEditor
         private void Button3_Click(object sender, EventArgs e)
         {
 
-
             if (sfd.ShowDialog() == DialogResult.OK && editor.GetMap(out Map map))
             {
                 SaveMap(sfd.FileName, map);
@@ -301,7 +322,14 @@ namespace MapEditor
             if (editor.GetMap(out Map map) && sfdExport.ShowDialog() == DialogResult.OK)
             {
                 List<string> exportString = editor.ExportMap();
+                string dataPath = sfdExport.FileName.Substring(0, sfdExport.FileName.LastIndexOf('\\') + 1);
+                string mapName = sfdExport.FileName.Substring(sfdExport.FileName.LastIndexOf('\\') + 1);
 
+                WriteLuaWrapper(dataPath, mapName, mapName.Replace(".txt", ".lua"), heightmap, groundMap, horizonMap,
+                    map.genOffset, map.xCurvature, map.xCurvatureSmoothness,
+                    map.heightMapTiling, map.heightMapSpeed,
+                    map.heightMapMaxHeight, map.heightMapSamplingWidth,
+                    map.xMoveTiling);
 
                 SaveExport(exportString, sfdExport.FileName);
             }
@@ -401,16 +429,24 @@ namespace MapEditor
         #endregion
 
         #region PartIO
-        bool LoadParts(string[] files, out Part[] newParts)
+        bool LoadParts(string[] files, out List<Part> newParts)
         {
-            newParts = new Part[files.Length];
+            newParts = new List<Part>();
             bool result = true;
             for (int i = 0; i < files.Length; i++)
             {
-                result = result && LoadPart(files[i], out newParts[i]);
+                if (LoadPart(files[i], out Part p))
+                {
+                    newParts.Add(p);
+                }
+                else
+                {
+                    result = false;
+                }
             }
-            if (result) Debug.LogGen<LoggingChannel>(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Loaded " + newParts.Length + " new Parts from XML");
-            else Debug.LogGen<LoggingChannel>(LoggingChannel.WARNING | LoggingChannel.MAIN_EDITOR, "Completed with errors");
+
+            Debug.LogGen<LoggingChannel>(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Loaded " + newParts.Count + " new Parts from XML");
+            if (!result) Debug.LogGen<LoggingChannel>(LoggingChannel.WARNING | LoggingChannel.MAIN_EDITOR, "Completed with errors");
 
             return result;
         }
@@ -507,12 +543,16 @@ namespace MapEditor
         {
             if (editor.GetMap(out Map map))
             {
-                if (editor.SwapParts(lbMapParts.SelectedIndex, lbMapParts.SelectedIndex - 1))
+                int[] newIndices = new int[lbMapParts.SelectedIndices.Count];
+                for (int i = 0; i < lbMapParts.SelectedIndices.Count; i++)
                 {
-
-                    InvalidateMap(map);
-                    lbMapParts.SelectedIndex--;
+                    int idx = lbMapParts.SelectedIndices[i];
+                    if (editor.SwapParts(idx, idx - 1))
+                        newIndices[i] = idx - 1;
+                    else
+                        newIndices[i] = idx;
                 }
+                InvalidateMap(map, newIndices);
             }
 
         }
@@ -521,12 +561,17 @@ namespace MapEditor
         {
             if (editor.GetMap(out Map map))
             {
-                if (editor.SwapParts(lbMapParts.SelectedIndex, lbMapParts.SelectedIndex + 1))
+                int[] newIndices = new int[lbMapParts.SelectedIndices.Count];
+                for (int i = lbMapParts.SelectedIndices.Count - 1; i >= 0; i--)
                 {
-
-                    InvalidateMap(map);
-                    lbMapParts.SelectedIndex++;
+                    int idx = lbMapParts.SelectedIndices[i];
+                    if (editor.SwapParts(idx, idx + 1))
+                        newIndices[i] = idx + 1;
+                    else
+                        newIndices[i] = idx;
                 }
+                InvalidateMap(map, newIndices);
+
             }
         }
 
@@ -611,7 +656,7 @@ namespace MapEditor
             try
             {
 
-                System.IO.TextWriter tr = new System.IO.StreamWriter(datapath + wrapperName);
+                System.IO.TextWriter tr = new System.IO.StreamWriter(datapath + wrapperName, false);
                 for (int i = 0; i < wrapper.Count; i++)
                 {
                     tr.WriteLine(wrapper[i]);
@@ -642,9 +687,20 @@ namespace MapEditor
             }
         }
 
+
+        bool closeConsole = false;
+        void CloseADL()
+        {
+            closeConsole = true;
+
+        }
+
         private void frmEditor_Closing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
+            CloseADL();
+
             if (!editor.GetMap(out Map map)) return;
+
             DialogResult res = MessageBox.Show("Unsaved work is about to be lost. Are u sure u want to exit?", "Exit?", MessageBoxButtons.YesNo);
             if (res == DialogResult.No)
                 e.Cancel = true;
@@ -721,7 +777,7 @@ namespace MapEditor
         private void frmEditor_Load(object sender, EventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
-            adl.SendToBack(); //Quick hack to make the console appear behind this form.
+            adl.Hide(); //Quick hack to make the console appear behind this form.
             CheckForIllegalCrossThreadCalls = true;
         }
 
@@ -748,6 +804,26 @@ namespace MapEditor
                     map.LaneSteps[i] = (int)numericUpDown1.Value;
                 }
 
+            }
+        }
+
+        private void lbMapParts_DoubleClickLoseSelectedIndex(object sender, EventArgs e)
+        {
+            lbMapParts.SelectedIndex = -1;
+        }
+
+        private void lbParts_DoubleClickLoseSelectedIndex(object sender, EventArgs e)
+        {
+            lbParts.SelectedIndex = -1;
+        }
+
+        private void btnOpenConsole_Click(object sender, EventArgs e)
+        {
+            if (adl != null)
+            {
+                Control.CheckForIllegalCrossThreadCalls = false;
+                adl.Show();
+                Control.CheckForIllegalCrossThreadCalls = true;
             }
         }
     }

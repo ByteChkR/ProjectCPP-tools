@@ -48,6 +48,7 @@
             this.btnNewMap = new System.Windows.Forms.Button();
             this.grpBoxParts = new System.Windows.Forms.GroupBox();
             this.grpBoxMap = new System.Windows.Forms.GroupBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.cbRandomizeParts = new System.Windows.Forms.CheckBox();
             this.btnMoveDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
@@ -58,11 +59,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.ofdHeightMap = new System.Windows.Forms.OpenFileDialog();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.btnOpenConsole = new System.Windows.Forms.Button();
             this.grpBoxParts.SuspendLayout();
             this.grpBoxMap.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblLaneCount
@@ -89,9 +90,11 @@
             this.lbMapParts.FormattingEnabled = true;
             this.lbMapParts.Location = new System.Drawing.Point(12, 85);
             this.lbMapParts.Name = "lbMapParts";
+            this.lbMapParts.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbMapParts.Size = new System.Drawing.Size(450, 394);
             this.lbMapParts.TabIndex = 7;
             this.lbMapParts.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.MapDrawItems);
+            this.lbMapParts.DoubleClick += new System.EventHandler(this.lbMapParts_DoubleClickLoseSelectedIndex);
             // 
             // lbParts
             // 
@@ -99,9 +102,11 @@
             this.lbParts.FormattingEnabled = true;
             this.lbParts.Location = new System.Drawing.Point(21, 72);
             this.lbParts.Name = "lbParts";
+            this.lbParts.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbParts.Size = new System.Drawing.Size(333, 368);
             this.lbParts.TabIndex = 8;
             this.lbParts.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.PartsDrawItems);
+            this.lbParts.DoubleClick += new System.EventHandler(this.lbParts_DoubleClickLoseSelectedIndex);
             // 
             // lblPartsAvaliable
             // 
@@ -248,6 +253,7 @@
             // 
             // grpBoxMap
             // 
+            this.grpBoxMap.Controls.Add(this.btnOpenConsole);
             this.grpBoxMap.Controls.Add(this.numericUpDown1);
             this.grpBoxMap.Controls.Add(this.cbRandomizeParts);
             this.grpBoxMap.Controls.Add(this.btnMoveDown);
@@ -267,6 +273,19 @@
             this.grpBoxMap.TabStop = false;
             this.grpBoxMap.Text = "Map:";
             this.grpBoxMap.Enter += new System.EventHandler(this.grpBoxMap_Enter);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(413, 22);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(49, 20);
+            this.numericUpDown1.TabIndex = 24;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // cbRandomizeParts
             // 
@@ -364,18 +383,15 @@
             // 
             this.ofdHeightMap.FileName = "Open Heightmap";
             // 
-            // numericUpDown1
+            // btnOpenConsole
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(413, 22);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(49, 20);
-            this.numericUpDown1.TabIndex = 24;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            this.btnOpenConsole.Location = new System.Drawing.Point(374, 485);
+            this.btnOpenConsole.Name = "btnOpenConsole";
+            this.btnOpenConsole.Size = new System.Drawing.Size(88, 23);
+            this.btnOpenConsole.TabIndex = 25;
+            this.btnOpenConsole.Text = "Open Console";
+            this.btnOpenConsole.UseVisualStyleBackColor = true;
+            this.btnOpenConsole.Click += new System.EventHandler(this.btnOpenConsole_Click);
             // 
             // frmEditor
             // 
@@ -398,8 +414,8 @@
             this.grpBoxParts.PerformLayout();
             this.grpBoxMap.ResumeLayout(false);
             this.grpBoxMap.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -436,6 +452,7 @@
         private System.Windows.Forms.OpenFileDialog ofdHeightMap;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button btnOpenConsole;
     }
 }
 
