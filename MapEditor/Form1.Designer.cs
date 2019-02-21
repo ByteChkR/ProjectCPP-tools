@@ -272,7 +272,6 @@
             this.grpBoxMap.TabIndex = 20;
             this.grpBoxMap.TabStop = false;
             this.grpBoxMap.Text = "Map:";
-            this.grpBoxMap.Enter += new System.EventHandler(this.grpBoxMap_Enter);
             // 
             // numericUpDown1
             // 

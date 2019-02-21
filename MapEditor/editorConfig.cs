@@ -14,6 +14,7 @@ namespace MapEditor
         public int HeightMap;
         public int GroundMap;
         public int HorizonMap;
+        public int GroundNormalMap;
         public int biomeCount;
         public bool isRaw;
 
@@ -31,6 +32,7 @@ namespace MapEditor
             ec.biomeCount = 1;
             ec.HorizonMap = 0;
             ec.GroundMap = 0;
+            ec.GroundNormalMap = 0;
             ec.isRaw = true;
             return ec;
         }

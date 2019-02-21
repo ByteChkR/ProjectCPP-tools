@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ADL;
 
 namespace MapEditor
 {
@@ -57,6 +58,7 @@ namespace MapEditor
             nudXCurvature.Value = (decimal)m.xCurvature;
             nudGenOffset.Value = (decimal)m.genOffset;
 
+
         }
         public void InvalidateCombos()
         {
@@ -66,22 +68,25 @@ namespace MapEditor
             cbHms.Items.Clear();
             cbHorizon.Items.Clear();
             cbGround.Items.Clear();
+            cbGroundNormal.Items.Clear();
 
             cbHms.Items.Add("NONE");
             cbHorizon.Items.Add("NONE");
             cbGround.Items.Add("NONE");
-
+            cbGroundNormal.Items.Add("NONE");
             foreach (string f in files)
             {
                 string file = f.Substring(f.LastIndexOf("\\") + 1);
                 cbHms.Items.Add(file);
                 cbHorizon.Items.Add(file);
                 cbGround.Items.Add(file);
+                cbGroundNormal.Items.Add(file);
             }
 
             if (cbHms.Items.Count > ec.HeightMap) cbHms.SelectedIndex = ec.HeightMap;
             if (cbGround.Items.Count > ec.GroundMap) cbGround.SelectedIndex = ec.GroundMap;
             if (cbHorizon.Items.Count > ec.HorizonMap) cbHorizon.SelectedIndex = ec.HorizonMap;
+            if (cbGroundNormal.Items.Count > ec.GroundNormalMap) cbGroundNormal.SelectedIndex = ec.GroundNormalMap;
 
         }
 
@@ -108,6 +113,12 @@ namespace MapEditor
         public editorConfig GetConfig()
         {
             return ec;
+        }
+
+        public string GetGroundNormal()
+        {
+            if (ec.GroundNormalMap == 0) return "";
+            return cbGroundNormal.Items[ec.GroundNormalMap].ToString();
         }
 
         public string GetHeight()
@@ -174,6 +185,35 @@ namespace MapEditor
         {
 
             m.xMoveTiling = (float)nudXMoveTiling.Value;
+        }
+
+
+
+        private void btnAddHeightmap_Click(object sender, EventArgs e)
+        {
+            //System.Diagnostics.Process p = new System.Diagnostics.Process();
+            //p.StartInfo = new System.Diagnostics.ProcessStartInfo(Environment.SystemDirectory+ "\\explorer.exe", @folderPath);
+            //p.StartInfo.RedirectStandardError = true;
+            //p.StartInfo.UseShellExecute = false;
+            //p.StartInfo.ErrorDialog = true;
+            //if(!p.Start())
+            //{
+            //    Debug.LogGen(LoggingChannel.ERROR, p.StandardError.ReadToEnd());
+            //}
+            //while (!p.HasExited) { }
+            InvalidateCombos();
+        }
+
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(folderPath);
+        }
+
+        private void cbGroundNormal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ec.GroundNormalMap = cbGroundNormal.SelectedIndex;
         }
     }
 }
