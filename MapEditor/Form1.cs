@@ -30,12 +30,12 @@ namespace MapEditor
         EngineSettings es;
         Form adl;
 
-        public frmEditor(bool enableLogging)
+        public frmEditor(bool enableLogging, string initMap = "")
         {
 
             InitializeComponent();
 
-
+            AllowDrop = true;
 
             ReadConfig();
 
@@ -63,13 +63,22 @@ namespace MapEditor
                 InvalidateParts();
             }
 
+            if (System.IO.File.Exists(initMap) && LoadMap(initMap, out Map m) && editor.LoadMap(m))
+            {
+                Debug.LogGen(LoggingChannel.LOG | LoggingChannel.GENERAL, "CLI Argument given:" + initMap);
+                InvalidateMap(m);
+            }
+            else if (initMap != "")
+            {
+                Debug.LogGen(LoggingChannel.ERROR | LoggingChannel.GENERAL, "CLI Argument given:" + initMap + " not found or not a valid map file.");
+            }
 
         }
 
         private void ConsoleClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = !closeConsole;
-            if(!closeConsole) adl.Hide();
+            if (!closeConsole) adl.Hide();
         }
 
         #region DebugLogging
@@ -581,6 +590,63 @@ namespace MapEditor
 
         }
 
+        private void frmEditor_Drop(object sender, DragEventArgs e)
+        {
+            List<string> parts = new List<string>();
+            string map = "";
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] path = (string[])e.Data.GetData(DataFormats.FileDrop, true);
+                for (int i = 0; i < path.Length; i++)
+                {
+                    if (path[i].EndsWith(".pxml"))
+                    {
+                        parts.Add(path[i]);
+                        Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Drag Drop operation contains parts. Loading parts");
+
+                    }
+                    else if (map == "" && path[i].EndsWith(".mxml"))
+                    {
+                        map = path[i];
+                        Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Drag Drop operation contains one map. Loading Map");
+
+                    }
+                    else if (path[i].EndsWith(".mxml"))
+                    {
+                        Debug.LogGen(LoggingChannel.WARNING | LoggingChannel.MAIN_EDITOR, "Drag Drop operation contains more than one map. Only the first map gets loaded.");
+                    }
+                    else
+                    {
+                        Debug.LogGen(LoggingChannel.ERROR | LoggingChannel.MAIN_EDITOR, "Drag Drop operation contains one or more unknown file types. Skipping..");
+
+                    }
+                }
+
+            }
+
+            
+            if(map != "" && LoadMap(map, out Map pmap) && editor.LoadMap(pmap))
+            {
+                Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Map :" + map + " loaded");
+                
+                InvalidateMap(pmap);
+            }
+            if (parts.Count > 0 && LoadParts(parts.ToArray(), out List<Part> pparts))
+            {
+                foreach (Part part in pparts)
+                {
+                    editor.LoadPart(part);
+                }
+                InvalidateParts();
+                if (editor.GetMap(out Map m)) InvalidateMap(m);
+            }
+        }
+
+        private void frmEditor_DropEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
             if (_enginePath == "")
@@ -771,7 +837,7 @@ namespace MapEditor
 
         }
 
-    
+
 
         private void frmEditor_Load(object sender, EventArgs e)
         {

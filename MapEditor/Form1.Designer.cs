@@ -48,6 +48,7 @@
             this.btnNewMap = new System.Windows.Forms.Button();
             this.grpBoxParts = new System.Windows.Forms.GroupBox();
             this.grpBoxMap = new System.Windows.Forms.GroupBox();
+            this.btnOpenConsole = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.cbRandomizeParts = new System.Windows.Forms.CheckBox();
             this.btnMoveDown = new System.Windows.Forms.Button();
@@ -59,7 +60,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.ofdHeightMap = new System.Windows.Forms.OpenFileDialog();
-            this.btnOpenConsole = new System.Windows.Forms.Button();
             this.grpBoxParts.SuspendLayout();
             this.grpBoxMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -86,6 +86,7 @@
             // 
             // lbMapParts
             // 
+            this.lbMapParts.AllowDrop = true;
             this.lbMapParts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lbMapParts.FormattingEnabled = true;
             this.lbMapParts.Location = new System.Drawing.Point(12, 85);
@@ -98,6 +99,7 @@
             // 
             // lbParts
             // 
+            this.lbParts.AllowDrop = true;
             this.lbParts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lbParts.FormattingEnabled = true;
             this.lbParts.Location = new System.Drawing.Point(21, 72);
@@ -273,6 +275,16 @@
             this.grpBoxMap.TabStop = false;
             this.grpBoxMap.Text = "Map:";
             // 
+            // btnOpenConsole
+            // 
+            this.btnOpenConsole.Location = new System.Drawing.Point(374, 485);
+            this.btnOpenConsole.Name = "btnOpenConsole";
+            this.btnOpenConsole.Size = new System.Drawing.Size(88, 23);
+            this.btnOpenConsole.TabIndex = 25;
+            this.btnOpenConsole.Text = "Open Console";
+            this.btnOpenConsole.UseVisualStyleBackColor = true;
+            this.btnOpenConsole.Click += new System.EventHandler(this.btnOpenConsole_Click);
+            // 
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(413, 22);
@@ -382,18 +394,9 @@
             // 
             this.ofdHeightMap.FileName = "Open Heightmap";
             // 
-            // btnOpenConsole
-            // 
-            this.btnOpenConsole.Location = new System.Drawing.Point(374, 485);
-            this.btnOpenConsole.Name = "btnOpenConsole";
-            this.btnOpenConsole.Size = new System.Drawing.Size(88, 23);
-            this.btnOpenConsole.TabIndex = 25;
-            this.btnOpenConsole.Text = "Open Console";
-            this.btnOpenConsole.UseVisualStyleBackColor = true;
-            this.btnOpenConsole.Click += new System.EventHandler(this.btnOpenConsole_Click);
-            // 
             // frmEditor
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 537);
@@ -409,6 +412,13 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmEditor_Closing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmEditor_Closed);
             this.Load += new System.EventHandler(this.frmEditor_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmEditor_Drop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.frmEditor_DropEnter);
+            this.lbParts.AllowDrop = true;
+            this.lbParts.DragEnter += new System.Windows.Forms.DragEventHandler(this.frmEditor_DropEnter);
+            this.lbMapParts.DragEnter += new System.Windows.Forms.DragEventHandler(this.frmEditor_DropEnter);
+            this.lbParts.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmEditor_Drop);
+            this.lbMapParts.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmEditor_Drop);
             this.grpBoxParts.ResumeLayout(false);
             this.grpBoxParts.PerformLayout();
             this.grpBoxMap.ResumeLayout(false);
