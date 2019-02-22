@@ -33,12 +33,12 @@
             this.lblLaneCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblPartSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCompileStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.btnSave = new MetroFramework.Controls.MetroButton();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
             this.nudBiomeID = new System.Windows.Forms.NumericUpDown();
-            this.lblBiomeID = new System.Windows.Forms.Label();
+            this.lblBiomeID = new MetroFramework.Controls.MetroLabel();
             this.tbPartName = new System.Windows.Forms.TextBox();
-            this.lblPartName = new System.Windows.Forms.Label();
+            this.lblPartName = new MetroFramework.Controls.MetroLabel();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBiomeID)).BeginInit();
             this.SuspendLayout();
@@ -47,50 +47,55 @@
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(652, 168);
+            this.richTextBox1.Size = new System.Drawing.Size(869, 206);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.RichTextBox1_TextChanged);
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblLaneCount,
             this.lblPartSize,
             this.lblCompileStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 167);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 208);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(652, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(869, 25);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lblLaneCount
             // 
             this.lblLaneCount.Name = "lblLaneCount";
-            this.lblLaneCount.Size = new System.Drawing.Size(65, 17);
+            this.lblLaneCount.Size = new System.Drawing.Size(79, 20);
             this.lblLaneCount.Text = "LaneCount";
             // 
             // lblPartSize
             // 
             this.lblPartSize.Name = "lblPartSize";
-            this.lblPartSize.Size = new System.Drawing.Size(51, 17);
+            this.lblPartSize.Size = new System.Drawing.Size(64, 20);
             this.lblPartSize.Text = "PartSize:";
             // 
             // lblCompileStatus
             // 
             this.lblCompileStatus.Name = "lblCompileStatus";
-            this.lblCompileStatus.Size = new System.Drawing.Size(39, 17);
+            this.lblCompileStatus.Size = new System.Drawing.Size(49, 20);
             this.lblCompileStatus.Text = "Status";
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(553, 167);
+            this.btnSave.Location = new System.Drawing.Point(737, 206);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 21);
+            this.btnSave.Size = new System.Drawing.Size(100, 26);
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseSelectable = true;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // sfd
@@ -102,43 +107,48 @@
             // 
             // nudBiomeID
             // 
-            this.nudBiomeID.Location = new System.Drawing.Point(500, 168);
+            this.nudBiomeID.Location = new System.Drawing.Point(667, 207);
+            this.nudBiomeID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudBiomeID.Name = "nudBiomeID";
-            this.nudBiomeID.Size = new System.Drawing.Size(47, 20);
+            this.nudBiomeID.Size = new System.Drawing.Size(63, 22);
             this.nudBiomeID.TabIndex = 3;
             this.nudBiomeID.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // lblBiomeID
             // 
             this.lblBiomeID.AutoSize = true;
-            this.lblBiomeID.Location = new System.Drawing.Point(441, 171);
+            this.lblBiomeID.Location = new System.Drawing.Point(588, 210);
+            this.lblBiomeID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBiomeID.Name = "lblBiomeID";
-            this.lblBiomeID.Size = new System.Drawing.Size(53, 13);
+            this.lblBiomeID.Size = new System.Drawing.Size(68, 20);
             this.lblBiomeID.TabIndex = 4;
             this.lblBiomeID.Text = "Biome ID:";
             // 
             // tbPartName
             // 
-            this.tbPartName.Location = new System.Drawing.Point(278, 169);
+            this.tbPartName.Location = new System.Drawing.Point(371, 208);
+            this.tbPartName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbPartName.Name = "tbPartName";
-            this.tbPartName.Size = new System.Drawing.Size(157, 20);
+            this.tbPartName.Size = new System.Drawing.Size(208, 22);
             this.tbPartName.TabIndex = 5;
             this.tbPartName.TextChanged += new System.EventHandler(this.tbPartName_TextChanged);
             // 
             // lblPartName
             // 
             this.lblPartName.AutoSize = true;
-            this.lblPartName.Location = new System.Drawing.Point(234, 172);
+            this.lblPartName.Location = new System.Drawing.Point(312, 212);
+            this.lblPartName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPartName.Name = "lblPartName";
-            this.lblPartName.Size = new System.Drawing.Size(38, 13);
+            this.lblPartName.Size = new System.Drawing.Size(50, 20);
             this.lblPartName.TabIndex = 6;
             this.lblPartName.Text = "Name:";
             // 
             // PartCreator
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(652, 189);
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ClientSize = new System.Drawing.Size(869, 233);
             this.Controls.Add(this.lblPartName);
             this.Controls.Add(this.tbPartName);
             this.Controls.Add(this.lblBiomeID);
@@ -147,6 +157,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.richTextBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "PartCreator";
             this.Text = "PartCreator";
             this.statusStrip1.ResumeLayout(false);
@@ -163,12 +174,12 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblLaneCount;
         private System.Windows.Forms.ToolStripStatusLabel lblPartSize;
-        private System.Windows.Forms.Button btnSave;
+        private MetroFramework.Controls.MetroButton btnSave;
         private System.Windows.Forms.SaveFileDialog sfd;
         private System.Windows.Forms.ToolStripStatusLabel lblCompileStatus;
         private System.Windows.Forms.NumericUpDown nudBiomeID;
-        private System.Windows.Forms.Label lblBiomeID;
+        private MetroFramework.Controls.MetroLabel lblBiomeID;
         private System.Windows.Forms.TextBox tbPartName;
-        private System.Windows.Forms.Label lblPartName;
+        private MetroFramework.Controls.MetroLabel lblPartName;
     }
 }

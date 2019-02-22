@@ -28,34 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblHm = new System.Windows.Forms.Label();
-            this.cbHms = new System.Windows.Forms.ComboBox();
-            this.btnAddHeightmap = new System.Windows.Forms.Button();
-            this.cboxMapMode = new System.Windows.Forms.ComboBox();
-            this.lblHorizonTex = new System.Windows.Forms.Label();
-            this.cbHorizon = new System.Windows.Forms.ComboBox();
-            this.lblGroundTex = new System.Windows.Forms.Label();
-            this.cbGround = new System.Windows.Forms.ComboBox();
-            this.lblGenerationOffset = new System.Windows.Forms.Label();
+            this.lblHm = new MetroFramework.Controls.MetroLabel();
+            this.cbHms = new MetroFramework.Controls.MetroComboBox();
+            this.btnAddHeightmap = new MetroFramework.Controls.MetroButton();
+            this.cboxMapMode = new MetroFramework.Controls.MetroComboBox();
+            this.lblHorizonTex = new MetroFramework.Controls.MetroLabel();
+            this.cbHorizon = new MetroFramework.Controls.MetroComboBox();
+            this.lblGroundTex = new MetroFramework.Controls.MetroLabel();
+            this.cbGround = new MetroFramework.Controls.MetroComboBox();
+            this.lblGenerationOffset = new MetroFramework.Controls.MetroLabel();
             this.nudGenOffset = new System.Windows.Forms.NumericUpDown();
             this.nudXCurvature = new System.Windows.Forms.NumericUpDown();
-            this.lblxCurvature = new System.Windows.Forms.Label();
+            this.lblxCurvature = new MetroFramework.Controls.MetroLabel();
             this.nudXCurvatureSmoothness = new System.Windows.Forms.NumericUpDown();
-            this.lblxCurvSmooth = new System.Windows.Forms.Label();
+            this.lblxCurvSmooth = new MetroFramework.Controls.MetroLabel();
             this.nudHeightMapTiling = new System.Windows.Forms.NumericUpDown();
-            this.lblHeightMapZTiling = new System.Windows.Forms.Label();
+            this.lblHeightMapZTiling = new MetroFramework.Controls.MetroLabel();
             this.nudHeightMapSpeed = new System.Windows.Forms.NumericUpDown();
-            this.lblHeightMapSpeed = new System.Windows.Forms.Label();
+            this.lblHeightMapSpeed = new MetroFramework.Controls.MetroLabel();
             this.nudHeightMapMaxHeight = new System.Windows.Forms.NumericUpDown();
-            this.lblHeightMapMaxHeight = new System.Windows.Forms.Label();
+            this.lblHeightMapMaxHeight = new MetroFramework.Controls.MetroLabel();
             this.nudHeightMapSamplingWidth = new System.Windows.Forms.NumericUpDown();
-            this.lblHeightMapSamplingWidth = new System.Windows.Forms.Label();
+            this.lblHeightMapSamplingWidth = new MetroFramework.Controls.MetroLabel();
             this.nudXMoveTiling = new System.Windows.Forms.NumericUpDown();
-            this.lblxMoveTiling = new System.Windows.Forms.Label();
+            this.lblxMoveTiling = new MetroFramework.Controls.MetroLabel();
             this.gbMapSettings = new System.Windows.Forms.GroupBox();
-            this.lblGroundNormal = new System.Windows.Forms.Label();
-            this.cbGroundNormal = new System.Windows.Forms.ComboBox();
-            this.btnOpenFolder = new System.Windows.Forms.Button();
+            this.lblGroundNormal = new MetroFramework.Controls.MetroLabel();
+            this.cbGroundNormal = new MetroFramework.Controls.MetroComboBox();
+            this.btnOpenFolder = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.nudGenOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudXCurvature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudXCurvatureSmoothness)).BeginInit();
@@ -70,90 +70,101 @@
             // lblHm
             // 
             this.lblHm.AutoSize = true;
-            this.lblHm.Location = new System.Drawing.Point(6, 9);
+            this.lblHm.Location = new System.Drawing.Point(8, 11);
+            this.lblHm.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHm.Name = "lblHm";
-            this.lblHm.Size = new System.Drawing.Size(65, 13);
+            this.lblHm.Size = new System.Drawing.Size(84, 20);
             this.lblHm.TabIndex = 30;
             this.lblHm.Text = "Height Map:";
             // 
             // cbHms
             // 
             this.cbHms.FormattingEnabled = true;
-            this.cbHms.Location = new System.Drawing.Point(132, 6);
+            this.cbHms.ItemHeight = 24;
+            this.cbHms.Location = new System.Drawing.Point(176, 7);
+            this.cbHms.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbHms.Name = "cbHms";
-            this.cbHms.Size = new System.Drawing.Size(153, 21);
+            this.cbHms.Size = new System.Drawing.Size(203, 30);
             this.cbHms.TabIndex = 29;
-            this.cbHms.Text = "NONE";
+            this.cbHms.UseSelectable = true;
             this.cbHms.SelectedIndexChanged += new System.EventHandler(this.cbHms_SelectedIndexChanged);
             // 
             // btnAddHeightmap
             // 
-            this.btnAddHeightmap.Location = new System.Drawing.Point(291, 85);
+            this.btnAddHeightmap.Location = new System.Drawing.Point(388, 105);
+            this.btnAddHeightmap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAddHeightmap.Name = "btnAddHeightmap";
-            this.btnAddHeightmap.Size = new System.Drawing.Size(102, 23);
+            this.btnAddHeightmap.Size = new System.Drawing.Size(136, 28);
             this.btnAddHeightmap.TabIndex = 28;
             this.btnAddHeightmap.Text = "Refresh Textures";
-            this.btnAddHeightmap.UseVisualStyleBackColor = true;
+            this.btnAddHeightmap.UseSelectable = true;
             this.btnAddHeightmap.Click += new System.EventHandler(this.btnAddHeightmap_Click);
             // 
             // cboxMapMode
             // 
             this.cboxMapMode.FormattingEnabled = true;
+            this.cboxMapMode.ItemHeight = 24;
             this.cboxMapMode.Items.AddRange(new object[] {
             "Raw",
             "Lua"});
-            this.cboxMapMode.Location = new System.Drawing.Point(343, 6);
+            this.cboxMapMode.Location = new System.Drawing.Point(457, 7);
+            this.cboxMapMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboxMapMode.Name = "cboxMapMode";
-            this.cboxMapMode.Size = new System.Drawing.Size(50, 21);
+            this.cboxMapMode.Size = new System.Drawing.Size(65, 30);
             this.cboxMapMode.TabIndex = 27;
-            this.cboxMapMode.Text = "Raw";
+            this.cboxMapMode.UseSelectable = true;
             this.cboxMapMode.SelectedIndexChanged += new System.EventHandler(this.cboxMapMode_SelectedIndexChanged);
             // 
             // lblHorizonTex
             // 
             this.lblHorizonTex.AutoSize = true;
-            this.lblHorizonTex.Location = new System.Drawing.Point(7, 36);
+            this.lblHorizonTex.Location = new System.Drawing.Point(9, 44);
+            this.lblHorizonTex.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHorizonTex.Name = "lblHorizonTex";
-            this.lblHorizonTex.Size = new System.Drawing.Size(85, 13);
+            this.lblHorizonTex.Size = new System.Drawing.Size(110, 20);
             this.lblHorizonTex.TabIndex = 34;
             this.lblHorizonTex.Text = "Horizon Texture:";
             // 
             // cbHorizon
             // 
             this.cbHorizon.FormattingEnabled = true;
-            this.cbHorizon.Location = new System.Drawing.Point(132, 33);
+            this.cbHorizon.ItemHeight = 24;
+            this.cbHorizon.Location = new System.Drawing.Point(176, 41);
+            this.cbHorizon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbHorizon.Name = "cbHorizon";
-            this.cbHorizon.Size = new System.Drawing.Size(153, 21);
+            this.cbHorizon.Size = new System.Drawing.Size(203, 30);
             this.cbHorizon.TabIndex = 33;
-            this.cbHorizon.Text = "NONE";
+            this.cbHorizon.UseSelectable = true;
             this.cbHorizon.SelectedIndexChanged += new System.EventHandler(this.cbHorizon_SelectedIndexChanged);
             // 
             // lblGroundTex
             // 
             this.lblGroundTex.AutoSize = true;
-            this.lblGroundTex.Location = new System.Drawing.Point(6, 63);
+            this.lblGroundTex.Location = new System.Drawing.Point(8, 78);
+            this.lblGroundTex.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGroundTex.Name = "lblGroundTex";
-            this.lblGroundTex.Size = new System.Drawing.Size(84, 13);
+            this.lblGroundTex.Size = new System.Drawing.Size(108, 20);
             this.lblGroundTex.TabIndex = 38;
             this.lblGroundTex.Text = "Ground Texture:";
             // 
             // cbGround
             // 
             this.cbGround.FormattingEnabled = true;
-            this.cbGround.Location = new System.Drawing.Point(132, 60);
+            this.cbGround.ItemHeight = 24;
+            this.cbGround.Location = new System.Drawing.Point(176, 74);
+            this.cbGround.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbGround.Name = "cbGround";
-            this.cbGround.Size = new System.Drawing.Size(153, 21);
+            this.cbGround.Size = new System.Drawing.Size(203, 30);
             this.cbGround.TabIndex = 37;
-            this.cbGround.Text = "NONE";
+            this.cbGround.UseSelectable = true;
             this.cbGround.SelectedIndexChanged += new System.EventHandler(this.cbGround_SelectedIndexChanged);
             // 
             // lblGenerationOffset
             // 
             this.lblGenerationOffset.AutoSize = true;
-            this.lblGenerationOffset.Location = new System.Drawing.Point(4, 22);
-            this.lblGenerationOffset.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGenerationOffset.Location = new System.Drawing.Point(5, 27);
             this.lblGenerationOffset.Name = "lblGenerationOffset";
-            this.lblGenerationOffset.Size = new System.Drawing.Size(129, 13);
+            this.lblGenerationOffset.Size = new System.Drawing.Size(172, 20);
             this.lblGenerationOffset.TabIndex = 39;
             this.lblGenerationOffset.Text = "GenerationOffset(Horizon)";
             // 
@@ -165,8 +176,8 @@
             0,
             0,
             65536});
-            this.nudGenOffset.Location = new System.Drawing.Point(284, 20);
-            this.nudGenOffset.Margin = new System.Windows.Forms.Padding(2);
+            this.nudGenOffset.Location = new System.Drawing.Point(379, 25);
+            this.nudGenOffset.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudGenOffset.Maximum = new decimal(new int[] {
             300,
             0,
@@ -178,7 +189,7 @@
             0,
             0});
             this.nudGenOffset.Name = "nudGenOffset";
-            this.nudGenOffset.Size = new System.Drawing.Size(90, 20);
+            this.nudGenOffset.Size = new System.Drawing.Size(120, 22);
             this.nudGenOffset.TabIndex = 40;
             this.nudGenOffset.Value = new decimal(new int[] {
             75,
@@ -196,8 +207,8 @@
             0,
             65536});
             this.nudXCurvature.InterceptArrowKeys = false;
-            this.nudXCurvature.Location = new System.Drawing.Point(284, 43);
-            this.nudXCurvature.Margin = new System.Windows.Forms.Padding(2);
+            this.nudXCurvature.Location = new System.Drawing.Point(379, 53);
+            this.nudXCurvature.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudXCurvature.Maximum = new decimal(new int[] {
             300,
             0,
@@ -209,7 +220,7 @@
             0,
             -2147483648});
             this.nudXCurvature.Name = "nudXCurvature";
-            this.nudXCurvature.Size = new System.Drawing.Size(90, 20);
+            this.nudXCurvature.Size = new System.Drawing.Size(120, 22);
             this.nudXCurvature.TabIndex = 42;
             this.nudXCurvature.Value = new decimal(new int[] {
             50,
@@ -221,10 +232,9 @@
             // lblxCurvature
             // 
             this.lblxCurvature.AutoSize = true;
-            this.lblxCurvature.Location = new System.Drawing.Point(4, 45);
-            this.lblxCurvature.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblxCurvature.Location = new System.Drawing.Point(5, 55);
             this.lblxCurvature.Name = "lblxCurvature";
-            this.lblxCurvature.Size = new System.Drawing.Size(149, 13);
+            this.lblxCurvature.Size = new System.Drawing.Size(198, 20);
             this.lblxCurvature.TabIndex = 41;
             this.lblxCurvature.Text = "xCurvature(x Offset at horizon)";
             // 
@@ -236,8 +246,8 @@
             0,
             0,
             65536});
-            this.nudXCurvatureSmoothness.Location = new System.Drawing.Point(284, 66);
-            this.nudXCurvatureSmoothness.Margin = new System.Windows.Forms.Padding(2);
+            this.nudXCurvatureSmoothness.Location = new System.Drawing.Point(379, 81);
+            this.nudXCurvatureSmoothness.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudXCurvatureSmoothness.Maximum = new decimal(new int[] {
             15,
             0,
@@ -249,7 +259,7 @@
             0,
             0});
             this.nudXCurvatureSmoothness.Name = "nudXCurvatureSmoothness";
-            this.nudXCurvatureSmoothness.Size = new System.Drawing.Size(90, 20);
+            this.nudXCurvatureSmoothness.Size = new System.Drawing.Size(120, 22);
             this.nudXCurvatureSmoothness.TabIndex = 44;
             this.nudXCurvatureSmoothness.Value = new decimal(new int[] {
             15,
@@ -261,10 +271,9 @@
             // lblxCurvSmooth
             // 
             this.lblxCurvSmooth.AutoSize = true;
-            this.lblxCurvSmooth.Location = new System.Drawing.Point(4, 67);
-            this.lblxCurvSmooth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblxCurvSmooth.Location = new System.Drawing.Point(5, 82);
             this.lblxCurvSmooth.Name = "lblxCurvSmooth";
-            this.lblxCurvSmooth.Size = new System.Drawing.Size(228, 13);
+            this.lblxCurvSmooth.Size = new System.Drawing.Size(301, 20);
             this.lblxCurvSmooth.TabIndex = 43;
             this.lblxCurvSmooth.Text = "xCurvatureSmoothness(1= straight, 2 = curved)";
             // 
@@ -276,8 +285,8 @@
             0,
             0,
             65536});
-            this.nudHeightMapTiling.Location = new System.Drawing.Point(284, 89);
-            this.nudHeightMapTiling.Margin = new System.Windows.Forms.Padding(2);
+            this.nudHeightMapTiling.Location = new System.Drawing.Point(379, 110);
+            this.nudHeightMapTiling.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudHeightMapTiling.Maximum = new decimal(new int[] {
             15,
             0,
@@ -289,7 +298,7 @@
             0,
             65536});
             this.nudHeightMapTiling.Name = "nudHeightMapTiling";
-            this.nudHeightMapTiling.Size = new System.Drawing.Size(90, 20);
+            this.nudHeightMapTiling.Size = new System.Drawing.Size(120, 22);
             this.nudHeightMapTiling.TabIndex = 46;
             this.nudHeightMapTiling.Value = new decimal(new int[] {
             1,
@@ -301,10 +310,9 @@
             // lblHeightMapZTiling
             // 
             this.lblHeightMapZTiling.AutoSize = true;
-            this.lblHeightMapZTiling.Location = new System.Drawing.Point(4, 90);
-            this.lblHeightMapZTiling.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHeightMapZTiling.Location = new System.Drawing.Point(5, 111);
             this.lblHeightMapZTiling.Name = "lblHeightMapZTiling";
-            this.lblHeightMapZTiling.Size = new System.Drawing.Size(265, 13);
+            this.lblHeightMapZTiling.Size = new System.Drawing.Size(354, 20);
             this.lblHeightMapZTiling.TabIndex = 45;
             this.lblHeightMapZTiling.Text = "HeightMapTiling(1 = original, 2 = higher texture density)";
             // 
@@ -316,25 +324,24 @@
             0,
             0,
             65536});
-            this.nudHeightMapSpeed.Location = new System.Drawing.Point(284, 111);
-            this.nudHeightMapSpeed.Margin = new System.Windows.Forms.Padding(2);
+            this.nudHeightMapSpeed.Location = new System.Drawing.Point(379, 137);
+            this.nudHeightMapSpeed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudHeightMapSpeed.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
             this.nudHeightMapSpeed.Name = "nudHeightMapSpeed";
-            this.nudHeightMapSpeed.Size = new System.Drawing.Size(90, 20);
+            this.nudHeightMapSpeed.Size = new System.Drawing.Size(120, 22);
             this.nudHeightMapSpeed.TabIndex = 48;
             this.nudHeightMapSpeed.ValueChanged += new System.EventHandler(this.nudHeightMapSpeed_ValueChanged);
             // 
             // lblHeightMapSpeed
             // 
             this.lblHeightMapSpeed.AutoSize = true;
-            this.lblHeightMapSpeed.Location = new System.Drawing.Point(4, 113);
-            this.lblHeightMapSpeed.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHeightMapSpeed.Location = new System.Drawing.Point(5, 139);
             this.lblHeightMapSpeed.Name = "lblHeightMapSpeed";
-            this.lblHeightMapSpeed.Size = new System.Drawing.Size(203, 13);
+            this.lblHeightMapSpeed.Size = new System.Drawing.Size(264, 20);
             this.lblHeightMapSpeed.TabIndex = 47;
             this.lblHeightMapSpeed.Text = "HeightMapSpeed(Movement Per second)";
             // 
@@ -346,8 +353,8 @@
             0,
             0,
             65536});
-            this.nudHeightMapMaxHeight.Location = new System.Drawing.Point(284, 134);
-            this.nudHeightMapMaxHeight.Margin = new System.Windows.Forms.Padding(2);
+            this.nudHeightMapMaxHeight.Location = new System.Drawing.Point(379, 165);
+            this.nudHeightMapMaxHeight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudHeightMapMaxHeight.Maximum = new decimal(new int[] {
             20,
             0,
@@ -359,7 +366,7 @@
             0,
             -2147483648});
             this.nudHeightMapMaxHeight.Name = "nudHeightMapMaxHeight";
-            this.nudHeightMapMaxHeight.Size = new System.Drawing.Size(90, 20);
+            this.nudHeightMapMaxHeight.Size = new System.Drawing.Size(120, 22);
             this.nudHeightMapMaxHeight.TabIndex = 50;
             this.nudHeightMapMaxHeight.Value = new decimal(new int[] {
             10,
@@ -371,10 +378,9 @@
             // lblHeightMapMaxHeight
             // 
             this.lblHeightMapMaxHeight.AutoSize = true;
-            this.lblHeightMapMaxHeight.Location = new System.Drawing.Point(4, 136);
-            this.lblHeightMapMaxHeight.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHeightMapMaxHeight.Location = new System.Drawing.Point(5, 167);
             this.lblHeightMapMaxHeight.Name = "lblHeightMapMaxHeight";
-            this.lblHeightMapMaxHeight.Size = new System.Drawing.Size(110, 13);
+            this.lblHeightMapMaxHeight.Size = new System.Drawing.Size(143, 20);
             this.lblHeightMapMaxHeight.TabIndex = 49;
             this.lblHeightMapMaxHeight.Text = "HeightMapMaxHeight";
             // 
@@ -386,8 +392,8 @@
             0,
             0,
             65536});
-            this.nudHeightMapSamplingWidth.Location = new System.Drawing.Point(284, 157);
-            this.nudHeightMapSamplingWidth.Margin = new System.Windows.Forms.Padding(2);
+            this.nudHeightMapSamplingWidth.Location = new System.Drawing.Point(379, 193);
+            this.nudHeightMapSamplingWidth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudHeightMapSamplingWidth.Maximum = new decimal(new int[] {
             300,
             0,
@@ -399,7 +405,7 @@
             0,
             65536});
             this.nudHeightMapSamplingWidth.Name = "nudHeightMapSamplingWidth";
-            this.nudHeightMapSamplingWidth.Size = new System.Drawing.Size(90, 20);
+            this.nudHeightMapSamplingWidth.Size = new System.Drawing.Size(120, 22);
             this.nudHeightMapSamplingWidth.TabIndex = 52;
             this.nudHeightMapSamplingWidth.Value = new decimal(new int[] {
             8,
@@ -411,10 +417,9 @@
             // lblHeightMapSamplingWidth
             // 
             this.lblHeightMapSamplingWidth.AutoSize = true;
-            this.lblHeightMapSamplingWidth.Location = new System.Drawing.Point(4, 158);
-            this.lblHeightMapSamplingWidth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHeightMapSamplingWidth.Location = new System.Drawing.Point(5, 194);
             this.lblHeightMapSamplingWidth.Name = "lblHeightMapSamplingWidth";
-            this.lblHeightMapSamplingWidth.Size = new System.Drawing.Size(130, 13);
+            this.lblHeightMapSamplingWidth.Size = new System.Drawing.Size(169, 20);
             this.lblHeightMapSamplingWidth.TabIndex = 51;
             this.lblHeightMapSamplingWidth.Text = "HeightMapSamplingWidth";
             // 
@@ -426,8 +431,8 @@
             0,
             0,
             65536});
-            this.nudXMoveTiling.Location = new System.Drawing.Point(284, 180);
-            this.nudXMoveTiling.Margin = new System.Windows.Forms.Padding(2);
+            this.nudXMoveTiling.Location = new System.Drawing.Point(379, 222);
+            this.nudXMoveTiling.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.nudXMoveTiling.Maximum = new decimal(new int[] {
             300,
             0,
@@ -439,7 +444,7 @@
             0,
             65536});
             this.nudXMoveTiling.Name = "nudXMoveTiling";
-            this.nudXMoveTiling.Size = new System.Drawing.Size(90, 20);
+            this.nudXMoveTiling.Size = new System.Drawing.Size(120, 22);
             this.nudXMoveTiling.TabIndex = 54;
             this.nudXMoveTiling.Value = new decimal(new int[] {
             100,
@@ -451,10 +456,9 @@
             // lblxMoveTiling
             // 
             this.lblxMoveTiling.AutoSize = true;
-            this.lblxMoveTiling.Location = new System.Drawing.Point(4, 181);
-            this.lblxMoveTiling.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblxMoveTiling.Location = new System.Drawing.Point(5, 223);
             this.lblxMoveTiling.Name = "lblxMoveTiling";
-            this.lblxMoveTiling.Size = new System.Drawing.Size(64, 13);
+            this.lblxMoveTiling.Size = new System.Drawing.Size(83, 20);
             this.lblxMoveTiling.TabIndex = 53;
             this.lblxMoveTiling.Text = "xMoveTiling";
             // 
@@ -476,11 +480,11 @@
             this.gbMapSettings.Controls.Add(this.lblHeightMapZTiling);
             this.gbMapSettings.Controls.Add(this.lblHeightMapSpeed);
             this.gbMapSettings.Controls.Add(this.nudHeightMapTiling);
-            this.gbMapSettings.Location = new System.Drawing.Point(9, 113);
-            this.gbMapSettings.Margin = new System.Windows.Forms.Padding(2);
+            this.gbMapSettings.Location = new System.Drawing.Point(12, 139);
+            this.gbMapSettings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbMapSettings.Name = "gbMapSettings";
-            this.gbMapSettings.Padding = new System.Windows.Forms.Padding(2);
-            this.gbMapSettings.Size = new System.Drawing.Size(376, 201);
+            this.gbMapSettings.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbMapSettings.Size = new System.Drawing.Size(501, 247);
             this.gbMapSettings.TabIndex = 55;
             this.gbMapSettings.TabStop = false;
             this.gbMapSettings.Text = "Map Settings";
@@ -488,37 +492,42 @@
             // lblGroundNormal
             // 
             this.lblGroundNormal.AutoSize = true;
-            this.lblGroundNormal.Location = new System.Drawing.Point(6, 90);
+            this.lblGroundNormal.Location = new System.Drawing.Point(8, 111);
+            this.lblGroundNormal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGroundNormal.Name = "lblGroundNormal";
-            this.lblGroundNormal.Size = new System.Drawing.Size(120, 13);
+            this.lblGroundNormal.Size = new System.Drawing.Size(158, 20);
             this.lblGroundNormal.TabIndex = 57;
             this.lblGroundNormal.Text = "Ground Normal Texture:";
             // 
             // cbGroundNormal
             // 
             this.cbGroundNormal.FormattingEnabled = true;
-            this.cbGroundNormal.Location = new System.Drawing.Point(132, 87);
+            this.cbGroundNormal.ItemHeight = 24;
+            this.cbGroundNormal.Location = new System.Drawing.Point(176, 107);
+            this.cbGroundNormal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbGroundNormal.Name = "cbGroundNormal";
-            this.cbGroundNormal.Size = new System.Drawing.Size(153, 21);
+            this.cbGroundNormal.Size = new System.Drawing.Size(203, 30);
             this.cbGroundNormal.TabIndex = 56;
-            this.cbGroundNormal.Text = "NONE";
+            this.cbGroundNormal.UseSelectable = true;
             this.cbGroundNormal.SelectedIndexChanged += new System.EventHandler(this.cbGroundNormal_SelectedIndexChanged);
             // 
             // btnOpenFolder
             // 
-            this.btnOpenFolder.Location = new System.Drawing.Point(291, 60);
+            this.btnOpenFolder.Location = new System.Drawing.Point(388, 74);
+            this.btnOpenFolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(102, 23);
+            this.btnOpenFolder.Size = new System.Drawing.Size(136, 28);
             this.btnOpenFolder.TabIndex = 58;
             this.btnOpenFolder.Text = "Open Folder";
-            this.btnOpenFolder.UseVisualStyleBackColor = true;
+            this.btnOpenFolder.UseSelectable = true;
             this.btnOpenFolder.Click += new System.EventHandler(this.button1_Click);
             // 
             // EngineSettings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 325);
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ClientSize = new System.Drawing.Size(529, 400);
             this.Controls.Add(this.btnOpenFolder);
             this.Controls.Add(this.lblGroundNormal);
             this.Controls.Add(this.cbGroundNormal);
@@ -532,6 +541,7 @@
             this.Controls.Add(this.cboxMapMode);
             this.Controls.Add(this.gbMapSettings);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EngineSettings";
@@ -554,33 +564,33 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblHm;
-        private System.Windows.Forms.ComboBox cbHms;
-        private System.Windows.Forms.Button btnAddHeightmap;
-        private System.Windows.Forms.ComboBox cboxMapMode;
-        private System.Windows.Forms.Label lblHorizonTex;
-        private System.Windows.Forms.ComboBox cbHorizon;
-        private System.Windows.Forms.Label lblGroundTex;
-        private System.Windows.Forms.ComboBox cbGround;
-        private System.Windows.Forms.Label lblGenerationOffset;
+        private MetroFramework.Controls.MetroLabel lblHm;
+        private MetroFramework.Controls.MetroComboBox cbHms;
+        private MetroFramework.Controls.MetroButton btnAddHeightmap;
+        private MetroFramework.Controls.MetroComboBox cboxMapMode;
+        private MetroFramework.Controls.MetroLabel lblHorizonTex;
+        private MetroFramework.Controls.MetroComboBox cbHorizon;
+        private MetroFramework.Controls.MetroLabel lblGroundTex;
+        private MetroFramework.Controls.MetroComboBox cbGround;
+        private MetroFramework.Controls.MetroLabel lblGenerationOffset;
         private System.Windows.Forms.NumericUpDown nudGenOffset;
         private System.Windows.Forms.NumericUpDown nudXCurvature;
-        private System.Windows.Forms.Label lblxCurvature;
+        private MetroFramework.Controls.MetroLabel lblxCurvature;
         private System.Windows.Forms.NumericUpDown nudXCurvatureSmoothness;
-        private System.Windows.Forms.Label lblxCurvSmooth;
+        private MetroFramework.Controls.MetroLabel lblxCurvSmooth;
         private System.Windows.Forms.NumericUpDown nudHeightMapTiling;
-        private System.Windows.Forms.Label lblHeightMapZTiling;
+        private MetroFramework.Controls.MetroLabel lblHeightMapZTiling;
         private System.Windows.Forms.NumericUpDown nudHeightMapSpeed;
-        private System.Windows.Forms.Label lblHeightMapSpeed;
+        private MetroFramework.Controls.MetroLabel lblHeightMapSpeed;
         private System.Windows.Forms.NumericUpDown nudHeightMapMaxHeight;
-        private System.Windows.Forms.Label lblHeightMapMaxHeight;
+        private MetroFramework.Controls.MetroLabel lblHeightMapMaxHeight;
         private System.Windows.Forms.NumericUpDown nudHeightMapSamplingWidth;
-        private System.Windows.Forms.Label lblHeightMapSamplingWidth;
+        private MetroFramework.Controls.MetroLabel lblHeightMapSamplingWidth;
         private System.Windows.Forms.NumericUpDown nudXMoveTiling;
-        private System.Windows.Forms.Label lblxMoveTiling;
+        private MetroFramework.Controls.MetroLabel lblxMoveTiling;
         private System.Windows.Forms.GroupBox gbMapSettings;
-        private System.Windows.Forms.Label lblGroundNormal;
-        private System.Windows.Forms.ComboBox cbGroundNormal;
-        private System.Windows.Forms.Button btnOpenFolder;
+        private MetroFramework.Controls.MetroLabel lblGroundNormal;
+        private MetroFramework.Controls.MetroComboBox cbGroundNormal;
+        private MetroFramework.Controls.MetroButton btnOpenFolder;
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace MapEditor
+﻿
+namespace MapEditor
 {
     partial class frmEditor
     {
@@ -28,37 +29,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblLaneCount = new System.Windows.Forms.Label();
-            this.lblMapParts = new System.Windows.Forms.Label();
+            this.lblLaneCount = new MetroFramework.Controls.MetroLabel();
+            this.lblMapParts = new MetroFramework.Controls.MetroLabel();
             this.lbMapParts = new System.Windows.Forms.ListBox();
             this.lbParts = new System.Windows.Forms.ListBox();
-            this.lblPartsAvaliable = new System.Windows.Forms.Label();
-            this.btnOpenPartFile = new System.Windows.Forms.Button();
-            this.btnRemoveFromMap = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.lblPartsAvaliable = new MetroFramework.Controls.MetroLabel();
+            this.btnOpenPartFile = new MetroFramework.Controls.MetroButton();
+            this.btnRemoveFromMap = new MetroFramework.Controls.MetroButton();
+            this.button1 = new MetroFramework.Controls.MetroButton();
             this.ofdPart = new System.Windows.Forms.OpenFileDialog();
-            this.btneditPart = new System.Windows.Forms.Button();
-            this.btnCreatePart = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btneditPart = new MetroFramework.Controls.MetroButton();
+            this.btnCreatePart = new MetroFramework.Controls.MetroButton();
+            this.button2 = new MetroFramework.Controls.MetroButton();
+            this.button3 = new MetroFramework.Controls.MetroButton();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
             this.sfdExport = new System.Windows.Forms.SaveFileDialog();
-            this.btnLoadMap = new System.Windows.Forms.Button();
+            this.btnLoadMap = new MetroFramework.Controls.MetroButton();
             this.ofdMap = new System.Windows.Forms.OpenFileDialog();
-            this.btnNewMap = new System.Windows.Forms.Button();
+            this.btnNewMap = new MetroFramework.Controls.MetroButton();
             this.grpBoxParts = new System.Windows.Forms.GroupBox();
             this.grpBoxMap = new System.Windows.Forms.GroupBox();
-            this.btnOpenConsole = new System.Windows.Forms.Button();
+            this.btnOpenConsole = new MetroFramework.Controls.MetroButton();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.cbRandomizeParts = new System.Windows.Forms.CheckBox();
-            this.btnMoveDown = new System.Windows.Forms.Button();
-            this.btnUp = new System.Windows.Forms.Button();
-            this.btnStartFromSelection = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.btnPlay = new System.Windows.Forms.Button();
+            this.cbRandomizeParts = new MetroFramework.Controls.MetroCheckBox();
+            this.btnMoveDown = new MetroFramework.Controls.MetroButton();
+            this.btnUp = new MetroFramework.Controls.MetroButton();
+            this.btnStartFromSelection = new MetroFramework.Controls.MetroButton();
+            this.button5 = new MetroFramework.Controls.MetroButton();
+            this.btnPlay = new MetroFramework.Controls.MetroButton();
             this.ofdEngine = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.button4 = new MetroFramework.Controls.MetroButton();
             this.ofdHeightMap = new System.Windows.Forms.OpenFileDialog();
             this.grpBoxParts.SuspendLayout();
             this.grpBoxMap.SuspendLayout();
@@ -69,18 +70,20 @@
             // lblLaneCount
             // 
             this.lblLaneCount.AutoSize = true;
-            this.lblLaneCount.Location = new System.Drawing.Point(330, 25);
+            this.lblLaneCount.Location = new System.Drawing.Point(440, 31);
+            this.lblLaneCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLaneCount.Name = "lblLaneCount";
-            this.lblLaneCount.Size = new System.Drawing.Size(76, 13);
+            this.lblLaneCount.Size = new System.Drawing.Size(94, 20);
             this.lblLaneCount.TabIndex = 2;
             this.lblLaneCount.Text = "Lane Spacing:";
             // 
             // lblMapParts
             // 
             this.lblMapParts.AutoSize = true;
-            this.lblMapParts.Location = new System.Drawing.Point(10, 56);
+            this.lblMapParts.Location = new System.Drawing.Point(13, 69);
+            this.lblMapParts.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMapParts.Name = "lblMapParts";
-            this.lblMapParts.Size = new System.Drawing.Size(71, 13);
+            this.lblMapParts.Size = new System.Drawing.Size(92, 20);
             this.lblMapParts.TabIndex = 6;
             this.lblMapParts.Text = "Parts(in map):";
             // 
@@ -89,12 +92,15 @@
             this.lbMapParts.AllowDrop = true;
             this.lbMapParts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lbMapParts.FormattingEnabled = true;
-            this.lbMapParts.Location = new System.Drawing.Point(12, 85);
+            this.lbMapParts.Location = new System.Drawing.Point(16, 105);
+            this.lbMapParts.Margin = new System.Windows.Forms.Padding(4);
             this.lbMapParts.Name = "lbMapParts";
             this.lbMapParts.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbMapParts.Size = new System.Drawing.Size(450, 394);
+            this.lbMapParts.Size = new System.Drawing.Size(599, 472);
             this.lbMapParts.TabIndex = 7;
             this.lbMapParts.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.MapDrawItems);
+            this.lbMapParts.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmEditor_Drop);
+            this.lbMapParts.DragEnter += new System.Windows.Forms.DragEventHandler(this.frmEditor_DropEnter);
             this.lbMapParts.DoubleClick += new System.EventHandler(this.lbMapParts_DoubleClickLoseSelectedIndex);
             // 
             // lbParts
@@ -102,51 +108,58 @@
             this.lbParts.AllowDrop = true;
             this.lbParts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lbParts.FormattingEnabled = true;
-            this.lbParts.Location = new System.Drawing.Point(21, 72);
+            this.lbParts.Location = new System.Drawing.Point(28, 89);
+            this.lbParts.Margin = new System.Windows.Forms.Padding(4);
             this.lbParts.Name = "lbParts";
             this.lbParts.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbParts.Size = new System.Drawing.Size(333, 368);
+            this.lbParts.Size = new System.Drawing.Size(443, 446);
             this.lbParts.TabIndex = 8;
             this.lbParts.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.PartsDrawItems);
+            this.lbParts.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmEditor_Drop);
+            this.lbParts.DragEnter += new System.Windows.Forms.DragEventHandler(this.frmEditor_DropEnter);
             this.lbParts.DoubleClick += new System.EventHandler(this.lbParts_DoubleClickLoseSelectedIndex);
             // 
             // lblPartsAvaliable
             // 
             this.lblPartsAvaliable.AutoSize = true;
-            this.lblPartsAvaliable.Location = new System.Drawing.Point(18, 56);
+            this.lblPartsAvaliable.Location = new System.Drawing.Point(24, 69);
+            this.lblPartsAvaliable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPartsAvaliable.Name = "lblPartsAvaliable";
-            this.lblPartsAvaliable.Size = new System.Drawing.Size(80, 13);
+            this.lblPartsAvaliable.Size = new System.Drawing.Size(101, 20);
             this.lblPartsAvaliable.TabIndex = 9;
             this.lblPartsAvaliable.Text = "Parts Avaliable:";
             // 
             // btnOpenPartFile
             // 
-            this.btnOpenPartFile.Location = new System.Drawing.Point(133, 19);
+            this.btnOpenPartFile.Location = new System.Drawing.Point(177, 23);
+            this.btnOpenPartFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnOpenPartFile.Name = "btnOpenPartFile";
-            this.btnOpenPartFile.Size = new System.Drawing.Size(106, 24);
+            this.btnOpenPartFile.Size = new System.Drawing.Size(141, 30);
             this.btnOpenPartFile.TabIndex = 10;
             this.btnOpenPartFile.Text = "Open Part";
-            this.btnOpenPartFile.UseVisualStyleBackColor = true;
+            this.btnOpenPartFile.UseSelectable = true;
             this.btnOpenPartFile.Click += new System.EventHandler(this.BtnOpenPartFile_Click);
             // 
             // btnRemoveFromMap
             // 
-            this.btnRemoveFromMap.Location = new System.Drawing.Point(87, 56);
+            this.btnRemoveFromMap.Location = new System.Drawing.Point(116, 69);
+            this.btnRemoveFromMap.Margin = new System.Windows.Forms.Padding(4);
             this.btnRemoveFromMap.Name = "btnRemoveFromMap";
-            this.btnRemoveFromMap.Size = new System.Drawing.Size(31, 24);
+            this.btnRemoveFromMap.Size = new System.Drawing.Size(41, 30);
             this.btnRemoveFromMap.TabIndex = 12;
             this.btnRemoveFromMap.Text = "X";
-            this.btnRemoveFromMap.UseVisualStyleBackColor = true;
+            this.btnRemoveFromMap.UseSelectable = true;
             this.btnRemoveFromMap.Click += new System.EventHandler(this.BtnRemoveFromMap_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(495, 275);
+            this.button1.Location = new System.Drawing.Point(660, 338);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(31, 24);
+            this.button1.Size = new System.Drawing.Size(41, 30);
             this.button1.TabIndex = 13;
             this.button1.Text = "<<";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseSelectable = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // ofdPart
@@ -159,42 +172,46 @@
             // 
             // btneditPart
             // 
-            this.btneditPart.Location = new System.Drawing.Point(245, 19);
+            this.btneditPart.Location = new System.Drawing.Point(327, 23);
+            this.btneditPart.Margin = new System.Windows.Forms.Padding(4);
             this.btneditPart.Name = "btneditPart";
-            this.btneditPart.Size = new System.Drawing.Size(109, 24);
+            this.btneditPart.Size = new System.Drawing.Size(145, 30);
             this.btneditPart.TabIndex = 14;
             this.btneditPart.Text = "Edit Part";
-            this.btneditPart.UseVisualStyleBackColor = true;
+            this.btneditPart.UseSelectable = true;
             this.btneditPart.Click += new System.EventHandler(this.BtneditPart_Click);
             // 
             // btnCreatePart
             // 
-            this.btnCreatePart.Location = new System.Drawing.Point(21, 19);
+            this.btnCreatePart.Location = new System.Drawing.Point(28, 23);
+            this.btnCreatePart.Margin = new System.Windows.Forms.Padding(4);
             this.btnCreatePart.Name = "btnCreatePart";
-            this.btnCreatePart.Size = new System.Drawing.Size(106, 24);
+            this.btnCreatePart.Size = new System.Drawing.Size(141, 30);
             this.btnCreatePart.TabIndex = 11;
             this.btnCreatePart.Text = "Create Part";
-            this.btnCreatePart.UseVisualStyleBackColor = true;
+            this.btnCreatePart.UseSelectable = true;
             this.btnCreatePart.Click += new System.EventHandler(this.BtnCreatePart_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(249, 19);
+            this.button2.Location = new System.Drawing.Point(332, 23);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 24);
+            this.button2.Size = new System.Drawing.Size(100, 30);
             this.button2.TabIndex = 15;
             this.button2.Text = "Export Map";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseSelectable = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(168, 19);
+            this.button3.Location = new System.Drawing.Point(224, 23);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 24);
+            this.button3.Size = new System.Drawing.Size(100, 30);
             this.button3.TabIndex = 16;
             this.button3.Text = "Save Map";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseSelectable = true;
             this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // sfd
@@ -213,12 +230,13 @@
             // 
             // btnLoadMap
             // 
-            this.btnLoadMap.Location = new System.Drawing.Point(87, 19);
+            this.btnLoadMap.Location = new System.Drawing.Point(116, 23);
+            this.btnLoadMap.Margin = new System.Windows.Forms.Padding(4);
             this.btnLoadMap.Name = "btnLoadMap";
-            this.btnLoadMap.Size = new System.Drawing.Size(75, 24);
+            this.btnLoadMap.Size = new System.Drawing.Size(100, 30);
             this.btnLoadMap.TabIndex = 17;
             this.btnLoadMap.Text = "Load Map";
-            this.btnLoadMap.UseVisualStyleBackColor = true;
+            this.btnLoadMap.UseSelectable = true;
             this.btnLoadMap.Click += new System.EventHandler(this.btnLoadMap_Click);
             // 
             // ofdMap
@@ -230,12 +248,13 @@
             // 
             // btnNewMap
             // 
-            this.btnNewMap.Location = new System.Drawing.Point(6, 19);
+            this.btnNewMap.Location = new System.Drawing.Point(8, 23);
+            this.btnNewMap.Margin = new System.Windows.Forms.Padding(4);
             this.btnNewMap.Name = "btnNewMap";
-            this.btnNewMap.Size = new System.Drawing.Size(75, 24);
+            this.btnNewMap.Size = new System.Drawing.Size(100, 30);
             this.btnNewMap.TabIndex = 18;
             this.btnNewMap.Text = "New Map";
-            this.btnNewMap.UseVisualStyleBackColor = true;
+            this.btnNewMap.UseSelectable = true;
             this.btnNewMap.Click += new System.EventHandler(this.btnNewMap_Click);
             // 
             // grpBoxParts
@@ -245,9 +264,11 @@
             this.grpBoxParts.Controls.Add(this.btneditPart);
             this.grpBoxParts.Controls.Add(this.lblPartsAvaliable);
             this.grpBoxParts.Controls.Add(this.lbParts);
-            this.grpBoxParts.Location = new System.Drawing.Point(532, 68);
+            this.grpBoxParts.Location = new System.Drawing.Point(709, 84);
+            this.grpBoxParts.Margin = new System.Windows.Forms.Padding(4);
             this.grpBoxParts.Name = "grpBoxParts";
-            this.grpBoxParts.Size = new System.Drawing.Size(361, 457);
+            this.grpBoxParts.Padding = new System.Windows.Forms.Padding(4);
+            this.grpBoxParts.Size = new System.Drawing.Size(481, 562);
             this.grpBoxParts.TabIndex = 19;
             this.grpBoxParts.TabStop = false;
             this.grpBoxParts.Text = "Parts:";
@@ -268,28 +289,32 @@
             this.grpBoxMap.Controls.Add(this.button3);
             this.grpBoxMap.Controls.Add(this.button2);
             this.grpBoxMap.Controls.Add(this.lblLaneCount);
-            this.grpBoxMap.Location = new System.Drawing.Point(12, 12);
+            this.grpBoxMap.Location = new System.Drawing.Point(16, 15);
+            this.grpBoxMap.Margin = new System.Windows.Forms.Padding(4);
             this.grpBoxMap.Name = "grpBoxMap";
-            this.grpBoxMap.Size = new System.Drawing.Size(468, 513);
+            this.grpBoxMap.Padding = new System.Windows.Forms.Padding(4);
+            this.grpBoxMap.Size = new System.Drawing.Size(624, 631);
             this.grpBoxMap.TabIndex = 20;
             this.grpBoxMap.TabStop = false;
             this.grpBoxMap.Text = "Map:";
             // 
             // btnOpenConsole
             // 
-            this.btnOpenConsole.Location = new System.Drawing.Point(374, 485);
+            this.btnOpenConsole.Location = new System.Drawing.Point(499, 597);
+            this.btnOpenConsole.Margin = new System.Windows.Forms.Padding(4);
             this.btnOpenConsole.Name = "btnOpenConsole";
-            this.btnOpenConsole.Size = new System.Drawing.Size(88, 23);
+            this.btnOpenConsole.Size = new System.Drawing.Size(117, 28);
             this.btnOpenConsole.TabIndex = 25;
             this.btnOpenConsole.Text = "Open Console";
-            this.btnOpenConsole.UseVisualStyleBackColor = true;
+            this.btnOpenConsole.UseSelectable = true;
             this.btnOpenConsole.Click += new System.EventHandler(this.btnOpenConsole_Click);
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(413, 22);
+            this.numericUpDown1.Location = new System.Drawing.Point(551, 27);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(49, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(65, 22);
             this.numericUpDown1.TabIndex = 24;
             this.numericUpDown1.Value = new decimal(new int[] {
             3,
@@ -301,62 +326,68 @@
             // cbRandomizeParts
             // 
             this.cbRandomizeParts.AutoSize = true;
-            this.cbRandomizeParts.Location = new System.Drawing.Point(13, 485);
+            this.cbRandomizeParts.Location = new System.Drawing.Point(17, 597);
+            this.cbRandomizeParts.Margin = new System.Windows.Forms.Padding(4);
             this.cbRandomizeParts.Name = "cbRandomizeParts";
-            this.cbRandomizeParts.Size = new System.Drawing.Size(172, 17);
+            this.cbRandomizeParts.Size = new System.Drawing.Size(207, 17);
             this.cbRandomizeParts.TabIndex = 23;
             this.cbRandomizeParts.Text = "Randomize Part Order on Load";
-            this.cbRandomizeParts.UseVisualStyleBackColor = true;
+            this.cbRandomizeParts.UseSelectable = true;
             this.cbRandomizeParts.CheckedChanged += new System.EventHandler(this.cbRandomizeParts_CheckedChanged);
             // 
             // btnMoveDown
             // 
-            this.btnMoveDown.Location = new System.Drawing.Point(161, 56);
+            this.btnMoveDown.Location = new System.Drawing.Point(215, 69);
+            this.btnMoveDown.Margin = new System.Windows.Forms.Padding(4);
             this.btnMoveDown.Name = "btnMoveDown";
-            this.btnMoveDown.Size = new System.Drawing.Size(31, 24);
+            this.btnMoveDown.Size = new System.Drawing.Size(41, 30);
             this.btnMoveDown.TabIndex = 20;
             this.btnMoveDown.Text = "🡇";
-            this.btnMoveDown.UseVisualStyleBackColor = true;
+            this.btnMoveDown.UseSelectable = true;
             this.btnMoveDown.Click += new System.EventHandler(this.btnMoveDown_Click);
             // 
             // btnUp
             // 
-            this.btnUp.Location = new System.Drawing.Point(124, 56);
+            this.btnUp.Location = new System.Drawing.Point(165, 69);
+            this.btnUp.Margin = new System.Windows.Forms.Padding(4);
             this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(31, 24);
+            this.btnUp.Size = new System.Drawing.Size(41, 30);
             this.btnUp.TabIndex = 19;
             this.btnUp.Text = "🡅";
-            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.UseSelectable = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
             // btnStartFromSelection
             // 
-            this.btnStartFromSelection.Location = new System.Drawing.Point(113, 19);
+            this.btnStartFromSelection.Location = new System.Drawing.Point(151, 23);
+            this.btnStartFromSelection.Margin = new System.Windows.Forms.Padding(4);
             this.btnStartFromSelection.Name = "btnStartFromSelection";
-            this.btnStartFromSelection.Size = new System.Drawing.Size(109, 24);
+            this.btnStartFromSelection.Size = new System.Drawing.Size(145, 30);
             this.btnStartFromSelection.TabIndex = 24;
             this.btnStartFromSelection.Text = "Start from Selection";
-            this.btnStartFromSelection.UseVisualStyleBackColor = true;
+            this.btnStartFromSelection.UseSelectable = true;
             this.btnStartFromSelection.Click += new System.EventHandler(this.btnStartFromSelection_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(6, 19);
+            this.button5.Location = new System.Drawing.Point(8, 23);
+            this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(58, 24);
+            this.button5.Size = new System.Drawing.Size(77, 30);
             this.button5.TabIndex = 22;
             this.button5.Text = "Set .exe";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button5.UseSelectable = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(70, 19);
+            this.btnPlay.Location = new System.Drawing.Point(93, 23);
+            this.btnPlay.Margin = new System.Windows.Forms.Padding(4);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(37, 24);
+            this.btnPlay.Size = new System.Drawing.Size(49, 30);
             this.btnPlay.TabIndex = 21;
             this.btnPlay.Text = "Play";
-            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.UseSelectable = true;
             this.btnPlay.Click += new System.EventHandler(this.button4_Click);
             // 
             // ofdEngine
@@ -373,21 +404,24 @@
             this.groupBox1.Controls.Add(this.btnStartFromSelection);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.btnPlay);
-            this.groupBox1.Location = new System.Drawing.Point(532, 10);
+            this.groupBox1.Location = new System.Drawing.Point(709, 12);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(361, 53);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(481, 65);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Engine Controls";
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(224, 20);
+            this.button4.Location = new System.Drawing.Point(299, 25);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(130, 23);
+            this.button4.Size = new System.Drawing.Size(173, 28);
             this.button4.TabIndex = 27;
             this.button4.Text = "Set Engine Settings";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button4.UseSelectable = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // ofdHeightMap
@@ -397,14 +431,16 @@
             // frmEditor
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(905, 537);
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ClientSize = new System.Drawing.Size(1207, 661);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grpBoxMap);
             this.Controls.Add(this.grpBoxParts);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmEditor";
@@ -414,11 +450,6 @@
             this.Load += new System.EventHandler(this.frmEditor_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmEditor_Drop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.frmEditor_DropEnter);
-            this.lbParts.AllowDrop = true;
-            this.lbParts.DragEnter += new System.Windows.Forms.DragEventHandler(this.frmEditor_DropEnter);
-            this.lbMapParts.DragEnter += new System.Windows.Forms.DragEventHandler(this.frmEditor_DropEnter);
-            this.lbParts.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmEditor_Drop);
-            this.lbMapParts.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmEditor_Drop);
             this.grpBoxParts.ResumeLayout(false);
             this.grpBoxParts.PerformLayout();
             this.grpBoxMap.ResumeLayout(false);
@@ -430,38 +461,41 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label lblLaneCount;
-        private System.Windows.Forms.Label lblMapParts;
+
+        private MetroFramework.Controls.MetroLabel lblLaneCount;
+        //private MetroFramework.Controls.MetroLabel lblLaneCount;
+        private MetroFramework.Controls.MetroLabel lblMapParts;
+        //private MetroFramework.Controls.MetroListView lbMapParts;
         private System.Windows.Forms.ListBox lbMapParts;
         private System.Windows.Forms.ListBox lbParts;
-        private System.Windows.Forms.Label lblPartsAvaliable;
-        private System.Windows.Forms.Button btnOpenPartFile;
-        private System.Windows.Forms.Button btnRemoveFromMap;
-        private System.Windows.Forms.Button button1;
+        private MetroFramework.Controls.MetroLabel lblPartsAvaliable;
+        private MetroFramework.Controls.MetroButton btnOpenPartFile;
+        private MetroFramework.Controls.MetroButton btnRemoveFromMap;
+        private MetroFramework.Controls.MetroButton button1;
         private System.Windows.Forms.OpenFileDialog ofdPart;
-        private System.Windows.Forms.Button btneditPart;
-        private System.Windows.Forms.Button btnCreatePart;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private MetroFramework.Controls.MetroButton btneditPart;
+        private MetroFramework.Controls.MetroButton btnCreatePart;
+        private MetroFramework.Controls.MetroButton button2;
+        private MetroFramework.Controls.MetroButton button3;
         private System.Windows.Forms.SaveFileDialog sfd;
         private System.Windows.Forms.SaveFileDialog sfdExport;
-        private System.Windows.Forms.Button btnLoadMap;
+        private MetroFramework.Controls.MetroButton btnLoadMap;
         private System.Windows.Forms.OpenFileDialog ofdMap;
-        private System.Windows.Forms.Button btnNewMap;
+        private MetroFramework.Controls.MetroButton btnNewMap;
         private System.Windows.Forms.GroupBox grpBoxParts;
         private System.Windows.Forms.GroupBox grpBoxMap;
-        private System.Windows.Forms.Button btnMoveDown;
-        private System.Windows.Forms.Button btnUp;
-        private System.Windows.Forms.Button btnPlay;
+        private MetroFramework.Controls.MetroButton btnMoveDown;
+        private MetroFramework.Controls.MetroButton btnUp;
+        private MetroFramework.Controls.MetroButton btnPlay;
         private System.Windows.Forms.OpenFileDialog ofdEngine;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.CheckBox cbRandomizeParts;
-        private System.Windows.Forms.Button btnStartFromSelection;
+        private MetroFramework.Controls.MetroButton button5;
+        private MetroFramework.Controls.MetroCheckBox cbRandomizeParts;
+        private MetroFramework.Controls.MetroButton btnStartFromSelection;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.OpenFileDialog ofdHeightMap;
-        private System.Windows.Forms.Button button4;
+        private MetroFramework.Controls.MetroButton button4;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button btnOpenConsole;
+        private MetroFramework.Controls.MetroButton btnOpenConsole;
     }
 }
 

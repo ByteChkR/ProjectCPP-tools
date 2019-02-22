@@ -62,6 +62,10 @@ namespace MapEditor
                 editor = new Editor(parts);
                 InvalidateParts();
             }
+            else
+            {
+                editor = new Editor(new List<Part>());
+            }
 
             if (System.IO.File.Exists(initMap) && LoadMap(initMap, out Map m) && editor.LoadMap(m))
             {
