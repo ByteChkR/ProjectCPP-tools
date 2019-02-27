@@ -17,6 +17,7 @@ namespace MapEditor
         WINDOWS_FORM = 64,
         LANESTEP_EDITOR = 128,
         PARTCREATOR_EDITOR = 256,
-        NEWMAPDIALOG_EDITOR = 512
+        NEWMAPDIALOG_EDITOR = 512,
+        MGE_ENGINE_CONSOLE_OUT = 1024
     }
 }

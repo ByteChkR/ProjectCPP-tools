@@ -28,6 +28,7 @@ namespace MapEditor
         string groundNormalMap = "";
         bool isRaw = true;
         EngineSettings es;
+        GameConsoleRedirector gcr = null;
         Form adl;
 
         public frmEditor(bool enableLogging, string initMap = "")
@@ -97,6 +98,7 @@ namespace MapEditor
                         {4, System.Drawing.Color.Orange }, //Every warning is painted in orange
                         {2, System.Drawing.Color.Magenta },
                         {16, System.Drawing.Color.Green },
+                        {1024, System.Drawing.Color.Lime }
                     });
             ADLCustomConsoleConfig config = ADLCustomConsoleConfig.Standard;
             config.FontSize = 13;
@@ -368,6 +370,11 @@ namespace MapEditor
             {
                 if (editor.GetMap(out Map map))
                 {
+                    map.LaneSteps = new int[map.LaneCount];
+                    for (int i = 0; i < map.LaneCount; i++)
+                    {
+                        map.LaneSteps[i] = (int)numericUpDown1.Value;
+                    }
                     InvalidateParts();
                     InvalidateMap(map);
 
@@ -673,6 +680,7 @@ namespace MapEditor
             if (_engine != null)
             {
 
+                if (gcr != null) gcr.StopThread();
                 if (!_engine.HasExited) _engine.Kill();
 
                 System.IO.File.Delete(_engine.StartInfo.WorkingDirectory + "mge\\maps\\temp.txt");
@@ -703,9 +711,14 @@ namespace MapEditor
                 psi = new System.Diagnostics.ProcessStartInfo(s, "temp.txt r");
 
             psi.WorkingDirectory = _engineWorkingDir;
+
+            psi.RedirectStandardOutput = true;
+            psi.UseShellExecute = false;
+
             _engine.StartInfo = psi;
             _engine.Start();
-
+            gcr = GameConsoleRedirector.CreateRedirector(_engine.StandardOutput, _engine);
+            gcr.StartThread();
 
         }
 

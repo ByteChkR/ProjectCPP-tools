@@ -28,34 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblHm = new MetroFramework.Controls.MetroLabel();
-            this.cbHms = new MetroFramework.Controls.MetroComboBox();
-            this.btnAddHeightmap = new MetroFramework.Controls.MetroButton();
-            this.cboxMapMode = new MetroFramework.Controls.MetroComboBox();
-            this.lblHorizonTex = new MetroFramework.Controls.MetroLabel();
-            this.cbHorizon = new MetroFramework.Controls.MetroComboBox();
-            this.lblGroundTex = new MetroFramework.Controls.MetroLabel();
-            this.cbGround = new MetroFramework.Controls.MetroComboBox();
-            this.lblGenerationOffset = new MetroFramework.Controls.MetroLabel();
+            this.lblHm = new System.Windows.Forms.Label();
+            this.cbHms = new System.Windows.Forms.ComboBox();
+            this.btnAddHeightmap = new System.Windows.Forms.Button();
+            this.cboxMapMode = new System.Windows.Forms.ComboBox();
+            this.lblHorizonTex = new System.Windows.Forms.Label();
+            this.cbHorizon = new System.Windows.Forms.ComboBox();
+            this.lblGroundTex = new System.Windows.Forms.Label();
+            this.cbGround = new System.Windows.Forms.ComboBox();
+            this.lblGenerationOffset = new System.Windows.Forms.Label();
             this.nudGenOffset = new System.Windows.Forms.NumericUpDown();
             this.nudXCurvature = new System.Windows.Forms.NumericUpDown();
-            this.lblxCurvature = new MetroFramework.Controls.MetroLabel();
+            this.lblxCurvature = new System.Windows.Forms.Label();
             this.nudXCurvatureSmoothness = new System.Windows.Forms.NumericUpDown();
-            this.lblxCurvSmooth = new MetroFramework.Controls.MetroLabel();
+            this.lblxCurvSmooth = new System.Windows.Forms.Label();
             this.nudHeightMapTiling = new System.Windows.Forms.NumericUpDown();
-            this.lblHeightMapZTiling = new MetroFramework.Controls.MetroLabel();
+            this.lblHeightMapZTiling = new System.Windows.Forms.Label();
             this.nudHeightMapSpeed = new System.Windows.Forms.NumericUpDown();
-            this.lblHeightMapSpeed = new MetroFramework.Controls.MetroLabel();
+            this.lblHeightMapSpeed = new System.Windows.Forms.Label();
             this.nudHeightMapMaxHeight = new System.Windows.Forms.NumericUpDown();
-            this.lblHeightMapMaxHeight = new MetroFramework.Controls.MetroLabel();
+            this.lblHeightMapMaxHeight = new System.Windows.Forms.Label();
             this.nudHeightMapSamplingWidth = new System.Windows.Forms.NumericUpDown();
-            this.lblHeightMapSamplingWidth = new MetroFramework.Controls.MetroLabel();
+            this.lblHeightMapSamplingWidth = new System.Windows.Forms.Label();
             this.nudXMoveTiling = new System.Windows.Forms.NumericUpDown();
-            this.lblxMoveTiling = new MetroFramework.Controls.MetroLabel();
+            this.lblxMoveTiling = new System.Windows.Forms.Label();
             this.gbMapSettings = new System.Windows.Forms.GroupBox();
-            this.lblGroundNormal = new MetroFramework.Controls.MetroLabel();
-            this.cbGroundNormal = new MetroFramework.Controls.MetroComboBox();
-            this.btnOpenFolder = new MetroFramework.Controls.MetroButton();
+            this.lblGroundNormal = new System.Windows.Forms.Label();
+            this.cbGroundNormal = new System.Windows.Forms.ComboBox();
+            this.btnOpenFolder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudGenOffset)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudXCurvature)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudXCurvatureSmoothness)).BeginInit();
@@ -86,7 +86,7 @@
             this.cbHms.Name = "cbHms";
             this.cbHms.Size = new System.Drawing.Size(203, 30);
             this.cbHms.TabIndex = 29;
-            this.cbHms.UseSelectable = true;
+            //this.cbHms.UseSelectable = true;
             this.cbHms.SelectedIndexChanged += new System.EventHandler(this.cbHms_SelectedIndexChanged);
             // 
             // btnAddHeightmap
@@ -97,7 +97,7 @@
             this.btnAddHeightmap.Size = new System.Drawing.Size(136, 28);
             this.btnAddHeightmap.TabIndex = 28;
             this.btnAddHeightmap.Text = "Refresh Textures";
-            this.btnAddHeightmap.UseSelectable = true;
+            //this.btnAddHeightmap.UseSelectable = true;
             this.btnAddHeightmap.Click += new System.EventHandler(this.btnAddHeightmap_Click);
             // 
             // cboxMapMode
@@ -112,7 +112,7 @@
             this.cboxMapMode.Name = "cboxMapMode";
             this.cboxMapMode.Size = new System.Drawing.Size(65, 30);
             this.cboxMapMode.TabIndex = 27;
-            this.cboxMapMode.UseSelectable = true;
+           // this.cboxMapMode.UseSelectable = true;
             this.cboxMapMode.SelectedIndexChanged += new System.EventHandler(this.cboxMapMode_SelectedIndexChanged);
             // 
             // lblHorizonTex
@@ -134,7 +134,7 @@
             this.cbHorizon.Name = "cbHorizon";
             this.cbHorizon.Size = new System.Drawing.Size(203, 30);
             this.cbHorizon.TabIndex = 33;
-            this.cbHorizon.UseSelectable = true;
+            //this.cbHorizon.UseSelectable = true;
             this.cbHorizon.SelectedIndexChanged += new System.EventHandler(this.cbHorizon_SelectedIndexChanged);
             // 
             // lblGroundTex
@@ -156,7 +156,7 @@
             this.cbGround.Name = "cbGround";
             this.cbGround.Size = new System.Drawing.Size(203, 30);
             this.cbGround.TabIndex = 37;
-            this.cbGround.UseSelectable = true;
+            //this.cbGround.UseSelectable = true;
             this.cbGround.SelectedIndexChanged += new System.EventHandler(this.cbGround_SelectedIndexChanged);
             // 
             // lblGenerationOffset
@@ -508,7 +508,7 @@
             this.cbGroundNormal.Name = "cbGroundNormal";
             this.cbGroundNormal.Size = new System.Drawing.Size(203, 30);
             this.cbGroundNormal.TabIndex = 56;
-            this.cbGroundNormal.UseSelectable = true;
+           // this.cbGroundNormal.UseSelectable = true;
             this.cbGroundNormal.SelectedIndexChanged += new System.EventHandler(this.cbGroundNormal_SelectedIndexChanged);
             // 
             // btnOpenFolder
@@ -519,7 +519,7 @@
             this.btnOpenFolder.Size = new System.Drawing.Size(136, 28);
             this.btnOpenFolder.TabIndex = 58;
             this.btnOpenFolder.Text = "Open Folder";
-            this.btnOpenFolder.UseSelectable = true;
+           // this.btnOpenFolder.UseSelectable = true;
             this.btnOpenFolder.Click += new System.EventHandler(this.button1_Click);
             // 
             // EngineSettings
@@ -564,33 +564,33 @@
 
         #endregion
 
-        private MetroFramework.Controls.MetroLabel lblHm;
-        private MetroFramework.Controls.MetroComboBox cbHms;
-        private MetroFramework.Controls.MetroButton btnAddHeightmap;
-        private MetroFramework.Controls.MetroComboBox cboxMapMode;
-        private MetroFramework.Controls.MetroLabel lblHorizonTex;
-        private MetroFramework.Controls.MetroComboBox cbHorizon;
-        private MetroFramework.Controls.MetroLabel lblGroundTex;
-        private MetroFramework.Controls.MetroComboBox cbGround;
-        private MetroFramework.Controls.MetroLabel lblGenerationOffset;
+        private System.Windows.Forms.Label lblHm;
+        private System.Windows.Forms.ComboBox cbHms;
+        private System.Windows.Forms.Button btnAddHeightmap;
+        private System.Windows.Forms.ComboBox cboxMapMode;
+        private System.Windows.Forms.Label lblHorizonTex;
+        private System.Windows.Forms.ComboBox cbHorizon;
+        private System.Windows.Forms.Label lblGroundTex;
+        private System.Windows.Forms.ComboBox cbGround;
+        private System.Windows.Forms.Label lblGenerationOffset;
         private System.Windows.Forms.NumericUpDown nudGenOffset;
         private System.Windows.Forms.NumericUpDown nudXCurvature;
-        private MetroFramework.Controls.MetroLabel lblxCurvature;
+        private System.Windows.Forms.Label lblxCurvature;
         private System.Windows.Forms.NumericUpDown nudXCurvatureSmoothness;
-        private MetroFramework.Controls.MetroLabel lblxCurvSmooth;
+        private System.Windows.Forms.Label lblxCurvSmooth;
         private System.Windows.Forms.NumericUpDown nudHeightMapTiling;
-        private MetroFramework.Controls.MetroLabel lblHeightMapZTiling;
+        private System.Windows.Forms.Label lblHeightMapZTiling;
         private System.Windows.Forms.NumericUpDown nudHeightMapSpeed;
-        private MetroFramework.Controls.MetroLabel lblHeightMapSpeed;
+        private System.Windows.Forms.Label lblHeightMapSpeed;
         private System.Windows.Forms.NumericUpDown nudHeightMapMaxHeight;
-        private MetroFramework.Controls.MetroLabel lblHeightMapMaxHeight;
+        private System.Windows.Forms.Label lblHeightMapMaxHeight;
         private System.Windows.Forms.NumericUpDown nudHeightMapSamplingWidth;
-        private MetroFramework.Controls.MetroLabel lblHeightMapSamplingWidth;
+        private System.Windows.Forms.Label lblHeightMapSamplingWidth;
         private System.Windows.Forms.NumericUpDown nudXMoveTiling;
-        private MetroFramework.Controls.MetroLabel lblxMoveTiling;
+        private System.Windows.Forms.Label lblxMoveTiling;
         private System.Windows.Forms.GroupBox gbMapSettings;
-        private MetroFramework.Controls.MetroLabel lblGroundNormal;
-        private MetroFramework.Controls.MetroComboBox cbGroundNormal;
-        private MetroFramework.Controls.MetroButton btnOpenFolder;
+        private System.Windows.Forms.Label lblGroundNormal;
+        private System.Windows.Forms.ComboBox cbGroundNormal;
+        private System.Windows.Forms.Button btnOpenFolder;
     }
 }

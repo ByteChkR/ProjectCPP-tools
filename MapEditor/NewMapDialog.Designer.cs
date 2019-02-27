@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.tbMapName = new System.Windows.Forms.TextBox();
-            this.lblMapName = new MetroFramework.Controls.MetroLabel();
+            this.lblMapName = new System.Windows.Forms.Label();
             this.nudPartSize = new System.Windows.Forms.NumericUpDown();
-            this.lblPartSize = new MetroFramework.Controls.MetroLabel();
-            this.lblLaneCount = new MetroFramework.Controls.MetroLabel();
+            this.lblPartSize = new System.Windows.Forms.Label();
+            this.lblLaneCount = new System.Windows.Forms.Label();
             this.nudLaneCount = new System.Windows.Forms.NumericUpDown();
             this.lbAvailableScripts = new System.Windows.Forms.ListBox();
-            this.btnCreate = new MetroFramework.Controls.MetroButton();
+            this.btnCreate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudPartSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLaneCount)).BeginInit();
             this.SuspendLayout();
@@ -145,12 +145,12 @@
         #endregion
 
         private System.Windows.Forms.TextBox tbMapName;
-        private MetroFramework.Controls.MetroLabel lblMapName;
+        private System.Windows.Forms.Label lblMapName;
         private System.Windows.Forms.NumericUpDown nudPartSize;
-        private MetroFramework.Controls.MetroLabel lblPartSize;
-        private MetroFramework.Controls.MetroLabel lblLaneCount;
+        private System.Windows.Forms.Label lblPartSize;
+        private System.Windows.Forms.Label lblLaneCount;
         private System.Windows.Forms.NumericUpDown nudLaneCount;
         private System.Windows.Forms.ListBox lbAvailableScripts;
-        private MetroFramework.Controls.MetroButton btnCreate;
+        private System.Windows.Forms.Button btnCreate;
     }
 }

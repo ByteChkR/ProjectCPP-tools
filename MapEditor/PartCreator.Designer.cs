@@ -33,12 +33,12 @@
             this.lblLaneCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblPartSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCompileStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.btnSave = new MetroFramework.Controls.MetroButton();
+            this.btnSave = new System.Windows.Forms.Button();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
             this.nudBiomeID = new System.Windows.Forms.NumericUpDown();
-            this.lblBiomeID = new MetroFramework.Controls.MetroLabel();
+            this.lblBiomeID = new System.Windows.Forms.Label();
             this.tbPartName = new System.Windows.Forms.TextBox();
-            this.lblPartName = new MetroFramework.Controls.MetroLabel();
+            this.lblPartName = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBiomeID)).BeginInit();
             this.SuspendLayout();
@@ -95,7 +95,7 @@
             this.btnSave.Size = new System.Drawing.Size(100, 26);
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Save";
-            this.btnSave.UseSelectable = true;
+           // this.btnSave.UseSelectable = true;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // sfd
@@ -174,12 +174,12 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblLaneCount;
         private System.Windows.Forms.ToolStripStatusLabel lblPartSize;
-        private MetroFramework.Controls.MetroButton btnSave;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.SaveFileDialog sfd;
         private System.Windows.Forms.ToolStripStatusLabel lblCompileStatus;
         private System.Windows.Forms.NumericUpDown nudBiomeID;
-        private MetroFramework.Controls.MetroLabel lblBiomeID;
+        private System.Windows.Forms.Label lblBiomeID;
         private System.Windows.Forms.TextBox tbPartName;
-        private MetroFramework.Controls.MetroLabel lblPartName;
+        private System.Windows.Forms.Label lblPartName;
     }
 }
