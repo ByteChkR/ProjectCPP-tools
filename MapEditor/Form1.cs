@@ -98,7 +98,8 @@ namespace MapEditor
                         {4, System.Drawing.Color.Orange }, //Every warning is painted in orange
                         {2, System.Drawing.Color.Magenta },
                         {16, System.Drawing.Color.Green },
-                        {1024, System.Drawing.Color.Lime }
+                        {1024, System.Drawing.Color.Lime },
+                        {2048, System.Drawing.Color.Red }
                     });
             ADLCustomConsoleConfig config = ADLCustomConsoleConfig.Standard;
             config.FontSize = 13;
@@ -680,7 +681,7 @@ namespace MapEditor
             if (_engine != null)
             {
 
-                if (gcr != null) gcr.StopThread();
+                if (gcr != null) gcr.StopThreads();
                 if (!_engine.HasExited) _engine.Kill();
 
                 System.IO.File.Delete(_engine.StartInfo.WorkingDirectory + "mge\\maps\\temp.txt");
@@ -713,12 +714,13 @@ namespace MapEditor
             psi.WorkingDirectory = _engineWorkingDir;
 
             psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
             psi.UseShellExecute = false;
 
             _engine.StartInfo = psi;
             _engine.Start();
-            gcr = GameConsoleRedirector.CreateRedirector(_engine.StandardOutput, _engine);
-            gcr.StartThread();
+            gcr = GameConsoleRedirector.CreateRedirector(_engine.StandardOutput, _engine.StandardError, _engine);
+            gcr.StartThreads();
 
         }
 
