@@ -390,7 +390,7 @@ namespace MapEditor
             this.btnRandomizeSelection.Name = "btnRandomizeSelection";
             this.btnRandomizeSelection.Size = new System.Drawing.Size(31, 24);
             this.btnRandomizeSelection.TabIndex = 26;
-            this.btnRandomizeSelection.Text = "🡇";
+            this.btnRandomizeSelection.Text = "⤮";
             this.btnRandomizeSelection.Click += new System.EventHandler(this.btnRandomizeSelection_Click);
             // 
             // frmEditor
