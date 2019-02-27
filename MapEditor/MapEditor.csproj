@@ -84,6 +84,7 @@
     <Compile Include="LaneStepEditor.Designer.cs">
       <DependentUpon>LaneStepEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListExtention.cs" />
     <Compile Include="LoggingChannel.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="NewMapDialog.cs">

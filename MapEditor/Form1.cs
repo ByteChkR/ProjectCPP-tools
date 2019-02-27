@@ -911,6 +911,35 @@ namespace MapEditor
                 Control.CheckForIllegalCrossThreadCalls = true;
             }
         }
+
+        private void btnRandomizeSelection_Click(object sender, EventArgs e)
+        {
+            if (editor.GetMap(out Map map))
+            {
+
+                List<string> selection = new List<string>();
+
+                if (lbMapParts.SelectedIndices.Count > 0)
+                {
+                    foreach (int idx in lbMapParts.SelectedIndices)
+                    {
+                        selection.Add(lbMapParts.Items[idx].ToString());
+                    }
+                }
+                else
+                {
+                    selection = lbMapParts.Items.Cast<string>().ToList();
+                }
+
+                selection.Shuffle();
+
+                for (int i = 0; i < lbMapParts.SelectedIndices.Count; i++)
+                {
+                    map.PartSequence[lbMapParts.SelectedIndices[i]] = selection[i];
+                }
+                InvalidateMap(map);
+            }
+        }
     }
 }
 
