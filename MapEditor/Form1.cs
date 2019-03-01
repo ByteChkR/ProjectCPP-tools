@@ -29,7 +29,7 @@ namespace MapEditor
         bool isRaw = true;
         EngineSettings es;
         GameConsoleRedirector gcr = null;
-        Form adl;
+        ADL.CustomCMD.CustomCMDForm adl;
 
         public frmEditor(bool enableLogging, string initMap = "")
         {
@@ -51,7 +51,11 @@ namespace MapEditor
 
                 //CreateADLCustomCMDConfig();
 
-                adl = ADL.CustomCMD.CMDUtils.CreateCustomConsole(ps);
+                adl = (ADL.CustomCMD.CustomCMDForm)ADL.CustomCMD.CMDUtils.CreateCustomConsole(ps);
+
+                adl.MaxConsoleLogCount = 5000; //Custom Changes to Console Window to delete the console output less often and
+                adl.MaxLogCountPerBlock = 500; //Set this higher when changing the max log count per frame
+                adl.MaxLogCountPerFrame = 300; //fix the ADL warnings when overusing the ADL System.
 
                 adl.FormClosing += new FormClosingEventHandler(ConsoleClosing);
 
@@ -718,10 +722,20 @@ namespace MapEditor
             psi.UseShellExecute = false;
 
             _engine.StartInfo = psi;
-            _engine.Start();
-            gcr = GameConsoleRedirector.CreateRedirector(_engine.StandardOutput, _engine.StandardError, _engine);
-            gcr.StartThreads();
+            try
+            {
+                _engine.Start();
+                gcr = GameConsoleRedirector.CreateRedirector(_engine.StandardOutput, _engine.StandardError, _engine);
+                gcr.StartThreads();
 
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error, could not run mge.exe at path " + _enginePath);
+                Debug.LogGen(LoggingChannel.ERROR | LoggingChannel.GENERAL, "Error, could not run mge.exe at path " + _enginePath);
+            }
+            
         }
 
         void WriteLuaWrapper(string datapath, string mapName, string wrapperName, string heightMap, string groundTex, string groundNormal, string horizonTex, float genOffset, float xCurvature, float xCurvatureSmoothness, float heightMapTiling, float heightMapSpeed, float heightMapMaxHeight, float heightMapSamplingWidth, float xMoveTiling)
