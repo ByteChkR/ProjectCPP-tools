@@ -176,10 +176,10 @@ namespace MapEditor
                     }
 
                 }
+                InvalidateMap(map, new int[0]);
+                lbMapParts.Focus();
             }
 
-            InvalidateMap(map, new int[0]);
-            lbMapParts.Focus();
         }
 
         public void InvalidateMap(Map map, int[] selectedIndices = null)
@@ -330,7 +330,7 @@ namespace MapEditor
         private void Button3_Click(object sender, EventArgs e)
         {
 
-            if (sfd.ShowDialog() == DialogResult.OK && editor.GetMap(out Map map))
+            if (editor.GetMap(out Map map) && sfd.ShowDialog() == DialogResult.OK)
             {
                 SaveMap(sfd.FileName, map);
             }
