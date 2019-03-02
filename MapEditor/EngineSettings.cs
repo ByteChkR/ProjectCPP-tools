@@ -19,25 +19,44 @@ namespace MapEditor
         Map m = null;
         public EngineSettings(string folderPath, editorConfig config, Map map = null)
         {
-            
+            Shown += EngineSettings_Shown;
             this.folderPath = folderPath;
             ec = config;
             InitializeComponent();
             InvalidateCombos();
-            if (map == null) gbMapSettings.Enabled = false;
+            if (map == null)
+            {
+                gbMapSettings.Enabled = false;
+                btnFogColor.Enabled = false;
+            }
             else
             {
                 gbMapSettings.Enabled = true;
+                btnFogColor.Enabled = true;
                 InvalidateMapSettings();
             }
             m = map;
             cboxMapMode.SelectedIndex = ec.isRaw ? 0 : 1;
         }
 
+        private void EngineSettings_Shown(object sender, EventArgs e)
+        {
+            if (m == null)
+            {
+                gbMapSettings.Enabled = false;
+                btnFogColor.Enabled = false;
+            }
+            else
+            {
+                gbMapSettings.Enabled = true;
+                btnFogColor.Enabled = true;
+                InvalidateMapSettings();
+            }
+        }
 
         public void SetMap(Map map)
         {
-            
+
             m = map;
             if (m == null) gbMapSettings.Enabled = false;
             else
@@ -57,7 +76,7 @@ namespace MapEditor
             nudXCurvatureSmoothness.Value = (decimal)m.xCurvatureSmoothness;
             nudXCurvature.Value = (decimal)m.xCurvature;
             nudGenOffset.Value = (decimal)m.genOffset;
-
+            panelColorPreview.BackColor = Color.FromArgb((int)(m.fogColorR * 255), (int)(m.fogColorG * 255), (int)(m.fogColorB * 255));
 
         }
         public void InvalidateCombos()
@@ -214,6 +233,19 @@ namespace MapEditor
         private void cbGroundNormal_SelectedIndexChanged(object sender, EventArgs e)
         {
             ec.GroundNormalMap = cbGroundNormal.SelectedIndex;
+        }
+
+        private void btnFogColor_Click(object sender, EventArgs e)
+        {
+            Cyotek.Windows.Forms.ColorPickerDialog cw = new Cyotek.Windows.Forms.ColorPickerDialog();
+            cw.Color = Color.FromArgb((int)(m.fogColorR * 255), (int)(m.fogColorG * 255), (int)(m.fogColorB * 255));
+            if (cw.ShowDialog() == DialogResult.OK)
+            {
+                m.fogColorB = cw.Color.B / 255f;
+                m.fogColorG = cw.Color.G / 255f;
+                m.fogColorR = cw.Color.R / 255f;
+            }
+            panelColorPreview.BackColor = cw.Color;
         }
     }
 }

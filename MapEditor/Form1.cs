@@ -28,6 +28,7 @@ namespace MapEditor
         string groundNormalMap = "";
         bool isRaw = true;
         EngineSettings es;
+        editorConfig ec;
         GameConsoleRedirector gcr = null;
         ADL.CustomCMD.CustomCMDForm adl;
 
@@ -345,12 +346,12 @@ namespace MapEditor
                 List<string> exportString = editor.ExportMap();
                 string dataPath = sfdExport.FileName.Substring(0, sfdExport.FileName.LastIndexOf('\\') + 1);
                 string mapName = sfdExport.FileName.Substring(sfdExport.FileName.LastIndexOf('\\') + 1);
-
+                
                 WriteLuaWrapper(dataPath, mapName, mapName.Replace(".txt", ".lua"), heightmap, groundMap, groundNormalMap, horizonMap,
                     map.genOffset, map.xCurvature, map.xCurvatureSmoothness,
                     map.heightMapTiling, map.heightMapSpeed,
                     map.heightMapMaxHeight, map.heightMapSamplingWidth,
-                    map.xMoveTiling);
+                    map.xMoveTiling, map.fogColorR, map.fogColorG, map.fogColorB);
 
                 SaveExport(exportString, sfdExport.FileName);
             }
@@ -506,7 +507,7 @@ namespace MapEditor
         void ReadConfig()
         {
 
-            editorConfig ec = editorConfig.GetStandard();
+            ec = editorConfig.GetStandard();
             XmlSerializer xs = new XmlSerializer(typeof(editorConfig));
             System.IO.Stream s = null;
             try
@@ -709,7 +710,7 @@ namespace MapEditor
                     map.genOffset, map.xCurvature, map.xCurvatureSmoothness,
                     map.heightMapTiling, map.heightMapSpeed,
                     map.heightMapMaxHeight, map.heightMapSamplingWidth,
-                    map.xMoveTiling);
+                    map.xMoveTiling, map.fogColorR, map.fogColorG, map.fogColorB);
                 psi = new System.Diagnostics.ProcessStartInfo(s, "temp.lua");
             }
             else
@@ -738,7 +739,7 @@ namespace MapEditor
             
         }
 
-        void WriteLuaWrapper(string datapath, string mapName, string wrapperName, string heightMap, string groundTex, string groundNormal, string horizonTex, float genOffset, float xCurvature, float xCurvatureSmoothness, float heightMapTiling, float heightMapSpeed, float heightMapMaxHeight, float heightMapSamplingWidth, float xMoveTiling)
+        void WriteLuaWrapper(string datapath, string mapName, string wrapperName, string heightMap, string groundTex, string groundNormal, string horizonTex, float genOffset, float xCurvature, float xCurvatureSmoothness, float heightMapTiling, float heightMapSpeed, float heightMapMaxHeight, float heightMapSamplingWidth, float xMoveTiling, float fogColorR, float fogColorG, float fogColorB)
         {
             List<string> wrapper = new List<string>();
             if (heightMap != "") wrapper.Add("heightTexture = \"" + heightMap + "\"");
@@ -754,6 +755,7 @@ namespace MapEditor
             wrapper.Add("heightMapMaxHeight = \"" + heightMapMaxHeight + "\"");
             wrapper.Add("heightMapSamplingWidth = \"" + heightMapSamplingWidth + "\"");
             wrapper.Add("xMoveTiling = \"" + xMoveTiling + "\"");
+            wrapper.Add("fogColor = {[\"Red\"] = \"" + fogColorR + "\" , [\"Green\"] = \"" + fogColorG + "\" , [\"Blue\"] = \"" + fogColorB + "\"}");
             try
             {
 
@@ -954,6 +956,8 @@ namespace MapEditor
                 InvalidateMap(map);
             }
         }
+
+        
     }
 }
 

@@ -23,6 +23,9 @@ namespace MapEditor
         public float heightMapMaxHeight;
         public float heightMapSamplingWidth;
         public float xMoveTiling;
+        public float fogColorR;
+        public float fogColorG;
+        public float fogColorB;
 
         public bool GetRandomize()
         {
@@ -56,7 +59,9 @@ namespace MapEditor
             heightMapSpeed = 0;
             heightMapMaxHeight = 10;
             xMoveTiling = 100;
+            fogColorB = fogColorG = fogColorR = 0.5f;
         }
+
 
         public bool SelfCheck()
         {
@@ -64,10 +69,23 @@ namespace MapEditor
             return true;
         }
 
+        public Map CloneSettings()
+        {
+            Map map = new Map(PartSize, LaneCount);
+            map.heightMapMaxHeight = heightMapMaxHeight;
+            map.heightMapSamplingWidth = heightMapSamplingWidth;
+            map.heightMapSpeed = heightMapSpeed;
+            map.heightMapTiling = heightMapTiling;
+            map.LaneSteps = LaneSteps;
+            map.xCurvature = xCurvature;
+            map.xCurvatureSmoothness = xCurvatureSmoothness;
+            map.xMoveTiling = xMoveTiling;
+            return map;
+        }
+
         public Map SubMap(int startIndex)
         {
-            Map m = new Map(PartSize, LaneCount);
-            m.LaneSteps = LaneSteps;
+            Map m = CloneSettings();
             m.RandomizePartOrder = RandomizePartOrder;
             m.PartSequence = new string[PartSequence.Length - startIndex];
             for (int i = 0; i < m.PartSequence.Length; i++)

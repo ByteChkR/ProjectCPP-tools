@@ -38,6 +38,9 @@
     <Reference Include="ADL.CustomCMD">
       <HintPath>D:\Users\Tim\Documents\ADL\ADL\ADL.DebugTest\bin\Debug\ADL.CustomCMD.dll</HintPath>
     </Reference>
+    <Reference Include="Cyotek.Windows.Forms.ColorPicker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=58daa28b0b2de221, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cyotek.Windows.Forms.ColorPicker.1.7.2\lib\net35\Cyotek.Windows.Forms.ColorPicker.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

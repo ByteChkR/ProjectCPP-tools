@@ -49,6 +49,7 @@ namespace MapEditor
             this.btnNewMap = new System.Windows.Forms.Button();
             this.grpBoxParts = new System.Windows.Forms.GroupBox();
             this.grpBoxMap = new System.Windows.Forms.GroupBox();
+            this.btnRandomizeSelection = new System.Windows.Forms.Button();
             this.btnOpenConsole = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.cbRandomizeParts = new System.Windows.Forms.CheckBox();
@@ -61,7 +62,6 @@ namespace MapEditor
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.ofdHeightMap = new System.Windows.Forms.OpenFileDialog();
-            this.btnRandomizeSelection = new System.Windows.Forms.Button();
             this.grpBoxParts.SuspendLayout();
             this.grpBoxMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -273,6 +273,15 @@ namespace MapEditor
             this.grpBoxMap.TabStop = false;
             this.grpBoxMap.Text = "Map:";
             // 
+            // btnRandomizeSelection
+            // 
+            this.btnRandomizeSelection.Location = new System.Drawing.Point(198, 56);
+            this.btnRandomizeSelection.Name = "btnRandomizeSelection";
+            this.btnRandomizeSelection.Size = new System.Drawing.Size(31, 24);
+            this.btnRandomizeSelection.TabIndex = 26;
+            this.btnRandomizeSelection.Text = "⤮";
+            this.btnRandomizeSelection.Click += new System.EventHandler(this.btnRandomizeSelection_Click);
+            // 
             // btnOpenConsole
             // 
             this.btnOpenConsole.Location = new System.Drawing.Point(374, 485);
@@ -383,15 +392,6 @@ namespace MapEditor
             // ofdHeightMap
             // 
             this.ofdHeightMap.FileName = "Open Heightmap";
-            // 
-            // btnRandomizeSelection
-            // 
-            this.btnRandomizeSelection.Location = new System.Drawing.Point(198, 56);
-            this.btnRandomizeSelection.Name = "btnRandomizeSelection";
-            this.btnRandomizeSelection.Size = new System.Drawing.Size(31, 24);
-            this.btnRandomizeSelection.TabIndex = 26;
-            this.btnRandomizeSelection.Text = "⤮";
-            this.btnRandomizeSelection.Click += new System.EventHandler(this.btnRandomizeSelection_Click);
             // 
             // frmEditor
             // 
