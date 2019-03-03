@@ -62,7 +62,8 @@ namespace MapEditor
             p.laneCount = other.laneCount;
             p.name = other.name + "(COPY)";
             p.partLength = other.partLength;
-            p.part = new int[p.laneCount][];
+            p.part = new int[other.laneCount][];
+            p.biomeID = other.biomeID;
             for (int i = 0; i < p.laneCount; i++)
             {
                 p.part[i] = new int[p.partLength];
