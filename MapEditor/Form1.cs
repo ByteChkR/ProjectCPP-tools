@@ -439,6 +439,8 @@ namespace MapEditor
             System.IO.Stream s = null;
             try
             {
+                if (System.IO.File.Exists(file))
+                    System.IO.File.Delete(file);
                 s = System.IO.File.OpenWrite(file);
                 xs.Serialize(s, map);
                 s.Close();
