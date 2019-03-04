@@ -528,7 +528,7 @@ namespace MapEditor
             }
             if (ec.biomeCount > 0) _biomeCount = ec.biomeCount;
             _enginePath = ec.EnginePath;
-            if (_enginePath != "") _engineWorkingDir = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1);
+            if (_enginePath != "" && System.IO.File.Exists(_enginePath)) _engineWorkingDir = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1);
             _defaultPartFolder = ec.DefaultPartsFolder;
             isRaw = ec.isRaw;
             es = new EngineSettings(_engineWorkingDir + "mge\\textures\\", ec);
