@@ -61,8 +61,7 @@ namespace MapEditor
         {
             string txt = "";
             while (!_engineProc.HasExited)
-            while (!_engineProc.HasExited)
-                {
+            {
                 txt = cout.ReadLine();
                 if (txt != "") ADL.Debug.Log(channelID, txt);
             }

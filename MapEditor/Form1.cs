@@ -55,8 +55,8 @@ namespace MapEditor
                 adl = (ADL.CustomCMD.CustomCMDForm)ADL.CustomCMD.CMDUtils.CreateCustomConsole(ps);
 
                 adl.MaxConsoleLogCount = 5000; //Custom Changes to Console Window to delete the console output less often and
-                adl.MaxLogCountPerBlock = 500; //Set this higher when changing the max log count per frame
-                adl.MaxLogCountPerFrame = 300; //fix the ADL warnings when overusing the ADL System.
+                adl.MaxLogCountPerBlock = 2500; //Set this higher when changing the max log count per frame
+                adl.MaxLogCountPerFrame = 500; //fix the ADL warnings when overusing the ADL System.
 
                 adl.FormClosing += new FormClosingEventHandler(ConsoleClosing);
 
@@ -757,7 +757,7 @@ namespace MapEditor
             wrapper.Add("heightMapMaxHeight = \"" + heightMapMaxHeight + "\"");
             wrapper.Add("heightMapSamplingWidth = \"" + heightMapSamplingWidth + "\"");
             wrapper.Add("xMoveTiling = \"" + xMoveTiling + "\"");
-            wrapper.Add("fogColor = {[\"Red\"] = \"" + fogColorR + "\" , [\"Green\"] = \"" + fogColorG + "\" , [\"Blue\"] = \"" + fogColorB + "\"}");
+            wrapper.Add("fogColor = {[\"Red\"] = \"" + fogColorR.ToString().Replace(',', '.') + "\" , [\"Green\"] = \"" + fogColorG.ToString().Replace(',', '.') + "\" , [\"Blue\"] = \"" + fogColorB.ToString().Replace(',', '.') + "\"}");
             try
             {
 
