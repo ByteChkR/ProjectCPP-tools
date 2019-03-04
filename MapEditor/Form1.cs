@@ -346,7 +346,7 @@ namespace MapEditor
                 List<string> exportString = editor.ExportMap();
                 string dataPath = sfdExport.FileName.Substring(0, sfdExport.FileName.LastIndexOf('\\') + 1);
                 string mapName = sfdExport.FileName.Substring(sfdExport.FileName.LastIndexOf('\\') + 1);
-                
+
                 WriteLuaWrapper(dataPath, mapName, mapName.Replace(".txt", ".lua"), heightmap, groundMap, groundNormalMap, horizonMap,
                     map.genOffset, map.xCurvature, map.xCurvatureSmoothness,
                     map.heightMapTiling, map.heightMapSpeed,
@@ -527,8 +527,11 @@ namespace MapEditor
 
             }
             if (ec.biomeCount > 0) _biomeCount = ec.biomeCount;
-            _enginePath = ec.EnginePath;
-            if (_enginePath != "" && System.IO.File.Exists(_enginePath)) _engineWorkingDir = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1);
+            if (System.IO.File.Exists(_enginePath))
+            {
+                _enginePath = ec.EnginePath;
+                _engineWorkingDir = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1);
+            }
             _defaultPartFolder = ec.DefaultPartsFolder;
             isRaw = ec.isRaw;
             es = new EngineSettings(_engineWorkingDir + "mge\\textures\\", ec);
@@ -643,11 +646,11 @@ namespace MapEditor
 
             }
 
-            
-            if(map != "" && LoadMap(map, out Map pmap) && editor.LoadMap(pmap))
+
+            if (map != "" && LoadMap(map, out Map pmap) && editor.LoadMap(pmap))
             {
                 Debug.LogGen(LoggingChannel.LOG | LoggingChannel.MAIN_EDITOR, "Map :" + map + " loaded");
-                
+
                 InvalidateMap(pmap);
             }
             if (parts.Count > 0 && LoadParts(parts.ToArray(), out List<Part> pparts))
@@ -738,7 +741,7 @@ namespace MapEditor
                 MessageBox.Show("Error, could not run mge.exe at path " + _enginePath);
                 Debug.LogGen(LoggingChannel.ERROR | LoggingChannel.GENERAL, "Error, could not run mge.exe at path " + _enginePath);
             }
-            
+
         }
 
         void WriteLuaWrapper(string datapath, string mapName, string wrapperName, string heightMap, string groundTex, string groundNormal, string horizonTex, float genOffset, float xCurvature, float xCurvatureSmoothness, float heightMapTiling, float heightMapSpeed, float heightMapMaxHeight, float heightMapSamplingWidth, float xMoveTiling, float fogColorR, float fogColorG, float fogColorB)
@@ -959,7 +962,7 @@ namespace MapEditor
             }
         }
 
-        
+
     }
 }
 
