@@ -527,14 +527,17 @@ namespace MapEditor
 
             }
             if (ec.biomeCount > 0) _biomeCount = ec.biomeCount;
+            string texPath = "";
             if (System.IO.File.Exists(_enginePath))
             {
                 _enginePath = ec.EnginePath;
                 _engineWorkingDir = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1);
+                if(System.IO.Directory.Exists(_engineWorkingDir + "mge\\textures\\")) texPath = _engineWorkingDir + "mge\\textures\\";
+                
             }
             _defaultPartFolder = ec.DefaultPartsFolder;
             isRaw = ec.isRaw;
-            es = new EngineSettings(_engineWorkingDir + "mge\\textures\\", ec);
+            es = new EngineSettings(texPath, ec);
             heightmap = es.GetHeight();
             horizonMap = es.GetHorizon();
             groundMap = es.GetGround();

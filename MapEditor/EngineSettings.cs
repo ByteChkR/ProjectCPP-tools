@@ -136,23 +136,23 @@ namespace MapEditor
 
         public string GetGroundNormal()
         {
-            if (ec.GroundNormalMap == 0) return "";
+            if (ec.GroundNormalMap == 0 || cbHms.Items.Count >= ec.GroundNormalMap) return "";
             return cbGroundNormal.Items[ec.GroundNormalMap].ToString();
         }
 
         public string GetHeight()
         {
-            if (ec.HeightMap == 0) return "";
+            if (ec.HeightMap == 0 || cbHms.Items.Count <= ec.HeightMap) return "";
             return cbHms.Items[ec.HeightMap].ToString();
         }
         public string GetGround()
         {
-            if (ec.GroundMap == 0) return "";
+            if (ec.GroundMap == 0 || cbHms.Items.Count <= ec.GroundMap) return "";
             return cbGround.Items[ec.GroundMap].ToString();
         }
         public string GetHorizon()
         {
-            if (ec.HorizonMap == 0) return "";
+            if (ec.HorizonMap == 0 || cbHms.Items.Count <= ec.HorizonMap) return "";
             return cbHorizon.Items[ec.HorizonMap].ToString();
         }
 
