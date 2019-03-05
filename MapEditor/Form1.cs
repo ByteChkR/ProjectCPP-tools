@@ -725,7 +725,7 @@ namespace MapEditor
                 psi = new System.Diagnostics.ProcessStartInfo(s, "temp.txt r");
 
             psi.WorkingDirectory = _engineWorkingDir;
-
+            psi.CreateNoWindow = true;
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
             psi.UseShellExecute = false;
