@@ -62,6 +62,7 @@ namespace MapEditor
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.ofdHeightMap = new System.Windows.Forms.OpenFileDialog();
+            this.cbWindowMode = new System.Windows.Forms.CheckBox();
             this.grpBoxParts.SuspendLayout();
             this.grpBoxMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -252,6 +253,7 @@ namespace MapEditor
             // 
             // grpBoxMap
             // 
+            this.grpBoxMap.Controls.Add(this.cbWindowMode);
             this.grpBoxMap.Controls.Add(this.btnRandomizeSelection);
             this.grpBoxMap.Controls.Add(this.btnOpenConsole);
             this.grpBoxMap.Controls.Add(this.numericUpDown1);
@@ -393,6 +395,15 @@ namespace MapEditor
             // 
             this.ofdHeightMap.FileName = "Open Heightmap";
             // 
+            // cbWindowMode
+            // 
+            this.cbWindowMode.AutoSize = true;
+            this.cbWindowMode.Location = new System.Drawing.Point(196, 485);
+            this.cbWindowMode.Name = "cbWindowMode";
+            this.cbWindowMode.Size = new System.Drawing.Size(125, 17);
+            this.cbWindowMode.TabIndex = 27;
+            this.cbWindowMode.Text = "Force Window Mode";
+            // 
             // frmEditor
             // 
             this.AllowDrop = true;
@@ -461,6 +472,7 @@ namespace MapEditor
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button btnOpenConsole;
         private System.Windows.Forms.Button btnRandomizeSelection;
+        private System.Windows.Forms.CheckBox cbWindowMode;
     }
 }
 

@@ -532,8 +532,8 @@ namespace MapEditor
             {
                 _enginePath = ec.EnginePath;
                 _engineWorkingDir = _enginePath.Substring(0, _enginePath.LastIndexOf('\\') + 1);
-                if(System.IO.Directory.Exists(_engineWorkingDir + "mge\\textures\\")) texPath = _engineWorkingDir + "mge\\textures\\";
-                
+                if (System.IO.Directory.Exists(_engineWorkingDir + "mge\\textures\\")) texPath = _engineWorkingDir + "mge\\textures\\";
+
             }
             _defaultPartFolder = ec.DefaultPartsFolder;
             isRaw = ec.isRaw;
@@ -719,10 +719,10 @@ namespace MapEditor
                     map.heightMapTiling, map.heightMapSpeed,
                     map.heightMapMaxHeight, map.heightMapSamplingWidth,
                     map.xMoveTiling, map.fogColorR, map.fogColorG, map.fogColorB);
-                psi = new System.Diagnostics.ProcessStartInfo(s, "temp.lua");
+                psi = new System.Diagnostics.ProcessStartInfo(s, (cbWindowMode.Checked ? "w" : "f") + " temp.lua");
             }
             else
-                psi = new System.Diagnostics.ProcessStartInfo(s, "temp.txt r");
+                psi = new System.Diagnostics.ProcessStartInfo(s, (cbWindowMode.Checked ? "w" : "f") + " temp.txt r");
 
             psi.WorkingDirectory = _engineWorkingDir;
             psi.CreateNoWindow = true;
