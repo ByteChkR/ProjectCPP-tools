@@ -62,7 +62,7 @@ namespace MapEditor
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.ofdHeightMap = new System.Windows.Forms.OpenFileDialog();
-            this.cbWindowMode = new System.Windows.Forms.CheckBox();
+            this.cbEngineMode = new System.Windows.Forms.ComboBox();
             this.grpBoxParts.SuspendLayout();
             this.grpBoxMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -110,7 +110,7 @@ namespace MapEditor
             this.lbParts.Location = new System.Drawing.Point(21, 72);
             this.lbParts.Name = "lbParts";
             this.lbParts.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lbParts.Size = new System.Drawing.Size(333, 355);
+            this.lbParts.Size = new System.Drawing.Size(333, 342);
             this.lbParts.TabIndex = 8;
             this.lbParts.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.PartsDrawItems);
             this.lbParts.DragDrop += new System.Windows.Forms.DragEventHandler(this.frmEditor_Drop);
@@ -243,9 +243,9 @@ namespace MapEditor
             this.grpBoxParts.Controls.Add(this.btneditPart);
             this.grpBoxParts.Controls.Add(this.lblPartsAvaliable);
             this.grpBoxParts.Controls.Add(this.lbParts);
-            this.grpBoxParts.Location = new System.Drawing.Point(532, 68);
+            this.grpBoxParts.Location = new System.Drawing.Point(532, 97);
             this.grpBoxParts.Name = "grpBoxParts";
-            this.grpBoxParts.Size = new System.Drawing.Size(361, 457);
+            this.grpBoxParts.Size = new System.Drawing.Size(361, 428);
             this.grpBoxParts.TabIndex = 19;
             this.grpBoxParts.TabStop = false;
             this.grpBoxParts.Text = "Parts:";
@@ -253,7 +253,6 @@ namespace MapEditor
             // 
             // grpBoxMap
             // 
-            this.grpBoxMap.Controls.Add(this.cbWindowMode);
             this.grpBoxMap.Controls.Add(this.btnRandomizeSelection);
             this.grpBoxMap.Controls.Add(this.btnOpenConsole);
             this.grpBoxMap.Controls.Add(this.numericUpDown1);
@@ -336,7 +335,7 @@ namespace MapEditor
             // 
             // btnStartFromSelection
             // 
-            this.btnStartFromSelection.Location = new System.Drawing.Point(113, 19);
+            this.btnStartFromSelection.Location = new System.Drawing.Point(245, 16);
             this.btnStartFromSelection.Name = "btnStartFromSelection";
             this.btnStartFromSelection.Size = new System.Drawing.Size(109, 24);
             this.btnStartFromSelection.TabIndex = 24;
@@ -345,18 +344,18 @@ namespace MapEditor
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(6, 19);
+            this.button5.Location = new System.Drawing.Point(6, 47);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(58, 24);
+            this.button5.Size = new System.Drawing.Size(179, 24);
             this.button5.TabIndex = 22;
             this.button5.Text = "Set .exe";
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(70, 19);
+            this.btnPlay.Location = new System.Drawing.Point(133, 16);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(37, 24);
+            this.btnPlay.Size = new System.Drawing.Size(106, 24);
             this.btnPlay.TabIndex = 21;
             this.btnPlay.Text = "Play";
             this.btnPlay.Click += new System.EventHandler(this.button4_Click);
@@ -371,22 +370,23 @@ namespace MapEditor
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbEngineMode);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.btnStartFromSelection);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.btnPlay);
             this.groupBox1.Location = new System.Drawing.Point(532, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(361, 53);
+            this.groupBox1.Size = new System.Drawing.Size(361, 81);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Engine Controls";
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(224, 20);
+            this.button4.Location = new System.Drawing.Point(191, 48);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(130, 23);
+            this.button4.Size = new System.Drawing.Size(163, 23);
             this.button4.TabIndex = 27;
             this.button4.Text = "Set Engine Settings";
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
@@ -395,14 +395,20 @@ namespace MapEditor
             // 
             this.ofdHeightMap.FileName = "Open Heightmap";
             // 
-            // cbWindowMode
+            // cbEngineMode
             // 
-            this.cbWindowMode.AutoSize = true;
-            this.cbWindowMode.Location = new System.Drawing.Point(196, 485);
-            this.cbWindowMode.Name = "cbWindowMode";
-            this.cbWindowMode.Size = new System.Drawing.Size(125, 17);
-            this.cbWindowMode.TabIndex = 27;
-            this.cbWindowMode.Text = "Force Window Mode";
+            this.cbEngineMode.FormattingEnabled = true;
+            this.cbEngineMode.Items.AddRange(new object[] {
+            "Editor(Window)",
+            "Editor(Fullscreen)",
+            "Game(Window)",
+            "Game(Fullscreen)",
+            "Game(Release)"});
+            this.cbEngineMode.Location = new System.Drawing.Point(6, 16);
+            this.cbEngineMode.Name = "cbEngineMode";
+            this.cbEngineMode.Size = new System.Drawing.Size(121, 21);
+            this.cbEngineMode.TabIndex = 28;
+            this.cbEngineMode.Text = "Game(Window)";
             // 
             // frmEditor
             // 
@@ -472,7 +478,7 @@ namespace MapEditor
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button btnOpenConsole;
         private System.Windows.Forms.Button btnRandomizeSelection;
-        private System.Windows.Forms.CheckBox cbWindowMode;
+        private System.Windows.Forms.ComboBox cbEngineMode;
     }
 }
 
