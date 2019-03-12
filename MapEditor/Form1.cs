@@ -702,23 +702,23 @@ namespace MapEditor
             string startParams = "";
             if (cbEngineMode.SelectedIndex == -1 || cbEngineMode.SelectedIndex == 0)
             {
-                startParams = "-forceWindow -res 900 600 -editor";
+                startParams = " -forceWindow -res 900 600 -editor";
             }
             else if (cbEngineMode.SelectedIndex == 1)
             {
-                startParams = "-windowMode 0 -res 1920 1080 -editor";
+                startParams = " -windowMode 0 -res 1920 1080 -editor";
             }
             else if (cbEngineMode.SelectedIndex == 2)
             {
-                startParams = "-forceWindow -res 900 600";
+                startParams = " -forceWindow -res 900 600";
             }
             else if (cbEngineMode.SelectedIndex == 3)
             {
-                startParams = "-windowMode 0 -res 1920 1080";
+                startParams = " -windowMode 0 -res 1920 1080";
             }
             else if (cbEngineMode.SelectedIndex == 4)
             {
-                startParams = "-s";
+                startParams = " -s";
             }
 
             editor.GetMap(out Map map);
@@ -733,7 +733,7 @@ namespace MapEditor
 
             string s = System.IO.Path.GetFullPath(_enginePath);
             System.Diagnostics.ProcessStartInfo psi;
-            
+
 
             if (!isRaw)
             {
@@ -745,7 +745,9 @@ namespace MapEditor
                 filename = "temp.lua";
             }
             string fullpath = System.IO.Path.GetFullPath(datapath);
-            psi = new System.Diagnostics.ProcessStartInfo(s, startParams + " -l " + fullpath + filename + " -enableCheats");
+            string startPars = " -l \"" + fullpath + filename + "\"" + startParams + " -enableCheats";
+            Debug.LogGen(LoggingChannel.LOG, startPars);
+            psi = new System.Diagnostics.ProcessStartInfo(s, startPars);
 
             psi.WorkingDirectory = _engineWorkingDir;
             psi.CreateNoWindow = true;
@@ -988,7 +990,21 @@ namespace MapEditor
             }
         }
 
+        private void btnTmpExport_Click(object sender, EventArgs e)
+        {
+            if (editor.GetMap(out Map m))
+            {
+                Debug.LogGen(LoggingChannel.LOG, "Exporting to engine path as temp.lua.");
+                Debug.LogGen(LoggingChannel.LOG, "To Reload while the game is running please press NUMPAD4");
+                List<string> tempMap = editor.ExportMap(m);
+                string filename = "temp.txt";
+                string datapath = _engineWorkingDir + "mge\\maps\\";
 
+                if (System.IO.File.Exists(datapath + filename)) System.IO.File.Delete(datapath + filename);
+                SaveExport(tempMap, datapath + filename);
+
+            }
+        }
     }
 }
 

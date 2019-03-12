@@ -60,9 +60,10 @@ namespace MapEditor
             this.btnPlay = new System.Windows.Forms.Button();
             this.ofdEngine = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbEngineMode = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
             this.ofdHeightMap = new System.Windows.Forms.OpenFileDialog();
-            this.cbEngineMode = new System.Windows.Forms.ComboBox();
+            this.btnTmpExport = new System.Windows.Forms.Button();
             this.grpBoxParts.SuspendLayout();
             this.grpBoxMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -346,7 +347,7 @@ namespace MapEditor
             // 
             this.button5.Location = new System.Drawing.Point(6, 47);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(179, 24);
+            this.button5.Size = new System.Drawing.Size(121, 24);
             this.button5.TabIndex = 22;
             this.button5.Text = "Set .exe";
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -370,6 +371,7 @@ namespace MapEditor
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnTmpExport);
             this.groupBox1.Controls.Add(this.cbEngineMode);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.btnStartFromSelection);
@@ -381,19 +383,6 @@ namespace MapEditor
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Engine Controls";
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(191, 48);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(163, 23);
-            this.button4.TabIndex = 27;
-            this.button4.Text = "Set Engine Settings";
-            this.button4.Click += new System.EventHandler(this.button4_Click_1);
-            // 
-            // ofdHeightMap
-            // 
-            this.ofdHeightMap.FileName = "Open Heightmap";
             // 
             // cbEngineMode
             // 
@@ -409,6 +398,28 @@ namespace MapEditor
             this.cbEngineMode.Size = new System.Drawing.Size(121, 21);
             this.cbEngineMode.TabIndex = 28;
             this.cbEngineMode.Text = "Game(Window)";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(245, 48);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(109, 23);
+            this.button4.TabIndex = 27;
+            this.button4.Text = "Set Engine Settings";
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
+            // ofdHeightMap
+            // 
+            this.ofdHeightMap.FileName = "Open Heightmap";
+            // 
+            // btnTmpExport
+            // 
+            this.btnTmpExport.Location = new System.Drawing.Point(133, 46);
+            this.btnTmpExport.Name = "btnTmpExport";
+            this.btnTmpExport.Size = new System.Drawing.Size(106, 24);
+            this.btnTmpExport.TabIndex = 29;
+            this.btnTmpExport.Text = "Only Export";
+            this.btnTmpExport.Click += new System.EventHandler(this.btnTmpExport_Click);
             // 
             // frmEditor
             // 
@@ -479,6 +490,7 @@ namespace MapEditor
         private System.Windows.Forms.Button btnOpenConsole;
         private System.Windows.Forms.Button btnRandomizeSelection;
         private System.Windows.Forms.ComboBox cbEngineMode;
+        private System.Windows.Forms.Button btnTmpExport;
     }
 }
 
