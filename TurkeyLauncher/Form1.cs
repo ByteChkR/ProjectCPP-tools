@@ -81,7 +81,7 @@ namespace TurkeyLauncher
         List<System.Drawing.Point> resolutions;
         List<string> userMaplist = new List<string>();
         int msaaSamples = 0;
-        static bool debug = true;
+        static bool debug = false;
         static string enginePath = debug ? "" : "engine/";
         static string configPath = debug ? "" : "config/";
         static string assetPath = enginePath + "mge/";
@@ -166,6 +166,8 @@ namespace TurkeyLauncher
             adlConsole.Hide(); //Make sure its not crashing through crossthreadcalls
             adlConsole.FormClosing += AdlConsole_FormClosing;
             Control.CheckForIllegalCrossThreadCalls = true;
+
+            cobMSAASamples.SelectedIndex = 3;
         }
 
         private void FrmLauncher_Enter(object sender, EventArgs e)
