@@ -297,7 +297,7 @@ namespace TurkeyLauncher
         string CreateLaunchArgs(bool storyMode)
         {
             string ret = "";
-            if (!storyMode) ret += " -p " + userMaplist[cobMaplist.SelectedIndex - 1];
+            if (!storyMode) ret += " -p \"" + userMaplist[cobMaplist.SelectedIndex - 1] + "\"";
             if (cbeditorMode.Checked) ret += " -editor";
             if (cbCheats.Checked) ret += " -enableCheats";
             return ret;
@@ -316,6 +316,7 @@ namespace TurkeyLauncher
                     userMaplist.Add(System.IO.Path.GetFullPath(s));
                     int lastInd = s.LastIndexOf("/") + 1;
                     cobMaplist.Items.Add(s.Substring(lastInd, s.Length - lastInd));
+                    Debug.LogGen(LoggingChannel.LOG, "Adding: " + userMaplist[userMaplist.Count - 1]);
                 }
                 if (cobMaplist.Items.Count > 1) cobMaplist.SelectedIndex = 1;
             }
