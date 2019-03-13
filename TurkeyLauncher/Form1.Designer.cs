@@ -48,9 +48,10 @@
             // 
             // pbBanner
             // 
-            this.pbBanner.Location = new System.Drawing.Point(12, 12);
+            this.pbBanner.Location = new System.Drawing.Point(16, 15);
+            this.pbBanner.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pbBanner.Name = "pbBanner";
-            this.pbBanner.Size = new System.Drawing.Size(353, 120);
+            this.pbBanner.Size = new System.Drawing.Size(471, 148);
             this.pbBanner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbBanner.TabIndex = 0;
             this.pbBanner.TabStop = false;
@@ -58,10 +59,11 @@
             // cbWindowed
             // 
             this.cbWindowed.AutoSize = true;
-            this.cbWindowed.Location = new System.Drawing.Point(270, 147);
+            this.cbWindowed.Location = new System.Drawing.Point(360, 181);
+            this.cbWindowed.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbWindowed.Name = "cbWindowed";
             this.cbWindowed.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cbWindowed.Size = new System.Drawing.Size(95, 17);
+            this.cbWindowed.Size = new System.Drawing.Size(118, 21);
             this.cbWindowed.TabIndex = 1;
             this.cbWindowed.Text = "Window Mode";
             this.cbWindowed.UseVisualStyleBackColor = true;
@@ -69,36 +71,40 @@
             // cobResolutions
             // 
             this.cobResolutions.FormattingEnabled = true;
-            this.cobResolutions.Location = new System.Drawing.Point(75, 145);
+            this.cobResolutions.Location = new System.Drawing.Point(100, 178);
+            this.cobResolutions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cobResolutions.Name = "cobResolutions";
-            this.cobResolutions.Size = new System.Drawing.Size(121, 21);
+            this.cobResolutions.Size = new System.Drawing.Size(160, 24);
             this.cobResolutions.TabIndex = 2;
             this.cobResolutions.SelectedIndexChanged += new System.EventHandler(this.cobResolutions_SelectedIndexChanged);
             // 
             // lblRes
             // 
             this.lblRes.AutoSize = true;
-            this.lblRes.Location = new System.Drawing.Point(12, 148);
+            this.lblRes.Location = new System.Drawing.Point(16, 182);
+            this.lblRes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRes.Name = "lblRes";
-            this.lblRes.Size = new System.Drawing.Size(60, 13);
+            this.lblRes.Size = new System.Drawing.Size(79, 17);
             this.lblRes.TabIndex = 3;
             this.lblRes.Text = "Resolution:";
             // 
             // btnStoryMode
             // 
-            this.btnStoryMode.Location = new System.Drawing.Point(12, 222);
+            this.btnStoryMode.Location = new System.Drawing.Point(16, 273);
+            this.btnStoryMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnStoryMode.Name = "btnStoryMode";
-            this.btnStoryMode.Size = new System.Drawing.Size(165, 51);
+            this.btnStoryMode.Size = new System.Drawing.Size(220, 63);
             this.btnStoryMode.TabIndex = 4;
-            this.btnStoryMode.Text = "Start Story Mode";
+            this.btnStoryMode.Text = "Play";
             this.btnStoryMode.UseVisualStyleBackColor = true;
             this.btnStoryMode.Click += new System.EventHandler(this.btnStoryMode_Click);
             // 
             // btnPlaygroundMode
             // 
-            this.btnPlaygroundMode.Location = new System.Drawing.Point(203, 249);
+            this.btnPlaygroundMode.Location = new System.Drawing.Point(271, 306);
+            this.btnPlaygroundMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnPlaygroundMode.Name = "btnPlaygroundMode";
-            this.btnPlaygroundMode.Size = new System.Drawing.Size(162, 24);
+            this.btnPlaygroundMode.Size = new System.Drawing.Size(216, 30);
             this.btnPlaygroundMode.TabIndex = 5;
             this.btnPlaygroundMode.Text = "Start Custom Map List";
             this.btnPlaygroundMode.UseVisualStyleBackColor = true;
@@ -107,10 +113,11 @@
             // cbShowConsole
             // 
             this.cbShowConsole.AutoSize = true;
-            this.cbShowConsole.Location = new System.Drawing.Point(271, 170);
+            this.cbShowConsole.Location = new System.Drawing.Point(361, 209);
+            this.cbShowConsole.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbShowConsole.Name = "cbShowConsole";
             this.cbShowConsole.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cbShowConsole.Size = new System.Drawing.Size(94, 17);
+            this.cbShowConsole.Size = new System.Drawing.Size(119, 21);
             this.cbShowConsole.TabIndex = 6;
             this.cbShowConsole.Text = "Show Console";
             this.cbShowConsole.UseVisualStyleBackColor = true;
@@ -119,9 +126,10 @@
             // cobMaplist
             // 
             this.cobMaplist.FormattingEnabled = true;
-            this.cobMaplist.Location = new System.Drawing.Point(203, 222);
+            this.cobMaplist.Location = new System.Drawing.Point(271, 273);
+            this.cobMaplist.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cobMaplist.Name = "cobMaplist";
-            this.cobMaplist.Size = new System.Drawing.Size(162, 21);
+            this.cobMaplist.Size = new System.Drawing.Size(215, 24);
             this.cobMaplist.TabIndex = 7;
             this.cobMaplist.Text = "Load From File";
             this.cobMaplist.SelectedIndexChanged += new System.EventHandler(this.cobMaplist_SelectedIndexChanged);
@@ -141,9 +149,10 @@
             "x2",
             "x4",
             "x8"});
-            this.cobMSAASamples.Location = new System.Drawing.Point(75, 172);
+            this.cobMSAASamples.Location = new System.Drawing.Point(100, 212);
+            this.cobMSAASamples.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cobMSAASamples.Name = "cobMSAASamples";
-            this.cobMSAASamples.Size = new System.Drawing.Size(61, 21);
+            this.cobMSAASamples.Size = new System.Drawing.Size(80, 24);
             this.cobMSAASamples.TabIndex = 8;
             this.cobMSAASamples.Text = "OFF";
             this.cobMSAASamples.SelectedIndexChanged += new System.EventHandler(this.cobMSAASamples_SelectedIndexChanged);
@@ -151,18 +160,20 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 175);
+            this.label1.Location = new System.Drawing.Point(16, 215);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.Size = new System.Drawing.Size(84, 17);
             this.label1.TabIndex = 9;
             this.label1.Text = "Antialiasing:";
             // 
             // cbVSync
             // 
             this.cbVSync.AutoSize = true;
-            this.cbVSync.Location = new System.Drawing.Point(15, 199);
+            this.cbVSync.Location = new System.Drawing.Point(20, 245);
+            this.cbVSync.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbVSync.Name = "cbVSync";
-            this.cbVSync.Size = new System.Drawing.Size(124, 17);
+            this.cbVSync.Size = new System.Drawing.Size(160, 21);
             this.cbVSync.TabIndex = 10;
             this.cbVSync.Text = "Enable Vertical Sync";
             this.cbVSync.UseVisualStyleBackColor = true;
@@ -170,10 +181,11 @@
             // cbeditorMode
             // 
             this.cbeditorMode.AutoSize = true;
-            this.cbeditorMode.Location = new System.Drawing.Point(285, 193);
+            this.cbeditorMode.Location = new System.Drawing.Point(380, 238);
+            this.cbeditorMode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbeditorMode.Name = "cbeditorMode";
             this.cbeditorMode.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cbeditorMode.Size = new System.Drawing.Size(80, 17);
+            this.cbeditorMode.Size = new System.Drawing.Size(102, 21);
             this.cbeditorMode.TabIndex = 11;
             this.cbeditorMode.Text = "EditorMode";
             this.cbeditorMode.UseVisualStyleBackColor = true;
@@ -181,19 +193,20 @@
             // cbCheats
             // 
             this.cbCheats.AutoSize = true;
-            this.cbCheats.Location = new System.Drawing.Point(199, 193);
+            this.cbCheats.Location = new System.Drawing.Point(265, 238);
+            this.cbCheats.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbCheats.Name = "cbCheats";
             this.cbCheats.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cbCheats.Size = new System.Drawing.Size(48, 17);
+            this.cbCheats.Size = new System.Drawing.Size(58, 21);
             this.cbCheats.TabIndex = 12;
             this.cbCheats.Text = "HAX";
             this.cbCheats.UseVisualStyleBackColor = true;
             // 
             // frmLauncher
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 278);
+            this.ClientSize = new System.Drawing.Size(503, 342);
             this.Controls.Add(this.cbCheats);
             this.Controls.Add(this.cbeditorMode);
             this.Controls.Add(this.cbVSync);
@@ -209,6 +222,7 @@
             this.Controls.Add(this.pbBanner);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmLauncher";

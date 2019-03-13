@@ -81,7 +81,7 @@ namespace TurkeyLauncher
         List<System.Drawing.Point> resolutions;
         List<string> userMaplist = new List<string>();
         int msaaSamples = 0;
-        static bool debug = false;
+        static bool debug = true;
         static string enginePath = debug ? "" : "engine/";
         static string configPath = debug ? "" : "config/";
         static string assetPath = enginePath + "mge/";
