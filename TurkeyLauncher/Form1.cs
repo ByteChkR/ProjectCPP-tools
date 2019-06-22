@@ -3,7 +3,9 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Reflection;
 using ADL;
+using ADL.Configs;
 using ADL.CustomCMD;
 
 namespace TurkeyLauncher
@@ -81,18 +83,22 @@ namespace TurkeyLauncher
         List<System.Drawing.Point> resolutions;
         List<string> userMaplist = new List<string>();
         int msaaSamples = 0;
-        static bool debug = true;
+        static bool debug = false;
         static string enginePath = debug ? "" : "engine/";
         static string configPath = debug ? "" : "config/";
         static string assetPath = enginePath + "mge/";
         static string texturePath = assetPath + "textures/";
         static string userListPath = assetPath + "customMapLists/";
 
+
+
         public frmLauncher()
         {
             InitializeComponent();
-
-
+            NetworkConfig nc = NetworkConfig.Load(configPath + "adl_network_config.xml");
+            if (nc.UseNetwork)
+                Debug.AddOutputStream(ADL.Network.NetUtils.CreateNetworkTextStream(1, Assembly.GetExecutingAssembly().GetName().Version,
+                nc.IP, nc.Port, -1, MatchType.MATCH_ALL, true));
 
         }
 

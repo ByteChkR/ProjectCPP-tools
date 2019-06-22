@@ -44,6 +44,9 @@
     <Reference Include="ADL.CustomCMD">
       <HintPath>..\..\ADL\ADL\ADL.DebugTest\bin\Release\ADL.CustomCMD.dll</HintPath>
     </Reference>
+    <Reference Include="ADL.Network">
+      <HintPath>..\..\ADL\ADL\ADL.DebugTest\bin\Debug\ADL.Network.dll</HintPath>
+    </Reference>
     <Reference Include="Costura, Version=3.3.2.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.3.3.2\lib\net40\Costura.dll</HintPath>
     </Reference>

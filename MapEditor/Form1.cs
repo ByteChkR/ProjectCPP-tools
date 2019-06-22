@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
@@ -41,6 +42,10 @@ namespace MapEditor
 
             ReadConfig();
 
+            NetworkConfig nc = NetworkConfig.Load("adl_network_config.xml");
+            if (nc.UseNetwork)
+                Debug.AddOutputStream(ADL.Network.NetUtils.CreateNetworkTextStream(2, Assembly.GetExecutingAssembly().GetName().Version,
+                    nc.IP, nc.Port, -1, MatchType.MATCH_ALL, true));
 
 
             Debug.ADLEnabled = false;
